@@ -770,11 +770,21 @@ function inicializarComponentesDinamicos() {
   const appSidebar = document.getElementById("appSidebar");
 
   if (sidebarToggleBtn && appSidebar) {
+    const fecharSidebarMobile = () => {
+      appSidebar.classList.add("esta-recolhido");
+      document.body.classList.remove("sidebar-mobile-aberta");
+      document.getElementById("sidebarToggleBtn")?.setAttribute("aria-expanded", "false");
+    };
+    const abrirSidebarMobile = () => {
+      appSidebar.classList.remove("esta-recolhido");
+      document.body.classList.add("sidebar-mobile-aberta");
+      document.getElementById("sidebarToggleBtn")?.setAttribute("aria-expanded", "true");
+    };
+
     // No mobile, a sidebar inicia recolhida por padrão
     const isMobile = window.matchMedia("(max-width: 48em)").matches;
     if (isMobile) {
-      appSidebar.classList.add("esta-recolhido");
-      sidebarToggleBtn.setAttribute("aria-expanded", "false");
+      fecharSidebarMobile();
     }
 
     const novoSidebarBtn = sidebarToggleBtn.cloneNode(true);
@@ -782,8 +792,30 @@ function inicializarComponentesDinamicos() {
 
     novoSidebarBtn.addEventListener("click", (evento) => {
       evento.preventDefault();
+      if (window.matchMedia("(max-width: 48em)").matches) {
+        if (document.body.classList.contains("sidebar-mobile-aberta")) fecharSidebarMobile();
+        else abrirSidebarMobile();
+        return;
+      }
       const estaRecolhido = appSidebar.classList.toggle("esta-recolhido");
       novoSidebarBtn.setAttribute("aria-expanded", String(!estaRecolhido));
+    });
+
+    document.getElementById("sidebarMobileClose")?.addEventListener("click", fecharSidebarMobile);
+    document.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape" && document.body.classList.contains("sidebar-mobile-aberta")) {
+        fecharSidebarMobile();
+      }
+    });
+    document.addEventListener("click", (evento) => {
+      if (
+        window.matchMedia("(max-width: 48em)").matches &&
+        document.body.classList.contains("sidebar-mobile-aberta") &&
+        !appSidebar.contains(evento.target) &&
+        !novoSidebarBtn.contains(evento.target)
+      ) {
+        fecharSidebarMobile();
+      }
     });
 
     // Ajusta o estado da sidebar ao redimensionar a janela
@@ -792,6 +824,7 @@ function inicializarComponentesDinamicos() {
       if (!agoraéMobile) {
         // No desktop, garante que a sidebar esteja visível
         appSidebar.classList.remove("esta-recolhido");
+        document.body.classList.remove("sidebar-mobile-aberta");
         novoSidebarBtn.setAttribute("aria-expanded", "true");
       }
     });
@@ -5092,4 +5125,13 @@ function inicializarNotificacoes() {
       if (clienteRealtime && canalRealtime) clienteRealtime.removeChannel(canalRealtime);
     });
   }
+}
+
+// Inicializa a interface depois que os componentes reutilizáveis já foram
+// inseridos no documento. O teste de estado também cobre páginas carregadas
+// dinamicamente ou por navegação de volta do navegador.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", inicializarAplicacao, { once: true });
+} else {
+  inicializarAplicacao();
 }

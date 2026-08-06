@@ -22,7 +22,7 @@ class AppHeader extends HTMLElement {
                 ${isAppPage ? `
                 <li class="item-navegacao">
                   <i class="fa-solid fa-bars"></i>
-                  <a href="#" id="sidebarToggleBtn" aria-controls="appSidebar" aria-expanded="true">Menu</a>
+                  <a href="#" id="sidebarToggleBtn" aria-controls="appSidebar" aria-expanded="false">Menu</a>
                 </li>` : ''}
               </ul>
             </nav>
@@ -79,6 +79,12 @@ class AppSidebar extends HTMLElement {
     
     this.innerHTML = `
       <aside class="barra-lateral" id="appSidebar">
+        <div class="cabecalho-menu-mobile">
+          <span>Navegação</span>
+          <button type="button" id="sidebarMobileClose" aria-label="Fechar menu">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
         ${isHome ? `<a href="home.html" class="marca-lateral-home" aria-label="Vivo AdaptAI, início"><img src="Imagens/vivo.svg" alt="Vivo"><span>AdaptAI</span></a>` : ''}
         <nav class="navegacao-lateral">
           <a href="home.html" class="link-lateral ${activePage === 'home' ? 'esta-ativo' : ''}"><i class="fa-solid fa-house"></i> Início</a>
