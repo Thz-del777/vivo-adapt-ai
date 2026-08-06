@@ -165,7 +165,7 @@ Não coloque chaves do Supabase no front-end. A sessão de login é guardada som
 1. Envie este projeto a um repositório Git e crie um **Web Service** no Render.
 2. Use `pip install -r requirements.txt` como *Build Command*.
 3. Use `uvicorn app.main:app --host 0.0.0.0 --port $PORT` como *Start Command*.
-4. Em **Environment**, adicione as variáveis de `.env.example`: `ENVIRONMENT`, `DEMO_MODE`, `USE_SUPABASE`, `GROQ_API_KEY`, `GROQ_MODEL`, `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_PUBLISHABLE_KEY` e `CORS_ORIGINS`.
+4. Em **Environment**, adicione as variáveis de `.env.example`: `ENVIRONMENT=production`, `DEMO_MODE`, `USE_SUPABASE`, `GROQ_API_KEY`, `GROQ_MODEL`, `SUPABASE_URL`, `SUPABASE_KEY`, `SUPABASE_PUBLISHABLE_KEY`, `FRONTEND_URL=https://vivo-adapt-ai.vercel.app` e `CORS_ORIGINS=https://vivo-adapt-ai.vercel.app`.
 5. Para demonstração, use `DEMO_MODE=true` e `USE_SUPABASE=false`. Para produção, forneça as credenciais necessárias e use `DEMO_MODE=false`.
 6. Inclua a URL final do frontend no `CORS_ORIGINS`.
 

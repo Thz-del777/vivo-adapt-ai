@@ -968,7 +968,12 @@ const CHAVE_USUARIO = "vivo-adaptai-usuario";
 
 async function requisitarApi(caminho, opcoes = {}) {
   const controlador = new AbortController();
-  const timeout = window.setTimeout(() => controlador.abort(), 12000);
+  // O primeiro acesso ao Render pode levar alguns segundos para acordar o
+  // servidor. Local continua rápido; em produção esperamos sem cancelar a ação.
+  const timeoutEmMs = /(^https?:\/\/(127\.0\.0\.1|localhost))/.test(API_BASE_URL)
+    ? 12000
+    : 45000;
+  const timeout = window.setTimeout(() => controlador.abort(), timeoutEmMs);
   try {
     const resposta = await fetch(`${API_BASE_URL}${caminho}`, {
       ...opcoes,
@@ -978,6 +983,14 @@ async function requisitarApi(caminho, opcoes = {}) {
     const corpo = await resposta.json().catch(() => ({}));
     if (!resposta.ok) throw new Error(corpo.detail || "Não foi possível concluir a solicitação.");
     return corpo;
+  } catch (erro) {
+    if (erro?.name === "AbortError") {
+      throw new Error("O atendimento está iniciando. Aguarde alguns segundos e tente novamente.");
+    }
+    if (erro instanceof TypeError) {
+      throw new Error("Não foi possível conectar ao atendimento. Verifique sua internet e tente novamente.");
+    }
+    throw erro;
   } finally {
     window.clearTimeout(timeout);
   }
@@ -1337,6 +1350,12 @@ const API_BASE_URL = (
   window.VIVO_ADAPTAI_API_URL ||
   "https://vivo-adapt-ai.onrender.com"
 ).replace(/\/$/, "");
+
+// Acorda o servidor hospedado antes da primeira interação. A falha é
+// silenciosa: cada ação ainda mostra uma mensagem amigável se necessário.
+if (!/(^https?:\/\/(127\.0\.0\.1|localhost))/.test(API_BASE_URL)) {
+  window.fetch(`${API_BASE_URL}/health`, { method: "GET" }).catch(() => null);
+}
 
 // Evolucao continua do ILD. Todas as interacoes relevantes sao registradas,
 // mas somente sinais de habilidade (acesso, conclusao, erro, abandono e pedido

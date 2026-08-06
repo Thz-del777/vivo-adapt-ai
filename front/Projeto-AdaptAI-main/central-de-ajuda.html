@@ -1,201 +1,230 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Central de Ajuda - Vivo AdaptAI</title>
-  <link rel="stylesheet" href="style.css?v=44">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Ajuda - Vivo AdaptAI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body class="tema-destaque" data-page="central-de-ajuda">
-  <div class="app-shell">
+    <div class="app-shell">
     <app-header app-page></app-header>
     <div class="layout-aplicativo">
-      <app-sidebar active-page="central-de-ajuda"></app-sidebar>
+        <app-sidebar active-page="central-de-ajuda"></app-sidebar>
+        <main class="conteudo-principal-app">
+            <section class="secao-historico secao-central-ajuda">
 
-      <main class="conteudo-principal-app">
-        <section class="secao-central-ajuda">
-          <nav class="trilha-navegacao" aria-label="Trilha de navegação">
-            <a href="home.html"><i class="fa-solid fa-house"></i> Início</a>
-            <i class="fa-solid fa-chevron-right"></i>
-            <span aria-current="page">Central de ajuda</span>
-          </nav>
+                <!-- Trilha de navegação -->
+                <nav class="trilha-navegacao" aria-label="Trilha de navegação">
+                    <a href="home.html"><i class="fa-solid fa-house"></i> Início</a>
+                    <i class="fa-solid fa-chevron-right"></i>
+                    <span aria-current="page">Central de ajuda</span>
+                </nav>
 
-          <header class="cabecalho-secao-app central-ajuda-hero">
-            <div>
-              <span class="central-ajuda-selo"><i class="fa-solid fa-sparkles"></i> Ajuda do seu jeito</span>
-              <h1 class="titulo-secao">Como podemos ajudar?</h1>
-              <p class="texto-secao">Encontre uma resposta, siga um tutorial ou converse com o Mimo.</p>
-              <span class="ajuda-perfil-badge" id="ajudaPerfilBadge"><i class="fa-solid fa-wand-magic-sparkles"></i> Preparando orientações para você</span>
-            </div>
-            <div class="mimo-central-ajuda">
-              <img src="Imagens/Ajuda.png" alt="Mimo, assistente do Vivo AdaptAI">
-            </div>
-          </header>
+                <!-- Cabeçalho -->
+                <header class="cabecalho-secao-app">
+                    <div>
+                        <h1 class="titulo-secao">Central de ajuda</h1>
+                        <p class="texto-secao">Encontre respostas rápidas ou aprenda a usar o Vivo AdaptAI da melhor forma para você.</p>
+                    </div>
+                    <div class="mimo-central-ajuda">
+                        <img src="Imagens/Ajuda.png" alt="Mimo, assistente do Vivo AdaptAI">
+                    </div>
+                </header>
 
-          <div class="busca-central-ajuda">
-            <label class="envelope-campo ajuda-busca-envelope" for="buscaAjudaInput">
-              <i class="fa-solid fa-magnifying-glass icone-campo"></i>
-              <input type="search" class="controle-campo campo-busca-ajuda" id="buscaAjudaInput" aria-label="Buscar na Central de Ajuda" placeholder="Ex.: segunda via, internet lenta ou trocar senha" autocomplete="off">
-              <button type="button" class="ajuda-limpar-busca" id="btnLimparBuscaAjuda" aria-label="Limpar busca" hidden><i class="fa-solid fa-xmark"></i></button>
-            </label>
-            <div class="chips-sugestao" id="chipsSugestaoAjuda" aria-label="Assuntos sugeridos">
-              <button type="button" class="chip-filtro" data-termo="fatura">2ª via de fatura</button>
-              <button type="button" class="chip-filtro" data-termo="internet wifi">Internet e Wi-Fi</button>
-              <button type="button" class="chip-filtro" data-termo="conta senha">Conta e senha</button>
-              <button type="button" class="chip-filtro" data-termo="acessibilidade">Acessibilidade</button>
-              <button type="button" class="chip-filtro" data-termo="libras">Libras</button>
-            </div>
-          </div>
-
-          <section class="ajuda-tutoriais" aria-labelledby="tituloTutoriais">
-            <div class="central-ajuda-cabecalho-lista">
-              <div>
-                <span class="ajuda-kicker">RESOLVA AGORA</span>
-                <h2 class="subtitulo-lista" id="tituloTutoriais">Tutoriais rápidos</h2>
-              </div>
-              <span class="ajuda-contador" id="contadorResultadosAjuda" role="status" aria-live="polite">Conteúdo disponível</span>
-            </div>
-            <div class="ajuda-tutoriais-grid" id="listaTutoriaisAjuda">
-              <button type="button" class="ajuda-tutorial-card" data-tutorial="fatura" data-termos="fatura segunda via boleto pagamento conta">
-                <span class="ajuda-tutorial-icone ajuda-cor-roxo"><i class="fa-solid fa-file-invoice-dollar"></i></span>
-                <span><strong>Segunda via da fatura</strong><small>Consulte e copie o código de pagamento</small></span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-              <button type="button" class="ajuda-tutorial-card" data-tutorial="internet" data-termos="internet wifi roteador modem lenta conexão">
-                <span class="ajuda-tutorial-icone ajuda-cor-azul"><i class="fa-solid fa-wifi"></i></span>
-                <span><strong>Internet e Wi-Fi</strong><small>Faça verificações simples e seguras</small></span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-              <button type="button" class="ajuda-tutorial-card" data-tutorial="conta" data-termos="conta senha login email perfil acesso">
-                <span class="ajuda-tutorial-icone ajuda-cor-rosa"><i class="fa-solid fa-user-shield"></i></span>
-                <span><strong>Conta e segurança</strong><small>Recupere a senha ou atualize seus dados</small></span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-              <button type="button" class="ajuda-tutorial-card" data-tutorial="acessibilidade" data-termos="acessibilidade libras voz contraste texto leitura">
-                <span class="ajuda-tutorial-icone ajuda-cor-verde"><i class="fa-solid fa-universal-access"></i></span>
-                <span><strong>Recursos de acessibilidade</strong><small>Configure a experiência ideal para você</small></span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-          </section>
-
-          <div class="central-ajuda-grid">
-            <div class="central-ajuda-coluna-principal">
-              <div class="central-ajuda-cabecalho-lista">
-                <div>
-                  <span class="ajuda-kicker">DÚVIDAS COMUNS</span>
-                  <h2 class="subtitulo-lista">Perguntas frequentes</h2>
+                <!-- Busca e sugestões -->
+                <div class="busca-central-ajuda">
+                    <div class="envelope-campo">
+                        <i class="fa-solid fa-magnifying-glass icone-campo"></i>
+                        <input type="text" class="controle-campo campo-busca-ajuda" id="buscaAjudaInput" placeholder="Buscar por dúvidas, assuntos ou palavras-chave...">
+                    </div>
+                    <div class="chips-sugestao" id="chipsSugestaoAjuda">
+                        <button type="button" class="chip-filtro">como usar a voz</button>
+                        <button type="button" class="chip-filtro">mudar modalidade</button>
+                        <button type="button" class="chip-filtro">libras</button>
+                        <button type="button" class="chip-filtro">texto simplificado</button>
+                        <button type="button" class="chip-filtro">acessibilidade</button>
+                    </div>
                 </div>
-                <button type="button" class="link-acao ajuda-ver-todas" id="btnVerTodasFaq">Ver todas</button>
-              </div>
 
-              <div class="faq-lista" id="listaFaq">
-                <article class="faq-item esta-aberto" data-termos="fatura segunda via boleto pagamento conta">
-                  <button type="button" class="faq-pergunta" aria-expanded="true"><span><i class="fa-solid fa-file-invoice-dollar"></i> Como tiro a segunda via da fatura?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="Abra o tutorial de Segunda via da fatura acima. O Mimo mostrará uma etapa por vez e você poderá iniciar um atendimento já com esse assunto.">Abra o tutorial de Segunda via da fatura acima. O Mimo mostrará uma etapa por vez e você poderá iniciar um atendimento já com esse assunto.</p></div>
-                </article>
-                <article class="faq-item" data-termos="internet wifi roteador modem conexão lenta sem sinal">
-                  <button type="button" class="faq-pergunta" aria-expanded="false"><span><i class="fa-solid fa-wifi"></i> Minha internet não está funcionando. O que faço?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="Confira primeiro as luzes do roteador e se os cabos estão firmes. Depois, abra o tutorial de Internet e Wi-Fi para seguir as verificações com segurança.">Confira primeiro as luzes do roteador e se os cabos estão firmes. Depois, abra o tutorial de Internet e Wi-Fi para seguir as verificações com segurança.</p></div>
-                </article>
-                <article class="faq-item" data-termos="senha conta login email recuperar acesso">
-                  <button type="button" class="faq-pergunta" aria-expanded="false"><span><i class="fa-solid fa-key"></i> Como recupero minha senha?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="Na página de login, selecione Esqueci minha senha, informe seu e-mail e siga o link recebido. Nunca compartilhe o código ou a nova senha.">Na página de login, selecione Esqueci minha senha, informe seu e-mail e siga o link recebido. Nunca compartilhe o código ou a nova senha.</p></div>
-                </article>
-                <article class="faq-item" data-termos="atendimento texto voz modalidade mudar conversa">
-                  <button type="button" class="faq-pergunta" aria-expanded="false"><span><i class="fa-solid fa-arrow-right-arrow-left"></i> Posso mudar a forma de atendimento?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="Sim. Você pode escolher texto, voz, modo híbrido, texto simplificado ou Libras. A modalidade padrão também pode ser alterada em Configurações.">Sim. Você pode escolher texto, voz, modo híbrido, texto simplificado ou Libras. A modalidade padrão também pode ser alterada em Configurações.</p></div>
-                </article>
-                <article class="faq-item" data-termos="libras surdo deficiência auditiva tradução intérprete">
-                  <button type="button" class="faq-pergunta" aria-expanded="false"><span><i class="fa-solid fa-hands-asl-interpreting"></i> Como funciona o atendimento em Libras?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="Na modalidade Libras, as respostas ficam disponíveis em texto e podem ser traduzidas pelo VLibras. Legendas e respostas rápidas continuam visíveis durante o atendimento.">Na modalidade Libras, as respostas ficam disponíveis em texto e podem ser traduzidas pelo VLibras. Legendas e respostas rápidas continuam visíveis durante o atendimento.</p></div>
-                </article>
-                <article class="faq-item" data-termos="acessibilidade contraste tamanho texto leitura voz comandos espaço">
-                  <button type="button" class="faq-pergunta" aria-expanded="false"><span><i class="fa-solid fa-universal-access"></i> Onde configuro a acessibilidade?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="Abra Acessibilidade no menu. Lá você pode ajustar tamanho do texto, contraste, espaçamento, leitura em voz alta, Libras e comandos de voz.">Abra Acessibilidade no menu. Lá você pode ajustar tamanho do texto, contraste, espaçamento, leitura em voz alta, Libras e comandos de voz.</p></div>
-                </article>
-                <article class="faq-item" data-termos="ild letramento digital perfil iniciante intermediario avançado adaptação">
-                  <button type="button" class="faq-pergunta" aria-expanded="false"><span><i class="fa-solid fa-chart-line"></i> O que é o ILD?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="O ILD ajuda o Vivo AdaptAI a escolher o nível de detalhe das orientações. Ele não é uma prova e pode evoluir conforme sua experiência digital.">O ILD ajuda o Vivo AdaptAI a escolher o nível de detalhe das orientações. Ele não é uma prova e pode evoluir conforme sua experiência digital.</p></div>
-                </article>
-                <article class="faq-item" data-termos="privacidade dados permissões histórico câmera microfone">
-                  <button type="button" class="faq-pergunta" aria-expanded="false"><span><i class="fa-solid fa-shield-halved"></i> Como controlo meus dados e permissões?</span><i class="fa-solid fa-chevron-down faq-seta"></i></button>
-                  <div class="faq-resposta"><p class="texto-secao" data-resposta-base="Abra Permissões no menu para controlar personalização, histórico, microfone, câmera, dados anônimos e notificações.">Abra Permissões no menu para controlar personalização, histórico, microfone, câmera, dados anônimos e notificações.</p></div>
-                </article>
-              </div>
+                <!-- Conteúdo principal: perguntas frequentes + coluna lateral -->
+                <div class="central-ajuda-grid">
 
-              <div class="ajuda-sem-resultados" id="ajudaSemResultados" hidden>
-                <i class="fa-solid fa-magnifying-glass-minus"></i>
-                <h3>Não encontramos esse assunto</h3>
-                <p>Você pode explicar sua dúvida ao Mimo ou chamar um atendente.</p>
-                <div><button type="button" class="botao botao-principal" data-iniciar-ajuda="Busca sem resultado">Falar com o Mimo</button><button type="button" class="botao botao-contorno" data-chamar-humano>Chamar atendente</button></div>
-              </div>
-            </div>
+                    <!-- Coluna principal: Perguntas frequentes -->
+                    <div class="central-ajuda-coluna-principal">
+                        <div class="central-ajuda-cabecalho-lista">
+                            <h2 class="subtitulo-lista">Perguntas frequentes</h2>
+                            <a href="#" class="link-acao">Ver todas as perguntas</a>
+                        </div>
 
-            <aside class="central-ajuda-coluna-lateral">
-              <div class="ajuda-cartao-topicos">
-                <h2 class="ajuda-cartao-titulo"><i class="fa-solid fa-compass"></i> Ir direto para</h2>
-                <button type="button" class="ajuda-topico-link" data-filtrar-ajuda="fatura"><span class="ajuda-topico-icone icone-conversa-roxo"><i class="fa-solid fa-file-invoice"></i></span><span class="ajuda-topico-texto"><strong>Fatura</strong><small>Segunda via e pagamentos</small></span><i class="fa-solid fa-chevron-right"></i></button>
-                <button type="button" class="ajuda-topico-link" data-filtrar-ajuda="internet wifi"><span class="ajuda-topico-icone icone-conversa-azul"><i class="fa-solid fa-wifi"></i></span><span class="ajuda-topico-texto"><strong>Internet e Wi-Fi</strong><small>Conexão, modem e roteador</small></span><i class="fa-solid fa-chevron-right"></i></button>
-                <button type="button" class="ajuda-topico-link" data-filtrar-ajuda="conta senha"><span class="ajuda-topico-icone icone-conversa-rosa"><i class="fa-solid fa-user-shield"></i></span><span class="ajuda-topico-texto"><strong>Conta e segurança</strong><small>Login, senha e perfil</small></span><i class="fa-solid fa-chevron-right"></i></button>
-                <a href="acessibilidade.html" class="ajuda-topico-link"><span class="ajuda-topico-icone icone-conversa-verde"><i class="fa-solid fa-universal-access"></i></span><span class="ajuda-topico-texto"><strong>Acessibilidade</strong><small>Personalize sua experiência</small></span><i class="fa-solid fa-chevron-right"></i></a>
-                <a href="permissoes.html" class="ajuda-topico-link"><span class="ajuda-topico-icone icone-conversa-amarelo"><i class="fa-solid fa-lock"></i></span><span class="ajuda-topico-texto"><strong>Privacidade</strong><small>Controle seus dados</small></span><i class="fa-solid fa-chevron-right"></i></a>
-              </div>
+                        <div class="faq-lista" id="listaFaq">
+                            <div class="faq-item esta-aberto">
+                                <button type="button" class="faq-pergunta" aria-expanded="true">
+                                    <span><i class="fa-solid fa-comment-dots"></i> Como inicio um atendimento?</span>
+                                    <i class="fa-solid fa-chevron-down faq-seta"></i>
+                                </button>
+                                <div class="faq-resposta">
+                                    <p class="texto-secao">Na página inicial, escolha a forma de atendimento que preferir (texto, voz, texto simplificado ou Libras) e clique em "Iniciar atendimento".</p>
+                                </div>
+                            </div>
 
-              <div class="ajuda-cartao-contato">
-                <img src="Imagens/Mimo-Oi.png" alt="Mimo acenando">
-                <span class="ajuda-contato-status"><i class="fa-solid fa-circle"></i> Ajuda disponível</span>
-                <h3>Ainda precisa de ajuda?</h3>
-                <p>Continue com o Mimo ou peça atendimento humano.</p>
-                <button type="button" class="botao botao-principal botao-bloco" data-iniciar-ajuda="Ajuda pela Central"><i class="fa-solid fa-comment-dots"></i> Conversar com o Mimo</button>
-                <button type="button" class="botao botao-contorno botao-bloco" data-chamar-humano><i class="fa-solid fa-headset"></i> Chamar atendente</button>
-                <span class="ajuda-cartao-contato-nota">Para gerar um protocolo, entre na sua conta.</span>
-              </div>
-            </aside>
-          </div>
+                            <div class="faq-item">
+                                <button type="button" class="faq-pergunta" aria-expanded="false">
+                                    <span><i class="fa-solid fa-arrow-right-arrow-left"></i> Posso mudar a forma de atendimento durante a conversa?</span>
+                                    <i class="fa-solid fa-chevron-down faq-seta"></i>
+                                </button>
+                                <div class="faq-resposta">
+                                    <p class="texto-secao">Sim. A qualquer momento você pode trocar entre texto, voz, texto simplificado ou Libras sem perder o contexto do seu atendimento.</p>
+                                </div>
+                            </div>
 
-          <div class="aviso aviso-informativo aviso-central-ajuda">
-            <div class="icone-aviso"><i class="fa-solid fa-shield-halved"></i></div>
-            <p><strong>Orientações seguras e adaptadas.</strong> O nível de detalhe acompanha seu ILD, sem impedir o acesso a nenhuma informação.</p>
-            <a href="permissoes.html" class="link-acao">Gerenciar privacidade <i class="fa-solid fa-chevron-right"></i></a>
-          </div>
-        </section>
-      </main>
+                            <div class="faq-item">
+                                <button type="button" class="faq-pergunta" aria-expanded="false">
+                                    <span><i class="fa-solid fa-microphone"></i> Como funciona o atendimento por voz?</span>
+                                    <i class="fa-solid fa-chevron-down faq-seta"></i>
+                                </button>
+                                <div class="faq-resposta">
+                                    <p class="texto-secao">O Mimo ouve sua mensagem, transcreve em tempo real na tela e responde por voz e texto, para que você acompanhe a conversa da forma que preferir.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button type="button" class="faq-pergunta" aria-expanded="false">
+                                    <span><i class="fa-solid fa-hands-asl-interpreting"></i> Como utilizar o atendimento em Libras?</span>
+                                    <i class="fa-solid fa-chevron-down faq-seta"></i>
+                                </button>
+                                <div class="faq-resposta">
+                                    <p class="texto-secao">Ao escolher a modalidade Libras, um intérprete virtual traduz as respostas do Mimo e você pode responder por vídeo, texto ou aceno.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button type="button" class="faq-pergunta" aria-expanded="false">
+                                    <span><i class="fa-solid fa-list-check"></i> O que é o texto simplificado?</span>
+                                    <i class="fa-solid fa-chevron-down faq-seta"></i>
+                                </button>
+                                <div class="faq-resposta">
+                                    <p class="texto-secao">É uma forma de atendimento com uma pergunta por tela, opções grandes e linguagem direta, pensada para reduzir a carga cognitiva durante a conversa.</p>
+                                </div>
+                            </div>
+
+                            <div class="faq-item">
+                                <button type="button" class="faq-pergunta" aria-expanded="false">
+                                    <span><i class="fa-solid fa-shield-halved"></i> Como minhas informações são protegidas?</span>
+                                    <i class="fa-solid fa-chevron-down faq-seta"></i>
+                                </button>
+                                <div class="faq-resposta">
+                                    <p class="texto-secao">Suas informações são usadas apenas para personalizar seu atendimento e nunca são compartilhadas. Você pode gerenciar suas permissões a qualquer momento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna lateral -->
+                    <aside class="central-ajuda-coluna-lateral">
+
+                        <!-- Principais tópicos -->
+                        <div class="ajuda-cartao-topicos">
+                            <h2 class="ajuda-cartao-titulo"><i class="fa-solid fa-book-open"></i> Principais tópicos</h2>
+
+                            <a href="#" class="ajuda-topico-link">
+                                <span class="ajuda-topico-icone icone-conversa-roxo"><i class="fa-solid fa-microphone"></i></span>
+                                <span class="ajuda-topico-texto">
+                                    <strong>Primeiros passos</strong>
+                                    <small>Comece a usar o Vivo AdaptAI</small>
+                                </span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="#" class="ajuda-topico-link">
+                                <span class="ajuda-topico-icone icone-conversa-rosa"><i class="fa-solid fa-comment-dots"></i></span>
+                                <span class="ajuda-topico-texto">
+                                    <strong>Formas de atendimento</strong>
+                                    <small>Texto, voz, texto simplificado e Libras</small>
+                                </span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="acessibilidade.html" class="ajuda-topico-link">
+                                <span class="ajuda-topico-icone icone-conversa-azul"><i class="fa-solid fa-universal-access"></i></span>
+                                <span class="ajuda-topico-texto">
+                                    <strong>Acessibilidade</strong>
+                                    <small>Recursos para tornar sua experiência melhor</small>
+                                </span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="perfil.html" class="ajuda-topico-link">
+                                <span class="ajuda-topico-icone icone-conversa-roxo"><i class="fa-regular fa-user"></i></span>
+                                <span class="ajuda-topico-texto">
+                                    <strong>Conta e perfil</strong>
+                                    <small>Login, preferências e segurança</small>
+                                </span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="permissoes.html" class="ajuda-topico-link">
+                                <span class="ajuda-topico-icone icone-conversa-verde"><i class="fa-solid fa-lock"></i></span>
+                                <span class="ajuda-topico-texto">
+                                    <strong>Privacidade e dados</strong>
+                                    <small>Como protegemos suas informações</small>
+                                </span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+
+                            <a href="#" class="ajuda-topico-link">
+                                <span class="ajuda-topico-icone icone-conversa-amarelo"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                                <span class="ajuda-topico-texto">
+                                    <strong>Solução de problemas</strong>
+                                    <small>Erros, conexões e outras situações</small>
+                                </span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- Não encontrou o que precisava -->
+                        <div class="ajuda-cartao-contato">
+                            <img src="Imagens/Mimo-Oi.png" alt="Mimo, assistente do Vivo AdaptAI">
+                            <h3>Não encontrou o que precisava?</h3>
+                            <p>Nosso time do Mimo pode te ajudar com sua dúvida.</p>
+                            <a href="atendimento-texto.html" class="botao botao-principal botao-bloco">
+                                <i class="fa-solid fa-comment-dots"></i> Falar com o Mimo
+                            </a>
+                            <a href="#" class="botao botao-contorno botao-bloco">
+                                <i class="fa-regular fa-pen-to-square"></i> Enviar feedback
+                            </a>
+                            <span class="ajuda-cartao-contato-nota">Seu feedback nos ajuda a melhorar cada vez mais!</span>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- Aviso de confiança -->
+                <div class="aviso aviso-informativo aviso-central-ajuda">
+                    <div class="icone-aviso"><i class="fa-solid fa-shield-halved"></i></div>
+                    <p><strong>Informações confiáveis.</strong> Todas as orientações são criadas para garantir uma experiência segura, acessível e inclusiva.</p>
+                    <a href="#" class="link-acao">Saiba mais sobre segurança <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+
+            </section>
+        </main>
     </div>
-
-    <dialog class="modal-ajuda" id="modalTutorialAjuda" aria-labelledby="tutorialAjudaTitulo">
-      <div class="modal-ajuda-cabecalho">
-        <div><span class="ajuda-kicker" id="tutorialAjudaCategoria">TUTORIAL</span><h2 id="tutorialAjudaTitulo">Como resolver</h2><p id="tutorialAjudaResumo"></p></div>
-        <button type="button" class="modal-ajuda-fechar" data-fechar-ajuda aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <ol class="tutorial-ajuda-passos" id="tutorialAjudaPassos"></ol>
-      <div class="modal-ajuda-acoes"><button type="button" class="botao botao-contorno" data-fechar-ajuda>Voltar</button><button type="button" class="botao botao-principal" id="btnTutorialFalarMimo"><i class="fa-solid fa-comment-dots"></i> Continuar com o Mimo</button></div>
-    </dialog>
-
-    <dialog class="modal-ajuda" id="modalAtendenteAjuda" aria-labelledby="tituloAtendenteAjuda">
-      <form id="formAtendenteAjuda">
-        <div class="modal-ajuda-cabecalho">
-          <div><span class="ajuda-kicker">ATENDIMENTO HUMANO</span><h2 id="tituloAtendenteAjuda">Conte o que você precisa</h2><p>Vamos registrar sua solicitação e gerar um protocolo.</p></div>
-          <button type="button" class="modal-ajuda-fechar" data-fechar-ajuda aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="form-ajuda-humana">
-          <label for="assuntoAtendenteAjuda">Assunto</label>
-          <select id="assuntoAtendenteAjuda" required>
-            <option value="">Selecione</option><option value="fatura">Fatura</option><option value="internet_wifi">Internet e Wi-Fi</option><option value="conta">Conta e acesso</option><option value="acessibilidade">Acessibilidade</option><option value="atendimento">Atendimento</option><option value="outro">Outro assunto</option>
-          </select>
-          <label for="descricaoAtendenteAjuda">Explique sua dúvida</label>
-          <textarea id="descricaoAtendenteAjuda" minlength="10" maxlength="1000" rows="5" placeholder="Descreva o que aconteceu e o que você já tentou." required></textarea>
-          <span class="form-ajuda-contador" id="contadorDescricaoAjuda">0/1000</span>
-          <div class="status-ajuda-solicitacao" id="statusSolicitacaoAjuda" role="status" aria-live="polite"></div>
-        </div>
-        <div class="modal-ajuda-acoes"><button type="button" class="botao botao-contorno" data-fechar-ajuda>Cancelar</button><button type="submit" class="botao botao-principal" id="btnEnviarSolicitacaoAjuda"><i class="fa-solid fa-paper-plane"></i> Gerar protocolo</button></div>
-      </form>
-    </dialog>
-  </div>
-
-  <script src="components.js?v=10"></script>
-  <script src="api-config.js?v=1"></script>
-  <script src="script.js?v=30"></script>
+    </div>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+    <script>
+      // F13: links de conteúdo ainda não implementado recebem um retorno
+      // visual mínimo, em vez de não reagir ao clique.
+      document.querySelectorAll('a[href="#"]').forEach((link) => {
+        link.addEventListener('click', (evento) => {
+          evento.preventDefault();
+          mostrarToast({
+            tipo: 'info',
+            titulo: 'Em breve',
+            mensagem: 'Este conteúdo ainda está sendo preparado.'
+          });
+        });
+      });
+    </script>
 </body>
 </html>

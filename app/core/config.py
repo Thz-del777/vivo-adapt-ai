@@ -1,11 +1,26 @@
+import os
 from functools import lru_cache
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+def _ambiente_padrao() -> str:
+    """Usa produção automaticamente quando o Render não recebeu ENVIRONMENT."""
+    return "production" if os.getenv("RENDER") else "development"
+
+
+def _frontend_padrao() -> str:
+    """Evita links de e-mail para localhost no ambiente hospedado."""
+    return (
+        "https://vivo-adapt-ai.vercel.app"
+        if os.getenv("RENDER")
+        else "http://127.0.0.1:5500"
+    )
+
+
 class Settings(BaseSettings):
     app_name: str = "Vivo AdaptAI API"
-    environment: str = "development"
+    environment: str = _ambiente_padrao()
     demo_mode: bool = True
     use_supabase: bool = False
     groq_api_key: str | None = None
@@ -13,7 +28,7 @@ class Settings(BaseSettings):
     supabase_url: str | None = None
     supabase_key: str | None = None
     supabase_publishable_key: str | None = None
-    frontend_url: str = "http://127.0.0.1:5500"
+    frontend_url: str = _frontend_padrao()
     funcionario_emails: str = ""
     cors_origins: str = (
         "http://localhost:3000,http://localhost:5173,http://localhost:5500,"
