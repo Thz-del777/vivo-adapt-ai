@@ -1324,7 +1324,7 @@ const CHAVE_CLIENTE_API = "vivo-adaptai-cliente-id";
 const API_BASE_URL = (
   document.querySelector('meta[name="vivo-adaptai-api-url"]')?.getAttribute("content") ||
   window.VIVO_ADAPTAI_API_URL ||
-  "http://127.0.0.1:8000"
+  "https://vivo-adapt-ai.onrender.com"
 ).replace(/\/$/, "");
 
 // Evolucao continua do ILD. Todas as interacoes relevantes sao registradas,
