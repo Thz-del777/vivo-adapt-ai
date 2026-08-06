@@ -1,0 +1,20 @@
+__pycache__/
+*.py[cod]
+.env
+.env.realtime.local
+.venv/
+venv/
+.pytest_cache/
+.coverage
+
+# IDEs
+.vscode/
+.idea/
+
+# Arquivos temporários
+tmp/
+output/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

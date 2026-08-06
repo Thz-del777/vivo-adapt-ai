@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notificações - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="notificacoes">
+  <div class="app-shell">
+    <app-header app-page></app-header>
+    <div class="layout-aplicativo">
+      <app-sidebar active-page="notificacoes"></app-sidebar>
+      <main class="conteudo-principal-app pagina-notificacoes">
+        <nav class="trilha-navegacao" aria-label="Trilha de navegação">
+          <a href="home.html"><i class="fa-solid fa-house"></i> Início</a>
+          <i class="fa-solid fa-chevron-right"></i><span aria-current="page">Notificações</span>
+        </nav>
+        <header class="notificacoes-hero">
+          <div class="notificacoes-hero-icone"><i class="fa-regular fa-bell"></i></div>
+          <div><span class="notificacoes-selo">Seus avisos em um só lugar</span><h1>Notificações</h1><p>Acompanhe atualizações de atendimento, segurança e novidades.</p></div>
+        </header>
+        <section class="notificacoes-conteudo" aria-labelledby="tituloListaNotificacoes">
+          <header class="notificacoes-barra">
+            <div><h2 id="tituloListaNotificacoes">Seus avisos</h2><p id="notificationsPageSummary">Carregando notificações...</p><span class="realtime-status" id="notificationsRealtimePageStatus"><i></i> Conectando em tempo real...</span></div>
+            <button type="button" class="botao botao-contorno botao-pequeno" id="notificationsPageReadAll"><i class="fa-solid fa-check-double"></i> Marcar todas como lidas</button>
+          </header>
+          <div class="filtros-notificacoes" role="group" aria-label="Filtrar notificações">
+            <button type="button" class="filtro-notificacao esta-ativo" data-notification-filter="todas">Todas</button>
+            <button type="button" class="filtro-notificacao" data-notification-filter="nao_lidas">Não lidas</button>
+            <button type="button" class="filtro-notificacao" data-notification-filter="atendimento">Atendimento</button>
+            <button type="button" class="filtro-notificacao" data-notification-filter="seguranca">Segurança</button>
+          </div>
+          <div class="lista-notificacoes lista-notificacoes-pagina" id="notificationsPageList" aria-live="polite"></div>
+          <div class="notificacoes-vazio notificacoes-vazio-pagina" id="notificationsPageEmpty" hidden>
+            <i class="fa-regular fa-bell-slash"></i><h3>Nenhuma notificação por aqui</h3><p>Quando houver uma atualização importante, ela aparecerá nesta página.</p><a class="botao botao-principal" href="home.html">Voltar ao início</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+  <script src="script.js?v=30"></script>
+</body>
+</html>

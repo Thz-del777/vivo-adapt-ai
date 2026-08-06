@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar - Vivo AdaptAI</title>
+
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="pagina-login pagina-login-centralizado">
+
+  <div class="layout-autenticacao">
+
+    <nav class="navegacao-autenticacao">
+      <ul class="lista-navegacao">
+        <li class="item-navegacao">
+          <i class="fa-solid fa-circle-question"></i>
+          <a href="central-de-ajuda.html">Precisa de ajuda?</a>
+        </li>
+
+        <li class="item-navegacao">
+          <p>
+            Não tem conta?
+            <a href="cadastro.html" class="link-acao">Criar conta</a>
+          </p>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="secao-autenticacao">
+      <div class="cartao-autenticacao cartao-autenticacao-compacto">
+
+        <h1 class="titulo-cartao-autenticacao">Entrar</h1>
+        <p class="subtitulo-cartao-autenticacao">Acesse sua conta para continuar de onde parou</p>
+
+        <div class="divisor">
+          <span></span>
+          <p>ou entre com</p>
+          <span></span>
+        </div>
+
+        <div class="autenticacao-social">
+          <button class="botao botao-social">
+            <img src="Imagens/google.svg" alt="Google" class="icone-botao-social">
+            <span>Google</span>
+          </button>
+
+          <button class="botao botao-social">
+            <img src="Imagens/vivo.svg" alt="Vivo" class="icone-botao-social">
+            <span>Conta Vivo</span>
+          </button>
+        </div>
+
+        <form class="formulario-autenticacao" id="loginForm" action="#" method="POST">
+          <div class="alerta-formulario" id="loginFormError" role="alert" hidden>
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span></span>
+          </div>
+
+            <div class="linha-formulario">
+              <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="emailEntrar">Email</label>
+
+              <div class="envelope-campo">
+                <i class="fa-solid fa-envelope icone-campo"></i>
+                <input class="controle-campo" type="email" id="emailEntrar" name="email" placeholder="Digite seu email" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="senhaEntrar">Senha</label>
+
+              <div class="envelope-campo campo-senha">
+                <i class="fa-solid fa-lock icone-campo"></i>
+                <input class="controle-campo" type="password" id="senhaEntrar" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+                <button type="button" class="alternador-campo botao-alternar-senha" data-target="senhaEntrar" aria-label="Mostrar senha" aria-pressed="false">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+              </div>
+            </div>
+
+            <p class="ajuda-campo">Funcionários Vivo: use seu e-mail corporativo <strong>@vivo.com.br</strong> para acessar o Dashboard da operação.</p>
+
+            <div class="rodape-formulario">
+            <a href="esqueci-senha.html" class="link-acao">Esqueci minha senha</a>
+          </div>
+
+          <button type="submit" class="botao botao-principal botao-bloco" id="loginSubmitBtn">Entrar</button>
+
+          <a href="home.html" id="linkContinuarVisitante" class="link-suave link-centralizado" style="margin-top: var(--space-md);">Continuar como visitante</a>
+
+        </form>
+
+        <div class="nota-seguranca">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Seus dados estão protegidos com criptografia ponta a ponta.</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="api-config.js?v=1"></script>
+  <script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

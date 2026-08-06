@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Perfil - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=47">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="perfil">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+    <app-sidebar active-page="perfil"></app-sidebar>
+
+    <main class="conteudo-principal-app">
+      <section class="secao-perfil-nova">
+        <header class="cabecalho-secao-app">
+          <div>
+            <h1 class="titulo-secao">Meu perfil</h1>
+            <p class="texto-secao">Seus dados e o atendimento adaptado à sua forma de usar a tecnologia.</p>
+          </div>
+        </header>
+
+        <div class="perfil-grid">
+
+          <!-- Coluna principal -->
+          <div class="perfil-coluna-principal">
+
+            <!-- Seção: Informações da conta -->
+            <div class="perfil-secao" id="secao-informacoes">
+              <h2 class="perfil-secao-titulo">Informações da conta</h2>
+
+              <div class="perfil-conta-info">
+                <div class="perfil-conta-avatar-area">
+                  <div class="avatar-conta" id="avatarConta">
+                    <span class="iniciais-avatar-conta" id="iniciaisAvatarConta">A</span>
+                  </div>
+                </div>
+
+                <div class="perfil-conta-campos">
+                  <div class="perfil-campo-linha">
+                    <span class="perfil-campo-label">Nome</span>
+                    <div class="perfil-campo-valor-area">
+                      <span class="perfil-campo-valor" id="nomeExibicaoPerfil">Carregando...</span>
+                      <button type="button" class="perfil-btn-editar" data-campo="nome" aria-label="Editar nome">
+                        Editar <i class="fa-solid fa-pen"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="perfil-campo-linha">
+                    <span class="perfil-campo-label">E-mail</span>
+                    <div class="perfil-campo-valor-area">
+                      <span class="perfil-campo-valor" id="emailExibicaoPerfil">Carregando...</span>
+                    </div>
+                  </div>
+
+                  <div class="perfil-campo-linha">
+                    <span class="perfil-campo-label">Telefone</span>
+                    <div class="perfil-campo-valor-area">
+                      <span class="perfil-campo-valor" id="telefoneExibicaoPerfil">Não informado</span>
+                      <button type="button" class="perfil-btn-editar" data-campo="telefone" aria-label="Editar telefone">
+                        Editar <i class="fa-solid fa-pen"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Formulário oculto de edição rápida -->
+              <form class="perfil-form-edicao" id="formPerfil" novalidate hidden>
+                <div class="perfil-edicao-campos">
+                  <div class="perfil-edicao-grupo">
+                    <label class="rotulo-formulario" for="perfilNome">Nome</label>
+                    <div class="envelope-campo">
+                      <i class="fa-solid fa-user icone-campo"></i>
+                      <input class="controle-campo" type="text" id="perfilNome" name="nomeCompleto" value="" required>
+                    </div>
+                  </div>
+                  <div class="perfil-edicao-grupo">
+                    <label class="rotulo-formulario" for="perfilEmail">E-mail</label>
+                    <div class="envelope-campo">
+                      <i class="fa-solid fa-envelope icone-campo"></i>
+                      <input class="controle-campo" type="email" id="perfilEmail" name="email" value="" readonly aria-describedby="ajudaEmailPerfil">
+                    </div>
+                    <small id="ajudaEmailPerfil">Para alterar o e-mail, use a opção em Gerenciar conta.</small>
+                  </div>
+                  <div class="perfil-edicao-grupo">
+                    <label class="rotulo-formulario" for="perfilTelefone">Telefone</label>
+                    <div class="envelope-campo">
+                      <i class="fa-solid fa-phone icone-campo"></i>
+                      <input class="controle-campo" type="tel" id="perfilTelefone" name="telefone" value="" placeholder="(00) 00000-0000">
+                    </div>
+                  </div>
+                </div>
+                <p class="status-perfil" id="statusPerfil" aria-live="polite"></p>
+                <div class="perfil-edicao-acoes">
+                  <button type="button" class="botao botao-contorno" id="btnCancelarPerfil">Cancelar</button>
+                  <button type="submit" class="botao botao-principal" id="btnSalvarPerfil" disabled>Salvar</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="perfil-secao" id="secao-atendimento-adaptado">
+              <h2 class="perfil-secao-titulo">Seu atendimento adaptado</h2>
+              <div class="perfil-preferencia-item">
+                <div class="perfil-preferencia-icone">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div class="perfil-preferencia-info">
+                  <span class="perfil-preferencia-nome">Forma atual de atendimento</span>
+                  <span class="perfil-preferencia-valor" id="perfilAtendimentoAtual">Carregando...</span>
+                </div>
+              </div>
+              <p class="texto-secao" id="perfilIldDescricao">O Mimo usa suas preferências e sua experiência digital para explicar cada etapa.</p>
+            </div>
+
+            <div class="perfil-secao seguranca-conta" id="segurancaConta">
+              <div class="seguranca-conta-cabecalho">
+                <div><span class="seguranca-conta-selo"><i class="fa-solid fa-shield-halved"></i> Segurança da conta</span><h2 class="perfil-secao-titulo">Senha e dispositivos</h2><p>Proteja sua conta e remova acessos que você não reconhece.</p></div>
+                <span class="seguranca-status"><i class="fa-solid fa-circle-check"></i> Proteção ativa</span>
+              </div>
+
+              <div class="seguranca-senha-card" id="segurancaSenha">
+                <div class="seguranca-bloco-titulo"><span><i class="fa-solid fa-key"></i></span><div><h3>Trocar senha</h3><p>A nova senha é verificada contra vazamentos conhecidos sem enviar a senha completa.</p></div></div>
+                <form id="formAlterarSenhaPerfil" class="seguranca-form-senha" novalidate>
+                  <label>Senha atual<div class="seguranca-campo-senha"><input type="password" id="senhaAtualPerfil" autocomplete="current-password" required minlength="8"><button type="button" data-toggle-security-password aria-label="Mostrar senha atual"><i class="fa-regular fa-eye"></i></button></div></label>
+                  <label>Nova senha<div class="seguranca-campo-senha"><input type="password" id="novaSenhaPerfil" autocomplete="new-password" required minlength="12" aria-describedby="regrasNovaSenha"><button type="button" data-toggle-security-password aria-label="Mostrar nova senha"><i class="fa-regular fa-eye"></i></button></div></label>
+                  <label>Confirmar nova senha<div class="seguranca-campo-senha"><input type="password" id="confirmarNovaSenhaPerfil" autocomplete="new-password" required minlength="12"><button type="button" data-toggle-security-password aria-label="Mostrar confirmação"><i class="fa-regular fa-eye"></i></button></div></label>
+                  <div class="seguranca-regras-senha" id="regrasNovaSenha"><span data-password-rule="length"><i class="fa-solid fa-circle"></i> 12 caracteres</span><span data-password-rule="upper"><i class="fa-solid fa-circle"></i> Maiúscula</span><span data-password-rule="lower"><i class="fa-solid fa-circle"></i> Minúscula</span><span data-password-rule="number"><i class="fa-solid fa-circle"></i> Número</span><span data-password-rule="symbol"><i class="fa-solid fa-circle"></i> Símbolo</span></div>
+                  <p class="seguranca-form-status" id="statusAlterarSenha" role="status" aria-live="polite"></p>
+                  <button type="submit" class="botao botao-principal" id="btnAlterarSenhaPerfil">Alterar senha</button>
+                </form>
+              </div>
+
+              <div class="seguranca-dispositivos-card" id="segurancaDispositivos">
+                <div class="seguranca-dispositivos-topo"><div class="seguranca-bloco-titulo"><span><i class="fa-solid fa-laptop-mobile"></i></span><div><h3>Dispositivos conectados</h3><p>Confira onde sua conta está aberta.</p></div></div><button type="button" class="botao botao-contorno botao-pequeno" id="btnRevogarOutrosDispositivos"><i class="fa-solid fa-right-from-bracket"></i> Remover outros</button></div>
+                <div class="seguranca-lista-dispositivos" id="listaDispositivosPerfil" aria-live="polite"><div class="seguranca-dispositivo-carregando"><i class="fa-solid fa-spinner fa-spin"></i> Carregando dispositivos...</div></div>
+                <p class="seguranca-dispositivos-nota"><i class="fa-solid fa-circle-info"></i> Não armazenamos seu endereço IP nem o identificador completo do navegador.</p>
+              </div>
+            </div>
+
+            <!-- Seção: Preferências -->
+            <div class="perfil-secao" id="secao-preferencias">
+              <h2 class="perfil-secao-titulo">Preferências</h2>
+
+              <div class="perfil-preferencias">
+                <div class="perfil-preferencia-item">
+                  <div class="perfil-preferencia-icone">
+                    <i class="fa-solid fa-message"></i>
+                  </div>
+                  <div class="perfil-preferencia-info">
+                    <span class="perfil-preferencia-nome">Modo de atendimento padrão</span>
+                    <span class="perfil-preferencia-valor">Texto</span>
+                  </div>
+                  <a href="configuracoes.html" class="perfil-btn-editar">
+                    Editar <i class="fa-solid fa-pen"></i>
+                  </a>
+                </div>
+
+                <div class="perfil-preferencia-item">
+                  <div class="perfil-preferencia-icone">
+                    <i class="fa-solid fa-palette"></i>
+                  </div>
+                  <div class="perfil-preferencia-info">
+                    <span class="perfil-preferencia-nome">Tema</span>
+                    <span class="perfil-preferencia-valor">Claro</span>
+                  </div>
+                  <a href="configuracoes.html" class="perfil-btn-editar">
+                    Editar <i class="fa-solid fa-pen"></i>
+                  </a>
+                </div>
+
+                <div class="perfil-preferencia-item">
+                  <div class="perfil-preferencia-icone">
+                    <i class="fa-solid fa-globe"></i>
+                  </div>
+                  <div class="perfil-preferencia-info">
+                    <span class="perfil-preferencia-nome">Idioma</span>
+                    <span class="perfil-preferencia-valor">Português (Brasil)</span>
+                  </div>
+                  <a href="configuracoes.html" class="perfil-btn-editar">
+                    Editar <i class="fa-solid fa-pen"></i>
+                  </a>
+                </div>
+
+                <div class="perfil-preferencia-item">
+                  <div class="perfil-preferencia-icone">
+                    <span class="perfil-preferencia-icone-texto">Aa</span>
+                  </div>
+                  <div class="perfil-preferencia-info">
+                    <span class="perfil-preferencia-nome">Tamanho da fonte</span>
+                    <span class="perfil-preferencia-valor">Grande</span>
+                  </div>
+                  <a href="acessibilidade.html" class="perfil-btn-editar">
+                    Editar <i class="fa-solid fa-pen"></i>
+                  </a>
+                </div>
+
+                <div class="perfil-preferencia-item">
+                  <div class="perfil-preferencia-icone">
+                    <i class="fa-solid fa-volume-high"></i>
+                  </div>
+                  <div class="perfil-preferencia-info">
+                    <span class="perfil-preferencia-nome">Leitura em voz alta</span>
+                    <span class="perfil-preferencia-valor">Ativada</span>
+                  </div>
+                  <a href="acessibilidade.html" class="perfil-btn-editar">
+                    Editar <i class="fa-solid fa-pen"></i>
+                  </a>
+                </div>
+
+                <div class="perfil-preferencia-item">
+                  <div class="perfil-preferencia-icone">
+                    <i class="fa-solid fa-hands-asl-interpreting"></i>
+                  </div>
+                  <div class="perfil-preferencia-info">
+                    <span class="perfil-preferencia-nome">Libras</span>
+                    <span class="perfil-preferencia-valor">Ativada</span>
+                  </div>
+                  <a href="acessibilidade.html" class="perfil-btn-editar">
+                    Editar <i class="fa-solid fa-pen"></i>
+                  </a>
+                </div>
+              </div>
+
+              <a href="acessibilidade.html" class="perfil-link-todas-preferencias">
+                Ver todas as preferências de acessibilidade <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            </div>
+
+            <!-- Seção: Seus dados estão protegidos -->
+            <div class="perfil-secao-protecao">
+              <i class="fa-solid fa-shield-halved"></i>
+              <div>
+                <strong>Seus dados estão protegidos</strong>
+                <p>A Vivo protege suas informações e não compartilha seus dados pessoais.</p>
+              </div>
+              <a href="privacidade.html#privacyLgpdTitle" class="perfil-link-privacidade">Política de Privacidade <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+
+          <!-- Coluna lateral (Privacidade / Permissões / Conta) -->
+          <div class="perfil-coluna-lateral">
+
+            <!-- Privacidade -->
+            <div class="perfil-card-lateral">
+              <div class="perfil-card-lateral-header">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Privacidade</span>
+              </div>
+              <p>Suas preferências nos ajudam a personalizar seu atendimento e oferecer a melhor experiência.</p>
+              <a href="privacidade.html" class="perfil-link-card">Saiba mais sobre como protegemos seus dados <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+
+            <!-- Permissões -->
+            <div class="perfil-card-lateral">
+              <div class="perfil-card-lateral-header">
+                <i class="fa-solid fa-lock"></i>
+                <span>Permissões</span>
+              </div>
+              <p>Você controla quais informações podem ser usadas para personalizar seu atendimento.</p>
+              <a href="permissoes.html" class="perfil-link-card">Gerenciar permissões <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+
+            <!-- Gerenciar conta -->
+            <div class="perfil-card-lateral">
+              <div class="perfil-card-lateral-header">
+                <i class="fa-solid fa-user-gear"></i>
+                <span>Gerenciar conta</span>
+              </div>
+
+              <div class="perfil-gerenciar-links">
+                <a href="#segurancaSenha" class="perfil-gerenciar-link">
+                  <i class="fa-solid fa-key"></i>
+                  <span>Alterar senha</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+                <a href="central-de-ajuda.html" class="perfil-gerenciar-link">
+                  <i class="fa-solid fa-envelope"></i>
+                  <span>Alterar e-mail</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+                <a href="privacidade.html#privacyActionsTitle" class="perfil-gerenciar-link perfil-gerenciar-link-perigo">
+                  <i class="fa-solid fa-user-xmark"></i>
+                  <span>Excluir conta</span>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+              </div>
+
+              <button type="button" class="perfil-btn-sair" id="perfilLogoutAll">
+                Sair da conta
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </button>
+              <p class="perfil-texto-sair">Você será desconectado de todos os dispositivos.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=31"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vivo AdaptAI</title>
+
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque">
+
+  <app-header></app-header>
+
+  <main class="destaque-inicial">
+
+    <div class="conteudo-inicial">
+      <h1 class="titulo-inicial">A Vivo que se adapta <span class="texto-gradiente">a você</span></h1>
+
+      <p class="introducao-inicial">
+        <strong>Olá! Eu sou o Mimo</strong>, assistente do Vivo AdaptAI.
+        Vamos encontrar juntos a melhor forma de personalizar seu atendimento.
+      </p>
+
+      <h2 class="pergunta-inicial">Como você prefere iniciar seu atendimento?</h2>
+
+      <div class="grade-opcoes">
+        <a href="atendimento-texto.html" class="bloco-opcao opcao-variante-1">
+          <span class="icone-opcao"><i class="fa-solid fa-comment-dots"></i></span>
+          <span class="titulo-opcao">Conversar por texto</span>
+          <span class="descricao-opcao">Digite suas dúvidas e receba orientações durante o atendimento.</span>
+        </a>
+
+        <a href="atendimento-voz.html" class="bloco-opcao opcao-variante-2">
+          <span class="icone-opcao"><i class="fa-solid fa-microphone"></i></span>
+          <span class="titulo-opcao">Conversar por voz</span>
+          <span class="descricao-opcao">Fale com o Mimo e escute as respostas quando desejar.</span>
+        </a>
+
+        <a href="texto-simplificado.html" class="bloco-opcao opcao-variante-3">
+          <span class="icone-opcao"><i class="fa-solid fa-file-lines"></i></span>
+          <span class="titulo-opcao">Usar texto simplificado</span>
+          <span class="descricao-opcao">Receba explicações diretas, organizadas e divididas em etapas.</span>
+        </a>
+
+        <a href="libras.html" class="bloco-opcao opcao-variante-4">
+          <span class="icone-opcao"><i class="fa-solid fa-hands"></i></span>
+          <span class="titulo-opcao">Atendimento em Libras</span>
+          <span class="descricao-opcao">Acesse recursos de comunicação e orientação em Língua Brasileira de Sinais.</span>
+        </a>
+      </div>
+
+      <div class="aviso aviso-informativo">
+        <span class="icone-aviso"><i class="fa-solid fa-circle-info"></i></span>
+        <p>Escolha uma forma de atendimento ou continue sem definir uma preferência.</p>
+      </div>
+
+      <div class="aviso aviso-interativo">
+        <span class="icone-aviso"><i class="fa-regular fa-face-smile"></i></span>
+        <p>
+          Não quer escolher agora? O Mimo pode ajudar você durante a conversa.
+          <a href="#" class="link-acao">Continuar sem escolher uma preferência <i class="fa-solid fa-chevron-right"></i></a>
+        </p>
+      </div>
+
+      <div class="acoes-inicial">
+        <button id="btnIniciarAtendimento" class="botao botao-principal botao-chamada">
+          Iniciar atendimento <i class="fa-solid fa-arrow-right-long"></i>
+        </button>
+
+        <button id="modalOpenBtn" class="botao botao-contorno">
+          <i class="fa-regular fa-circle-play"></i> Conhecer o Mimo
+        </button>
+      </div>
+
+      <div class="nota-seguranca nota-seguranca--start">
+        <i class="fa-solid fa-lock"></i>
+        <span>Seus dados são protegidos durante o atendimento.</span>
+      </div>
+    </div>
+
+    <div class="visual-inicial">
+      <div class="painel-mascote">
+        <div class="selo-mascote selo-mascote-chat"><i class="fa-solid fa-comment-dots"></i></div>
+        <div class="selo-mascote selo-mascote-microfone"><i class="fa-solid fa-microphone"></i></div>
+        <div class="selo-mascote selo-mascote-mao"><i class="fa-solid fa-hand-sparkles"></i></div>
+        <div class="selo-mascote selo-mascote-documento"><i class="fa-solid fa-file-lines"></i></div>
+
+        <div class="personagem-mascote" aria-hidden="true">
+          <img src="Imagens/PosterEscolhaModalidade.png" alt="Mimo apresentando as formas de atendimento disponíveis" class="imagem-inicial">
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="modalMimo" class="modal">
+
+    <div class="modal__content">
+      <button class="modal__close" id="modalCloseBtn" aria-label="Fechar modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal__header">
+        <span class="modal__avatar"><img src="Imagens/Perfil-Mimo.png" alt="Mimo"></span>
+        <h2 class="titulo-secao modal__title">Conhecer o Mimo</h2>
+      </div>
+
+      <p class="texto-secao">
+        O Mimo é a inteligência artificial do Vivo AdaptAI, criada pela
+        Equipe Nexus para conhecer suas necessidades e preferências e,
+        assim, personalizar sua experiência de atendimento.
+      </p>
+
+      <h2 class="subtitulo-secao modal__subtitle">Como o Mimo se adapta?</h2>
+
+      <p class="texto-secao">
+        Durante a conversa, o Mimo ajusta a comunicação, a organização
+        das orientações e a forma de interação de acordo com suas preferências.
+      </p>
+
+      <ul class="modal__feature-list">
+        <li class="modal__feature">
+          <span class="modal__feature-icon"><i class="fa-solid fa-comment"></i></span>
+          Comunicação por texto
+        </li>
+        <li class="modal__feature">
+          <span class="modal__feature-icon"><i class="fa-solid fa-microphone"></i></span>
+          Atendimento por voz
+        </li>
+        <li class="modal__feature">
+          <span class="modal__feature-icon"><i class="fa-solid fa-list-check"></i></span>
+          Explicações em etapas
+        </li>
+        <li class="modal__feature">
+          <span class="modal__feature-icon"><i class="fa-solid fa-hands-asl-interpreting"></i></span>
+          Apoio em Libras
+        </li>
+      </ul>
+
+      <div class="modal__info-list">
+        <div class="modal__info-row">
+          <span class="modal__info-icon"><i class="fa-solid fa-sliders"></i></span>
+          <p class="modal__info-label">Controle</p>
+          <p class="modal__info-desc">As preferências podem ser alteradas a qualquer momento durante o atendimento.</p>
+        </div>
+
+        <div class="modal__info-row">
+          <span class="modal__info-icon"><i class="fa-solid fa-user"></i></span>
+          <p class="modal__info-label">Atendimento humano</p>
+          <p class="modal__info-desc">Quando necessário, o Mimo pode encaminhar o atendimento para uma pessoa, preservando as informações já fornecidas.</p>
+        </div>
+
+        <div class="modal__info-row">
+          <span class="modal__info-icon"><i class="fa-solid fa-shield-halved"></i></span>
+          <p class="modal__info-label">Segurança</p>
+          <p class="modal__info-desc">Suas informações são utilizadas com segurança para realizar e personalizar o atendimento.</p>
+        </div>
+      </div>
+
+      <div class="modal__actions">
+        <button class="botao botao-contorno modal__btn" id="modalBackBtn">Voltar para a escolha</button>
+        <button class="botao botao-modal-primary modal__btn" id="modalContinueBtn">Continuar sem preferência</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

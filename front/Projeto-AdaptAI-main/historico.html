@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Conversas - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque" data-page="historico">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+
+    <app-sidebar active-page="historico"></app-sidebar>
+
+    <main class="conteudo-principal-app">
+      <section class="secao-historico-nova">
+        <header class="cabecalho-secao-app">
+          <div>
+            <h1 class="titulo-secao">Histórico de conversas</h1>
+            <p class="texto-secao">Veja suas conversas anteriores e retome quando quiser.</p>
+          </div>
+        </header>
+
+        <!-- Barra de filtros -->
+        <div class="barra-filtros-historico">
+          <div class="envelope-campo busca-historico">
+            <i class="fa-solid fa-magnifying-glass icone-campo"></i>
+            <input type="text" class="controle-campo" id="buscaHistoricoInput" placeholder="Buscar por assunto ou palavra-chave...">
+          </div>
+
+          <div class="select-filtro-wrapper">
+            <select class="controle-campo select-filtro" id="filtroModalidade">
+              <option value="todas">Todas as modalidades</option>
+              <option value="texto">Texto</option>
+              <option value="voz">Voz</option>
+              <option value="texto-simplificado">Texto simplificado</option>
+              <option value="libras">Libras</option>
+            </select>
+            <i class="fa-solid fa-chevron-down icone-select"></i>
+          </div>
+
+          <div class="select-filtro-wrapper">
+            <select class="controle-campo select-filtro" id="filtroPeriodo">
+              <option value="todos">Todos os períodos</option>
+              <option value="hoje">Hoje</option>
+              <option value="esta-semana">Esta semana</option>
+              <option value="este-mes">Este mês</option>
+              <option value="anterior">Mais antigos</option>
+            </select>
+            <i class="fa-solid fa-chevron-down icone-select"></i>
+          </div>
+        </div>
+
+        <!-- Layout de duas colunas: lista + painel de detalhes -->
+        <div class="historico-grid">
+
+          <!-- Coluna esquerda: lista de conversas -->
+          <div class="historico-coluna-lista">
+            <h2 class="subtitulo-lista">Conversas recentes</h2>
+
+            <!-- Cards de conversa renderizados dinamicamente por
+                 renderizarListaConversas() (script.js), a partir de
+                 CONVERSAS_HISTORICO — fonte mockada preparada para troca
+                 futura por dados vindos da API. -->
+            <div class="lista-conversas" id="listaConversas"></div>
+
+            <!-- Botão carregar mais -->
+            <button class="botao-carregar-mais" id="btnCarregarMais">
+              Carregar mais conversas
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+
+            <!-- Estado vazio (oculto por padrão) -->
+            <div class="vazio-historico" style="display: none;">
+              <img src="Imagens/Mimo-Oi.png" alt="Mimo">
+              <p>Você ainda não possui conversas registradas.</p>
+              <button class="botao botao-principal" onclick="window.location.href='atendimento-texto.html'">Iniciar nova conversa</button>
+            </div>
+          </div>
+
+          <!-- Coluna direita: painel de detalhes -->
+          <div class="historico-coluna-detalhes" id="painelDetalhes">
+
+            <div class="cartao-detalhes">
+              <div class="detalhes-cabecalho">
+                <div class="icone-detalhes icone-detalhes-roxo">
+                  <i class="fa-solid fa-wifi"></i>
+                </div>
+                <div>
+                  <h2 class="titulo-detalhes" id="detalhesTitulo">Internet residencial não funciona</h2>
+                  <span class="status-conversa status-concluido" id="detalhesStatus"><i class="fa-solid fa-circle"></i> Concluído</span>
+                </div>
+              </div>
+
+              <div class="detalhes-corpo">
+                <div class="detalhe-linha">
+                  <div class="detalhe-label-area">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    <span>Modalidade</span>
+                  </div>
+                  <span class="detalhe-valor" id="detalhesModalidade">Texto</span>
+                </div>
+
+                <div class="detalhe-linha">
+                  <div class="detalhe-label-area">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span>Data</span>
+                  </div>
+                  <span class="detalhe-valor" id="detalhesData">Hoje às 14:32</span>
+                </div>
+
+                <div class="detalhe-linha">
+                  <div class="detalhe-label-area">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Duração</span>
+                  </div>
+                  <span class="detalhe-valor" id="detalhesDuracao">12 min</span>
+                </div>
+
+                <div class="detalhe-linha">
+                  <div class="detalhe-label-area">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Status</span>
+                  </div>
+                  <span class="detalhe-valor status-andamento" id="detalhesStatusLinha"><i class="fa-solid fa-circle"></i> Em andamento</span>
+                </div>
+
+                <div class="detalhe-secao">
+                  <h3 class="detalhe-secao-titulo">Última mensagem</h3>
+                  <div class="detalhe-mensagem">
+                    <p>Você: Minha internet parou de funcionar desde ontem à noite. Já reiniciei o roteador e não resolveu.</p>
+                    <span class="detalhe-mensagem-hora">14:32</span>
+                  </div>
+                </div>
+
+                <div class="detalhe-secao">
+                  <h3 class="detalhe-secao-titulo">Resumo</h3>
+                  <p class="detalhe-resumo">Você relatou instabilidade na sua internet. O Mimo está verificando sua conexão e os equipamentos associados.</p>
+                  <a href="resumo-atendimento.html" class="detalhe-link" id="linkVerResumo">Ver resumo completo <i class="fa-solid fa-chevron-right"></i></a>
+                </div>
+              </div>
+
+              <div class="detalhes-acoes">
+                <button class="botao botao-principal botao-bloco" id="btnContinuarConversa">
+                  <i class="fa-solid fa-play"></i> Continuar conversa
+                </button>
+                <button class="botao botao-contorno botao-bloco botao-perigo-suave" id="btnExcluirConversa">
+                  <i class="fa-regular fa-trash-can"></i> Excluir conversa
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

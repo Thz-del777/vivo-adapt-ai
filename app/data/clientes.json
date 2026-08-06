@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "nome": "Maria",
+    "acessos_app": 2,
+    "chamadas_suporte": 3,
+    "tempo_medio_tarefa": 2,
+    "erros": 1,
+    "tarefas_abandonadas": 2
+  },
+  {
+    "id": 2,
+    "nome": "João",
+    "acessos_app": 16,
+    "chamadas_suporte": 1,
+    "tempo_medio_tarefa": 2,
+    "erros": 1,
+    "tarefas_abandonadas": 0
+  },
+  {
+    "id": 3,
+    "nome": "Ana",
+    "acessos_app": 30,
+    "chamadas_suporte": 0,
+    "tempo_medio_tarefa": 1,
+    "erros": 0,
+    "tarefas_abandonadas": 0
+  },
+  {
+    "id": 4,
+    "nome": "Carlos",
+    "acessos_app": 5,
+    "chamadas_suporte": 1,
+    "tempo_medio_tarefa": 2,
+    "erros": 1,
+    "tarefas_abandonadas": 0,
+    "historico_atendimento": []
+  }
+]

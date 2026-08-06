@@ -1,0 +1,71 @@
+:root {
+    /* Cores principais — tema claro */
+    --vivo-purple: #660099;
+    --vivo-purple-deep: #3B0066;
+    --tech-violet: #7C3AED;
+    --adapt-magenta: #E735C7;
+    --digital-blue: #3B82F6;
+    --inclusive-cyan: #22D3C5;
+    
+    /* Backgrounds e superfícies */
+    --bg-main: #F8F7FC;
+    --bg-alt: #F2ECF8;
+    --surface-white: #FFFFFF;
+    --border-light: #E4DCEB;
+    
+    /* Texto */
+    --text-primary: #211B2B;
+    --text-secondary: #696273;
+    --text-disabled: #A39DAA;
+    
+    /* Estados */
+    --status-success: #18875A;
+    --status-warning: #D97706;
+    --status-error: #C9364F;
+    --status-info: #3B82F6;
+    
+    /* Gradientes */
+    --grad-main: linear-gradient(135deg, #3B0066, #660099, #A020F0, #E735C7);
+    
+    /* Tipografia */
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    
+    /* Espaçamento e bordas */
+    --radius-card: 24px;
+    
+    /* Sombras */
+    --shadow-sm: 0 2px 8px rgba(33, 27, 43, 0.05);
+    --shadow-md: 0 8px 24px rgba(33, 27, 43, 0.08);
+}
+
+[data-theme="escuro"] {
+    --bg-main: #090014;
+    --bg-alt: #120022;
+    --surface-white: #1A1030;
+    --border-light: #2A1A45;
+    --text-primary: #FFFFFF;
+    --text-secondary: #CFC8DA;
+    --status-success: #18875A;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Base */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    margin: 0;
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    color: var(--vivo-purple);
+    font-weight: 700;
+}
+
+[data-theme="escuro"] h1, 
+[data-theme="escuro"] h2, 
+[data-theme="escuro"] h3 {
+    color: #FFFFFF;
+}

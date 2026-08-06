@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="vivo-adaptai-api-url" content="http://127.0.0.1:8000">
+  <title>Início - Vivo AdaptAI</title>
+
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque" data-page="home">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+
+    <app-sidebar active-page="home"></app-sidebar>
+
+    <main class="conteudo-principal home-principal">
+
+      <div class="saudacao">
+        <div>
+          <h2 class="titulo-saudacao">Olá, Arthur! 👋<br>Como posso te ajudar hoje?</h2>
+          <p class="subtitulo-saudacao">Converse por texto ou escolha o modo que<br>melhor se adapta a você.</p>
+        </div>
+
+        <div class="mascot-saudacao">
+          <img src="Imagens/Feliz.png" alt="Mimo: Vamos encontrar juntos a melhor forma de conversar" class="imagem-mascote-saudacao">
+        </div>
+
+      </div>
+
+      <div class="cartoes-dashboard">
+        <a href="atendimento-texto.html" class="cartao-dashboard">
+          <span class="marca-selecao-cartao" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+          <span class="icone-cartao-dashboard"><i class="fa-solid fa-comment-dots"></i></span>
+          <h3 class="titulo-cartao-dashboard">Tire suas dúvidas</h3>
+          <p class="descricao-cartao-dashboard">Pergunte sobre produtos, serviços e muito mais.</p>
+          <span class="seta-cartao-dashboard" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="atendimento-texto.html" class="cartao-dashboard">
+          <span class="marca-selecao-cartao" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+          <span class="icone-cartao-dashboard"><i class="fa-regular fa-file-lines"></i></span>
+          <h3 class="titulo-cartao-dashboard">2ª via de fatura</h3>
+          <p class="descricao-cartao-dashboard">Consulte e solicite segunda via da sua fatura.</p>
+          <span class="seta-cartao-dashboard" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+
+        <a href="atendimento-texto.html" class="cartao-dashboard">
+          <span class="marca-selecao-cartao" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+          <span class="icone-cartao-dashboard"><i class="fa-solid fa-wifi"></i></span>
+          <h3 class="titulo-cartao-dashboard">Internet e Wi-Fi</h3>
+          <p class="descricao-cartao-dashboard">Suporte para sua conexão e rede Wi-Fi.</p>
+          <span class="seta-cartao-dashboard" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+
+      <form class="compositor" id="chatComposerForm" action="#" method="POST">
+        
+        <button type="button" class="anexo-compositor" aria-label="Anexar arquivo">
+          <i class="fa-solid fa-paperclip"></i>
+        </button>
+
+        <input type="text" class="entrada-compositor" id="chatComposerInput" name="mensagem_inicial" placeholder="Digite sua mensagem..." aria-label="Digite sua mensagem">
+
+        <div class="acoes-compositor">
+          <button type="button" class="microfone-compositor" aria-label="Enviar áudio">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+          <button type="submit" class="enviar-compositor" aria-label="Enviar mensagem">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </form>
+
+      <div class="nota-seguranca nota-seguranca--center">
+        <i class="fa-solid fa-lock"></i>
+        <span>Suas conversas são seguras e criptografadas.</span>
+      </div>
+
+    </main>
+
+  </div>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

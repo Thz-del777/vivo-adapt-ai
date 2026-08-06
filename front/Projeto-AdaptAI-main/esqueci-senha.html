@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Senha - Vivo AdaptAI</title>
+
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="layout-recuperacao">
+
+    <div class="envelope-imagem-recuperacao">
+      <img src="Imagens/RecuperarSenha.jpeg" alt="Mimo: Que bom ver você novamente">
+    </div>
+
+    <div class="painel-recuperacao">
+      <a href="entrar.html" class="voltar-recuperacao">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para o login
+      </a>
+
+      <div class="cartao-recuperacao">
+
+        <div class="cabecalho-recuperacao">
+          <h1 class="titulo-recuperacao" id="recoveryTitle">Recuperar senha</h1>
+          <p class="subtitulo-recuperacao" id="recoverySubtitle">Enviar instruções de recuperação sem expor existência de conta.</p>
+        </div>
+
+        <ol class="indicador-passos">
+          <li class="item-passo esta-ativo" id="step1">
+            <span class="circulo-passo">1</span>
+            <span class="rotulo-passo">Identificação</span>
+          </li>
+          <li class="linha-passo"></li>
+          <li class="item-passo" id="step2">
+            <span class="circulo-passo">2</span>
+            <span class="rotulo-passo">E-mail enviado</span>
+          </li>
+        </ol>
+
+        <!-- ETAPA 1: Identificação -->
+        <div id="recoveryStage1" class="estagio-recuperacao">
+          <form id="formStep1">
+            <div class="alerta-formulario" id="formStep1Error" role="alert" hidden>
+              <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+              <span></span>
+            </div>
+
+            <div class="linha-formulario">
+              <div class="grupo-formulario">
+                <label class="rotulo-formulario" for="emailRecuperacao">Informe seu e-mail ou telefone</label>
+                <p class="dica-recuperacao">Usaremos esses dados para enviar o código de verificação.</p>
+
+                <div class="abas" role="tablist">
+                  <button type="button" class="botao-aba esta-ativo" role="tab" aria-selected="true">
+                    <i class="fa-solid fa-envelope"></i> E-mail
+                  </button>
+                  <button type="button" class="botao-aba" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-phone"></i> Telefone
+                  </button>
+                </div>
+
+                <div class="envelope-campo">
+                  <i class="fa-solid fa-envelope icone-campo"></i>
+                  <input class="controle-campo" type="email" id="emailRecuperacao" name="identificador" placeholder="Digite seu email" required>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="botao botao-principal botao-bloco" id="formStep1SubmitBtn">
+              <span>Enviar link de recuperação</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- ETAPA 2: confirmação do envio -->
+        <div id="recoveryStage2" class="estagio-recuperacao" style="display: none;">
+          <div class="caixa-ajuda">
+            <span class="icone-ajuda"><i class="fa-solid fa-envelope-circle-check"></i></span>
+            <div>
+              <strong>Confira seu e-mail</strong>
+              <p id="recoveryConfirmationMessage">Se existir uma conta com esse e-mail, você receberá um link seguro para criar uma nova senha.</p>
+            </div>
+          </div>
+          <a href="entrar.html" class="botao botao-principal botao-bloco">Voltar para o login</a>
+        </div>
+
+        <!-- SUCESSO FINAL -->
+        <div id="recoverySuccess" class="estagio-recuperacao" style="display: none; text-align: center;">
+          <div class="icone-sucesso-recuperacao">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h2 class="titulo-sucesso-recuperacao">Senha alterada!</h2>
+          <p class="texto-sucesso-recuperacao">Sua senha foi redefinida com sucesso. Agora você já pode acessar sua conta novamente.</p>
+          
+          <button type="button" class="botao botao-principal botao-bloco" onclick="window.location.href='entrar.html'">
+            Ir para o Login
+          </button>
+        </div>
+
+        <div class="caixa-ajuda" id="recoveryHelpBox">
+          <span class="icone-ajuda"><i class="fa-solid fa-lock"></i></span>
+          <div>
+            <strong>Segurança em primeiro lugar</strong>
+            <p>Nunca compartilhe seu código de verificação com ninguém. O time da Vivo nunca pedirá sua senha.</p>
+          </div>
+        </div>
+
+        <p class="rodape-recuperacao" id="recoveryFooter">
+          Ainda precisa de ajuda? <a href="atendimento-texto.html" class="link-acao">Fale com o Mimo <i class="fa-solid fa-arrow-right"></i></a>
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

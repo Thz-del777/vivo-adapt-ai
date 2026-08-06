@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta - Vivo AdaptAI</title>
+
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="pagina-cadastro">
+
+  <div class="layout-autenticacao">
+
+    <nav class="navegacao-autenticacao">
+      <ul class="lista-navegacao">
+        <li class="item-navegacao">
+          <i class="fa-solid fa-circle-question"></i>
+          <a href="central-de-ajuda.html">Precisa de ajuda?</a>
+        </li>
+
+        <li class="item-navegacao">
+          <p>
+            Já tem uma conta?
+            <a href="entrar.html" class="link-acao">Entrar</a>
+          </p>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="secao-autenticacao">
+      <div class="cartao-autenticacao">
+
+        <h1 class="titulo-cartao-autenticacao">Criar Conta</h1>
+        <p class="subtitulo-cartao-autenticacao">Preencha seus dados para criar sua conta no Vivo AdaptAI</p>
+
+        <div class="divisor">
+          <span></span>
+          <p>ou crie com</p>
+          <span></span>
+        </div>
+
+        <div class="autenticacao-social">
+          <button class="botao botao-social">
+            <img src="Imagens/google.svg" alt="Google" class="icone-botao-social">
+            <span>Google</span>
+          </button>
+
+          <button class="botao botao-social">
+            <img src="Imagens/vivo.svg" alt="Vivo" class="icone-botao-social">
+            <span>Conta Vivo</span>
+          </button>
+        </div>
+
+        <form class="formulario-autenticacao" id="registroForm" action="#" method="POST">
+          <div class="alerta-formulario" id="registroFormError" role="alert" hidden>
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span></span>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="nomeCompleto">Nome completo</label>
+              <div class="envelope-campo">
+                <i class="fa-solid fa-user icone-campo"></i>
+                <input class="controle-campo" type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Digite seu nome completo" required>
+              </div>
+            </div>
+
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="email">Email</label>
+              <div class="envelope-campo">
+                <i class="fa-solid fa-envelope icone-campo"></i>
+                <input class="controle-campo" type="email" id="email" name="email" placeholder="Digite seu melhor email" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="telefone">Telefone <span class="link-suave">(opcional)</span></label>
+              <div class="envelope-campo">
+                <i class="fa-solid fa-phone icone-campo"></i>
+                <input class="controle-campo" type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+              </div>
+            </div>
+
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="dataNascimento">Data de nascimento <span class="link-suave">(opcional)</span></label>
+              <div class="envelope-campo">
+                <i class="fa-solid fa-calendar-days icone-campo"></i>
+                <input class="controle-campo" type="text" id="dataNascimento" name="dataNascimento" placeholder="DD/MM/AAAA">
+              </div>
+            </div>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="senha">Senha</label>
+              <div class="envelope-campo campo-senha">
+                <i class="fa-solid fa-lock icone-campo"></i>
+                <input class="controle-campo" type="password" id="senha" name="senha" placeholder="Crie uma senha segura" autocomplete="new-password" required minlength="12">
+                <button type="button" class="alternador-campo botao-alternar-senha" data-target="senha" aria-label="Mostrar senha" aria-pressed="false">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+
+              <div class="indicador-forca-senha" id="indicadorForcaSenha" hidden>
+                <div class="indicador-forca-senha__barras" aria-hidden="true">
+                  <span class="indicador-forca-senha__barra"></span>
+                  <span class="indicador-forca-senha__barra"></span>
+                  <span class="indicador-forca-senha__barra"></span>
+                </div>
+                <span class="indicador-forca-senha__texto" id="indicadorForcaSenhaTexto" role="status"></span>
+              </div>
+              <small class="texto-ajuda-campo">Use 12 ou mais caracteres, com letra maiúscula, minúscula, número e símbolo.</small>
+            </div>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="confirmarSenha">Confirmar senha</label>
+              <div class="envelope-campo campo-senha">
+                <i class="fa-solid fa-lock icone-campo"></i>
+                <input class="controle-campo" type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite novamente sua senha" autocomplete="new-password" required minlength="12">
+                <button type="button" class="alternador-campo botao-alternar-senha" data-target="confirmarSenha" aria-label="Mostrar senha" aria-pressed="false">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <section class="avaliacao-ild" aria-labelledby="tituloAvaliacaoInicial">
+            <div class="avaliacao-ild__cabecalho">
+              <span class="avaliacao-ild__selo"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> Atendimento do seu jeito</span>
+              <h2 id="tituloAvaliacaoInicial">Vamos conhecer o seu ritmo digital</h2>
+              <p>São só três escolhas rápidas. Não existe resposta certa: elas ajudam o Mimo a explicar tudo no seu tempo.</p>
+            </div>
+
+            <fieldset class="avaliacao-ild__pergunta">
+              <legend><span class="avaliacao-ild__numero">1</span> Com que frequência você usa aplicativos?</legend>
+              <div class="avaliacao-ild__opcoes">
+                <label><input type="radio" name="usoAplicativos" value="quase_todo_dia" required><span><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Quase todos os dias</span></label>
+                <label><input type="radio" name="usoAplicativos" value="as_vezes"><span><i class="fa-solid fa-calendar-day" aria-hidden="true"></i> Algumas vezes</span></label>
+                <label><input type="radio" name="usoAplicativos" value="raramente"><span><i class="fa-solid fa-seedling" aria-hidden="true"></i> Raramente ou nunca</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="avaliacao-ild__pergunta">
+              <legend><span class="avaliacao-ild__numero">2</span> Quando surge uma dúvida digital, o que você costuma fazer?</legend>
+              <div class="avaliacao-ild__opcoes">
+                <label><input type="radio" name="autonomiaDuvidas" value="tento_sozinho" required><span><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Tento resolver sozinho(a)</span></label>
+                <label><input type="radio" name="autonomiaDuvidas" value="peco_ajuda_as_vezes"><span><i class="fa-solid fa-handshake-angle" aria-hidden="true"></i> Às vezes peço ajuda</span></label>
+                <label><input type="radio" name="autonomiaDuvidas" value="preciso_de_ajuda"><span><i class="fa-solid fa-heart-circle-check" aria-hidden="true"></i> Normalmente preciso de ajuda</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="avaliacao-ild__pergunta">
+              <legend><span class="avaliacao-ild__numero">3</span> Como você se sente ao concluir uma tarefa digital?</legend>
+              <div class="avaliacao-ild__opcoes">
+                <label><input type="radio" name="conclusaoTarefas" value="consigo_sozinho" required><span><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Consigo concluir sozinho(a)</span></label>
+                <label><input type="radio" name="conclusaoTarefas" value="consigo_com_calma"><span><i class="fa-solid fa-mug-hot" aria-hidden="true"></i> Consigo, mas preciso de tempo</span></label>
+                <label><input type="radio" name="conclusaoTarefas" value="desisto_com_facilidade"><span><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i> Às vezes deixo para depois</span></label>
+              </div>
+            </fieldset>
+          </section>
+
+          <div class="grupo-radio">
+            <h2 class="titulo-radio">Preferência de comunicação</h2>
+            <p class="subtitulo-radio">Como você prefere receber informações importantes?</p>
+
+            <label class="cartao-radio">
+              <div class="icone-radio">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="info-radio">
+                <h3>Email</h3>
+                <p>Receber por email</p>
+              </div>
+              <input type="radio" name="preferenciaContato" id="prefEmail" value="email">
+            </label>
+
+            <label class="cartao-radio">
+              <div class="icone-radio">
+                <i class="fa-solid fa-comment"></i>
+              </div>
+              <div class="info-radio">
+                <h3>SMS</h3>
+                <p>Receber por SMS</p>
+              </div>
+              <input type="radio" name="preferenciaContato" id="prefSms" value="sms">
+            </label>
+
+            <div class="envelope-checkbox">
+              <label class="rotulo-checkbox">
+                <input type="checkbox" id="aceiteTermos" name="aceiteTermos" required>
+                <span>
+                  Eu concordo com os <a href="#" class="link-acao">Termos de Uso</a> e a <a href="#" class="link-acao">Política de Privacidade</a> da Vivo.
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="botao botao-principal botao-bloco" id="registroSubmitBtn">Criar Conta</button>
+
+        </form>
+
+        <div class="nota-seguranca">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Seus dados estão protegidos com criptografia ponta a ponta.</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="api-config.js?v=1"></script>
+  <script src="script.js?v=31"></script>
+  <script>
+    // F13: Termos de Uso e Política de Privacidade ainda não têm página própria.
+    document.querySelectorAll('a[href="#"]').forEach((link) => {
+      link.addEventListener('click', (evento) => {
+        evento.preventDefault();
+        mostrarToast({
+          tipo: 'info',
+          titulo: 'Em breve',
+          mensagem: 'Este documento ainda está sendo preparado.'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

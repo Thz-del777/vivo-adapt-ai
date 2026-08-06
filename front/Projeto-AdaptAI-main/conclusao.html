@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conclusão e Avaliação - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque" data-page="conclusao">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+
+    <app-sidebar active-page="atendimento"></app-sidebar>
+
+    <main class="conteudo-principal-app">
+      <section class="secao-conclusao">
+        <div class="cartao-conclusao">
+          <div class="topo-conclusao">
+            <div class="avatar-mimo-conclusao">
+              <img src="Imagens/Perfil-Mimo.png" alt="Mimo">
+            </div>
+            <h1 class="titulo-conclusao">Tudo certo!</h1>
+            <p class="texto-conclusao" style="font-size: var(--fs-sm); color: var(--color-text-secondary);">Confirmar conclusão e oferecer próximos passos.</p>
+            <p class="texto-conclusao" style="margin-top: var(--space-sm);">Seu atendimento foi concluído com sucesso. O Mimo adorou ajudar você hoje!</p>
+          </div>
+
+          <div class="divisor-conclusao"></div>
+
+          <div class="corpo-conclusao">
+            <h2 class="titulo-avaliacao">Como foi sua experiência?</h2>
+            <p class="subtitulo-avaliacao">Sua opinião é muito importante para tornarmos o AdaptAI cada vez melhor.</p>
+
+            <form id="formAvaliacao" class="form-avaliacao">
+              <div class="estrelas-avaliacao" role="radiogroup" aria-label="Avaliação por estrelas">
+                <input type="radio" name="estrela" id="estrela5" value="5" class="input-estrela">
+                <label for="estrela5" title="5 estrelas"><i class="fa-solid fa-star"></i></label>
+                
+                <input type="radio" name="estrela" id="estrela4" value="4" class="input-estrela">
+                <label for="estrela4" title="4 estrelas"><i class="fa-solid fa-star"></i></label>
+                
+                <input type="radio" name="estrela" id="estrela3" value="3" class="input-estrela">
+                <label for="estrela3" title="3 estrelas"><i class="fa-solid fa-star"></i></label>
+                
+                <input type="radio" name="estrela" id="estrela2" value="2" class="input-estrela">
+                <label for="estrela2" title="2 estrelas"><i class="fa-solid fa-star"></i></label>
+                
+                <input type="radio" name="estrela" id="estrela1" value="1" class="input-estrela">
+                <label for="estrela1" title="1 estrela"><i class="fa-solid fa-star"></i></label>
+              </div>
+
+              <div class="grupo-feedback">
+                <label for="comentarioFeedback" class="rotulo-formulario">Conte-nos mais (opcional)</label>
+                <textarea id="comentarioFeedback" name="comentario" class="controle-campo area-texto" placeholder="O que você mais gostou ou o que podemos melhorar?"></textarea>
+              </div>
+
+              <p class="status-perfil" id="statusAvaliacao" aria-live="polite"></p>
+
+              <div class="acoes-conclusao">
+                <button type="button" class="botao botao-contorno" id="btnPularAvaliacao" onclick="window.location.href='home.html'">Pular</button>
+                <button type="submit" class="botao botao-principal" id="btnEnviarAvaliacao">Enviar avaliação</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="atalhos-conclusao">
+          <a href="atendimento-texto.html" class="cartao-atalho">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Novo atendimento</span>
+          </a>
+          <a href="historico.html" class="cartao-atalho">
+            <i class="fa-regular fa-clock"></i>
+            <span>Ver histórico</span>
+          </a>
+          <a href="home.html" class="cartao-atalho">
+            <i class="fa-solid fa-house"></i>
+            <span>Ir para o início</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

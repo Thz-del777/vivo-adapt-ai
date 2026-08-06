@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Você está off-line - Vivo AdaptAI</title>
+
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque" data-page="offline">
+
+  <div class="app-shell">
+    <app-header app-page></app-header>
+
+    <div class="layout-aplicativo">
+      <app-sidebar active-page="offline"></app-sidebar>
+
+      <main class="pagina-offline">
+        <section class="offline-hero" aria-labelledby="tituloOffline">
+          <div class="offline-conteudo">
+            <span class="offline-icone-principal" aria-hidden="true">
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-xmark"></i>
+            </span>
+
+            <p class="offline-status" id="statusOfflineConexao">Sem conexão</p>
+            <h1 id="tituloOffline" class="offline-titulo">Você está off-line</h1>
+            <p class="offline-texto">
+              Parece que sua conexão com a internet caiu. Sem conexão, o Mimo não consegue acessar as informações para continuar o atendimento.
+            </p>
+
+            <div class="offline-caixa">
+              <p class="offline-caixa-titulo"><i class="fa-solid fa-wifi"></i> O que você pode fazer:</p>
+              <ul class="offline-lista">
+                <li><i class="fa-solid fa-circle"></i> Verifique sua conexão com a internet.</li>
+                <li><i class="fa-solid fa-circle"></i> Tente se aproximar do seu roteador ou mude de rede.</li>
+                <li><i class="fa-solid fa-circle"></i> Aguarde alguns instantes e tente novamente.</li>
+              </ul>
+
+              <div class="offline-dica">
+                <i class="fa-regular fa-lightbulb"></i>
+                <div>
+                  <strong>Dica do Mimo</strong>
+                  <p>Alguns conteúdos podem estar temporariamente indisponíveis sem conexão.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="offline-acoes">
+              <button type="button" class="botao botao-principal" id="btnOfflineTentarNovamente">
+                <i class="fa-solid fa-rotate-right"></i> Tentar novamente
+              </button>
+              <a href="home.html" class="botao botao-contorno">
+                <i class="fa-solid fa-house"></i> Voltar para o início
+              </a>
+            </div>
+
+            <p class="offline-seguranca">
+              <i class="fa-solid fa-lock"></i>
+              Seus dados estão seguros. Assim que a conexão voltar, tudo continuará normalmente.
+            </p>
+          </div>
+
+          <div class="offline-ilustracao" aria-hidden="true">
+            <span class="offline-balao">
+              <i class="fa-solid fa-wifi"></i>
+              <i class="fa-solid fa-xmark"></i>
+            </span>
+            <span class="offline-nuvem offline-nuvem-1"></span>
+            <span class="offline-nuvem offline-nuvem-2"></span>
+            <img src="Imagens/Erro.png" alt="Mimo preocupado com um alerta de erro" class="offline-mimo">
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <footer class="alternador-modo">
+    <p class="rotulo-modo">Mude a forma de atendimento a qualquer momento</p>
+
+    <div class="opcoes-modo opcoes-modo-desabilitada">
+      <a href="atendimento-texto.html" class="botao-modo" aria-disabled="true" tabindex="-1"><i class="fa-regular fa-message"></i> Texto</a>
+      <a href="atendimento-voz.html" class="botao-modo" aria-disabled="true" tabindex="-1"><i class="fa-solid fa-waveform-lines"></i> Voz</a>
+      <a href="atendimento-hibrido.html" class="botao-modo" aria-disabled="true" tabindex="-1"><i class="fa-solid fa-table-columns"></i> Híbrido</a>
+      <a href="texto-simplificado.html" class="botao-modo" aria-disabled="true" tabindex="-1"><i class="fa-solid fa-list-check"></i> Texto simplificado</a>
+      <a href="libras.html" class="botao-modo" aria-disabled="true" tabindex="-1"><i class="fa-solid fa-hands"></i> Libras</a>
+      <a href="home.html" class="botao-modo botao-modo-tracejado" aria-disabled="true" tabindex="-1"><i class="fa-regular fa-circle"></i> Sem preferência</a>
+    </div>
+  </footer>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

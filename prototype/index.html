@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Vivo AdaptAI: atendimento inteligente, acessível e personalizado com o Mimo."
+    />
+    <title>Vivo AdaptAI</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app" data-theme="light">
+      <a class="skip-link" href="#main">Pular para o conteúdo</a>
+
+      <header class="topbar">
+        <a class="brand" href="#" data-view="home" aria-label="Vivo AdaptAI">
+          <span class="brand-symbol" aria-hidden="true">AI</span>
+          <span><b>vivo</b> AdaptAI</span>
+        </a>
+
+        <nav class="nav" aria-label="Navegação principal">
+          <button class="active" data-view="home">Início</button>
+          <button data-view="chat">Atendimento</button>
+          <button data-view="accessibility">Acessibilidade</button>
+          <button data-view="mimo">Mimo</button>
+          <button data-view="history">Histórico</button>
+          <button data-view="dashboard">Dashboard</button>
+        </nav>
+
+        <div class="top-actions">
+          <button class="icon-button" id="accessibilityQuick" title="Abrir recursos de acessibilidade" aria-label="Abrir recursos de acessibilidade">A11y</button>
+          <button class="icon-button" id="themeToggle" title="Alternar tema" aria-label="Alternar tema">Tema</button>
+          <button class="ghost small" id="helpButton">Ajuda</button>
+          <button class="primary small" data-view="chat">Experimentar agora</button>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="view active" id="view-home" aria-labelledby="homeTitle">
+          <section class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow">Olá! Eu sou o Mimo</span>
+              <h1 id="homeTitle">Como posso te ajudar hoje?</h1>
+              <p>Converse por texto ou escolha o modo que melhor se adapta a você.</p>
+              <div class="hero-actions">
+                <button class="primary" data-view="chat">Iniciar atendimento</button>
+                <button class="secondary" data-view="mimo">Conhecer o Mimo</button>
+              </div>
+              <div class="trust-row" aria-label="Diferenciais do projeto">
+                <span>Dados simulados</span>
+                <span>Login opcional</span>
+                <span>Fallback local</span>
+              </div>
+            </div>
+
+            <div class="hero-stage" aria-label="Prévia do atendimento">
+              <div class="assistant-card">
+                <div class="assistant-card-head">
+                  <img src="./assets/drive-designs/aparencia-mimo.png" alt="Mimo, assistente do Vivo AdaptAI" />
+                  <div>
+                  <strong>Mimo</strong>
+                  <span>Online</span>
+                  </div>
+                </div>
+                <div class="preview-chat">
+                  <p>Olá! Como posso ajudar você hoje?</p>
+                  <button data-view="chat">Quero entender minha conta</button>
+                  <button data-view="chat">Minha internet não funciona</button>
+                  <button data-view="chat">Preciso de outro tipo de ajuda</button>
+                </div>
+              </div>
+              <div class="mode-rail" aria-label="Modalidades disponíveis">
+                <span>Texto</span>
+                <span>Voz</span>
+                <span>Libras</span>
+                <span>Etapas</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="home-quick-cards" aria-label="Ações rápidas">
+            <button data-view="chat">
+              <span class="mode-icon">?</span>
+              <strong>Tire suas dúvidas</strong>
+              <small>Pergunte sobre produtos, serviços e muito mais.</small>
+            </button>
+            <button data-view="chat">
+              <span class="mode-icon">2ª</span>
+              <strong>2ª via de fatura</strong>
+              <small>Consulte e solicite segunda via da sua fatura.</small>
+            </button>
+            <button data-view="chat">
+              <span class="mode-icon">Wi</span>
+              <strong>Internet e Wi-Fi</strong>
+              <small>Suporte para sua conexão e rede Wi-Fi.</small>
+            </button>
+          </section>
+
+          <section class="problem-band">
+            <article>
+              <span>01</span>
+              <h2>Linguagem técnica</h2>
+              <p>Informações difíceis viram orientação clara e passo a passo.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h2>Acesso à informação</h2>
+              <p>Fluxos confusos são reorganizados por necessidade e contexto.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h2>Dificuldade digital</h2>
+              <p>O atendimento respeita ritmo, leitura, fala e preferência visual.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <h2>Repetição de dados</h2>
+              <p>O resumo mantém continuidade sem obrigar a pessoa a recomeçar.</p>
+            </article>
+          </section>
+
+          <section class="section-block">
+            <div class="section-heading">
+              <span class="section-label">Como funciona</span>
+              <h2>Um fluxo simples, adaptável e sem login obrigatório</h2>
+            </div>
+            <div class="flow-line">
+              <article><span>1</span><strong>Você inicia</strong><small>Sem barreira inicial.</small></article>
+              <article><span>2</span><strong>Escolhe o modo</strong><small>Texto, voz, Libras ou adaptável.</small></article>
+              <article><span>3</span><strong>Mimo adapta</strong><small>Linguagem, ritmo e formato.</small></article>
+              <article><span>4</span><strong>Você acompanha</strong><small>Estados visuais e feedback claro.</small></article>
+              <article><span>5</span><strong>Resumo final</strong><small>Histórico opcional e consentido.</small></article>
+            </div>
+          </section>
+
+          <section class="modality-grid" aria-label="Modalidades de atendimento">
+            <button data-view="chat" data-start-mode="texto">
+              <span class="mode-icon">TXT</span>
+              <strong>Conversar por texto</strong>
+              <small>Dúvidas e protocolos com registro claro.</small>
+            </button>
+            <button data-view="chat" data-start-mode="voz">
+              <span class="mode-icon">VOZ</span>
+              <strong>Conversar por voz</strong>
+              <small>Entrada falada com transcrição e legenda.</small>
+            </button>
+            <button data-view="chat" data-start-mode="simples">
+              <span class="mode-icon">ABC</span>
+              <strong>Usar texto simplificado</strong>
+              <small>Frases curtas, etapas e menos carga cognitiva.</small>
+            </button>
+            <button data-view="chat" data-start-mode="libras">
+              <span class="mode-icon">LIB</span>
+              <strong>Atendimento em Libras</strong>
+              <small>Área visual, legenda e confirmação textual.</small>
+            </button>
+          </section>
+
+          <section class="cta-strip">
+            <img src="./assets/drive-designs/aparencia-mimo.png" alt="" />
+            <div>
+              <strong>Experimente uma forma de atendimento que se adapta a você.</strong>
+              <span>O Mimo ajusta a conversa conforme sua preferência.</span>
+            </div>
+            <button class="primary" data-view="chat">Iniciar atendimento</button>
+          </section>
+        </section>
+
+        <section class="view" id="view-chat" aria-labelledby="chatTitle">
+          <div class="page-heading">
+            <span class="section-label">Atendimento</span>
+            <h1 id="chatTitle">Escolha como prefere iniciar</h1>
+            <p>Todos os modos têm o mesmo valor. Você pode trocar a modalidade durante a conversa.</p>
+          </div>
+
+          <section class="chat-shell">
+            <aside class="mode-panel" aria-label="Escolha de modalidade">
+              <button class="mode active" data-mode="texto">
+                <span>Texto</span>
+                <small>Mensagem escrita com resposta clara.</small>
+              </button>
+              <button class="mode" data-mode="voz">
+                <span>Voz</span>
+                <small>Fale e acompanhe a transcrição.</small>
+              </button>
+              <button class="mode" data-mode="simples">
+                <span>Texto simplificado</span>
+                <small>Uma etapa por vez.</small>
+              </button>
+              <button class="mode" data-mode="libras">
+                <span>Libras</span>
+                <small>Área visual com legenda.</small>
+              </button>
+              <button class="mode" data-mode="adaptavel">
+                <span>Adaptável</span>
+                <small>O Mimo sugere o melhor caminho.</small>
+              </button>
+              <button class="secondary full" id="skipMode">Continuar sem escolher</button>
+            </aside>
+
+            <section class="chat-panel">
+              <header class="chat-header">
+                <div class="assistant">
+              <img id="chatMimo" src="./assets/drive-designs/aparencia-mimo.png" alt="Mimo" />
+                  <div>
+                    <strong>Mimo</strong>
+                    <span><i></i> Online</span>
+                  </div>
+                </div>
+                <div class="chat-tools">
+                  <button class="ghost small" id="warmupBtn">Verificar sistema</button>
+                  <button class="ghost small" id="finishChat">Concluir</button>
+                </div>
+              </header>
+
+              <div class="conversation" id="conversation" aria-live="polite">
+                <div class="message mimo">
+                  <span>Mimo</span>
+                  <p>Olá! Eu sou o Mimo. Vamos encontrar juntos a melhor forma de personalizar seu atendimento.</p>
+                </div>
+                <div class="system-note" id="systemNote">
+                  Sistema pronto. Se algo oscilar, o modo demo mantém a conversa.
+                </div>
+              </div>
+
+              <form class="composer" id="chatForm">
+                <input id="messageInput" type="text" placeholder="Digite sua mensagem para o Mimo" autocomplete="off" />
+                <button class="primary" type="submit">Enviar</button>
+              </form>
+
+              <div class="quick-actions">
+                <button>Minha internet não funciona</button>
+                <button>Quero entender minha conta</button>
+                <button>Quero conhecer os planos</button>
+                <button>Preciso de acessibilidade</button>
+              </div>
+            </section>
+          </section>
+        </section>
+
+        <section class="view" id="view-accessibility" aria-labelledby="accessTitle">
+          <div class="page-heading">
+            <span class="section-label">Acessibilidade</span>
+            <h1 id="accessTitle">Preferências que acompanham a pessoa</h1>
+            <p>A experiência é configurável sem parecer técnica. O usuário controla como quer ler, ouvir e navegar.</p>
+          </div>
+
+          <section class="settings-grid">
+            <label><input type="checkbox" id="largeText" /> <span>Aumentar fonte</span><small>Texto mais confortável em todas as telas.</small></label>
+            <label><input type="checkbox" id="contrastToggle" /> <span>Alto contraste</span><small>Bordas e textos mais fortes.</small></label>
+            <label><input type="checkbox" checked /> <span>Legendas</span><small>Conteúdo de voz acompanhado por texto.</small></label>
+            <label><input type="checkbox" /> <span>Leitura em voz alta</span><small>Mimo pode ler mensagens essenciais.</small></label>
+            <label><input type="checkbox" checked /> <span>Libras</span><small>Atendimento visual com área dedicada.</small></label>
+            <label><input type="checkbox" id="reduceMotion" /> <span>Reduzir movimento</span><small>Transições mais discretas.</small></label>
+          </section>
+
+          <section class="access-preview">
+            <div>
+              <span class="section-label">Prévia</span>
+              <h2>O mesmo conteúdo em formatos diferentes</h2>
+              <p>O produto preserva sentido e autonomia ao alternar entre texto, voz, Libras e explicação simplificada.</p>
+            </div>
+            <div class="caption-box">
+              <strong>Legenda ativa</strong>
+              <p>"Vou verificar sua conexão. Primeiro, confirme se as luzes do modem estão acesas."</p>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="view-mimo" aria-labelledby="mimoTitle">
+          <section class="mimo-layout">
+            <div class="page-heading">
+              <span class="section-label">Mimo</span>
+              <h1 id="mimoTitle">Assistente claro, paciente e adaptável</h1>
+              <p>Mimo traduz o atendimento em pequenos passos, confirma entendimento e usa estados visuais para comunicar o que está acontecendo.</p>
+            </div>
+            <div class="mimo-showcase">
+              <img id="mimoShowcase" src="./assets/drive-designs/aparencia-mimo.png" alt="Estado visual do Mimo" />
+            </div>
+          </section>
+
+          <div class="state-buttons" aria-label="Estados visuais do Mimo">
+            <button class="active" data-mimo="welcome">Boas-vindas</button>
+            <button data-mimo="neutral">Neutro</button>
+            <button data-mimo="listening">Ouvindo</button>
+            <button data-mimo="processing">Processando</button>
+            <button data-mimo="responding">Respondendo</button>
+            <button data-mimo="done">Concluído</button>
+            <button data-mimo="error">Erro</button>
+          </div>
+
+          <section class="behavior-grid">
+            <article><strong>Tom de voz</strong><p>Calmo, direto e acolhedor. Evita linguagem técnica desnecessária.</p></article>
+            <article><strong>Confirmação</strong><p>Repete decisões importantes para reduzir erro e ansiedade.</p></article>
+            <article><strong>Limites</strong><p>Não finge atendimento humano e informa quando está em modo demo.</p></article>
+          </section>
+
+          <section class="mockup-gallery" aria-label="Referências visuais do Drive">
+            <article>
+              <img src="./assets/drive-designs/conhecer-mimo.png" alt="Tela Conhecer o Mimo" />
+              <strong>Conhecer o Mimo</strong>
+            </article>
+            <article>
+              <img src="./assets/drive-designs/adaptacoes-mimo.png" alt="Tela de adaptações do Mimo" />
+              <strong>Adaptações do Mimo</strong>
+            </article>
+          </section>
+        </section>
+
+        <section class="view" id="view-history" aria-labelledby="historyTitle">
+          <div class="page-heading">
+            <span class="section-label">Histórico e resumo</span>
+            <h1 id="historyTitle">Continuidade sem obrigar login</h1>
+            <p>O histórico pode ser salvo com consentimento. Para a demonstração, os dados são simulados localmente.</p>
+          </div>
+
+          <section class="history-layout">
+            <div class="history-list" id="historyList"></div>
+            <article class="summary-card">
+              <span class="section-label">Resumo atual</span>
+              <h2 id="summaryTitle">Atendimento em andamento</h2>
+              <p id="summaryText">Escolha uma modalidade e envie uma mensagem para gerar um resumo do atendimento.</p>
+              <div class="summary-actions">
+                <button class="secondary" id="loginOpen">Salvar com login opcional</button>
+                <button class="primary" data-view="chat">Fazer outra pergunta</button>
+              </div>
+            </article>
+          </section>
+        </section>
+
+        <section class="view" id="view-dashboard" aria-labelledby="dashTitle">
+          <div class="page-heading">
+            <span class="section-label">Dashboard</span>
+            <h1 id="dashTitle">Gestão da experiência em tempo real</h1>
+            <p>Indicadores simulados para acompanhar qualidade, acessibilidade e estabilidade da demonstração.</p>
+          </div>
+
+          <section class="dashboard-grid">
+            <article><strong>92%</strong><span>Resolução simulada no primeiro contato</span></article>
+            <article><strong>4,8/5</strong><span>Satisfação média da experiência</span></article>
+            <article><strong>1,7s</strong><span>Resposta perceptível com feedback visual</span></article>
+            <article><strong>37%</strong><span>Uso de recursos de acessibilidade</span></article>
+          </section>
+
+          <section class="dashboard-layout">
+            <article class="chart-card" aria-label="Gráfico demonstrativo de uso por modalidade">
+              <div class="chart-head">
+                <div>
+                  <span class="section-label">Modalidades</span>
+                  <h2>Uso na demo</h2>
+                </div>
+                <select id="dashboardFilter" aria-label="Filtrar dashboard">
+                  <option value="week">Semana</option>
+                  <option value="day">Hoje</option>
+                  <option value="month">Mês</option>
+                </select>
+              </div>
+              <div class="bar-chart" id="barChart"></div>
+            </article>
+
+            <article class="ops-card">
+              <span class="section-label">Robustez</span>
+              <h2>Plano de continuidade</h2>
+              <ul>
+                <li>Ping silencioso em <code>/health</code> ao abrir.</li>
+                <li><code>DEMO_MODE</code> para respostas simuladas.</li>
+                <li>Fallback para JSON local quando a API oscilar.</li>
+                <li>CORS restrito à origem final e ambientes locais.</li>
+              </ul>
+            </article>
+          </section>
+        </section>
+      </main>
+
+      <aside class="help-drawer" id="helpDrawer" aria-hidden="true">
+        <div>
+          <header>
+            <strong>Central de ajuda</strong>
+            <button class="icon-button" id="helpClose" aria-label="Fechar ajuda">x</button>
+          </header>
+          <button data-help-message="Como usar acessibilidade?">Como usar acessibilidade?</button>
+          <button data-help-message="Como trocar modalidade?">Como trocar modalidade?</button>
+          <button data-help-message="Como salvar meu histórico?">Como salvar meu histórico?</button>
+        </div>
+      </aside>
+
+      <div class="modal" id="loginModal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle">
+        <div class="modal-card">
+          <button class="icon-button modal-close" id="loginClose" aria-label="Fechar">x</button>
+          <span class="section-label">Login opcional</span>
+          <h2 id="loginTitle">Salvar preferências e histórico</h2>
+          <p>Você pode continuar sem login. O acesso serve apenas para sincronizar preferências e recuperar atendimentos.</p>
+          <form id="loginForm">
+            <input type="email" placeholder="seuemail@exemplo.com" aria-label="E-mail" />
+            <input type="password" placeholder="Senha" aria-label="Senha" />
+            <button class="primary" type="submit">Entrar em modo demo</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

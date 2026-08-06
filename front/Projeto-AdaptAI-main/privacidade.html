@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacidade e dados - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=46">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="privacidade">
+  <div class="app-shell">
+    <app-header app-page></app-header>
+    <div class="layout-aplicativo">
+      <app-sidebar active-page="privacidade"></app-sidebar>
+      <main class="conteudo-principal-app pagina-privacidade">
+        <nav class="trilha-navegacao" aria-label="Trilha de navegação">
+          <a href="home.html"><i class="fa-solid fa-house"></i> Início</a>
+          <i class="fa-solid fa-chevron-right"></i><span aria-current="page">Privacidade e dados</span>
+        </nav>
+
+        <header class="privacidade-hero">
+          <span class="privacidade-hero-icone"><i class="fa-solid fa-shield-halved"></i></span>
+          <div><span class="privacidade-selo">Você no controle</span><h1>Privacidade e dados</h1><p>Consulte, baixe ou exclua suas informações com clareza e segurança.</p></div>
+        </header>
+
+        <div class="privacidade-login" id="privacyLoginRequired" hidden>
+          <i class="fa-solid fa-lock"></i><div><strong>Entre para gerenciar seus dados</strong><p>Esta área contém informações pessoais e só pode ser aberta pelo titular da conta.</p></div><a href="entrar.html" class="botao botao-principal">Fazer login</a>
+        </div>
+
+        <div class="privacidade-conteudo" id="privacyContent">
+          <section class="privacidade-resumo" aria-labelledby="privacySummaryTitle">
+            <div><span class="privacidade-etiqueta">Resumo da conta</span><h2 id="privacySummaryTitle">Seus dados no AdaptAI</h2><p id="privacyAccountSummary">Carregando informações protegidas...</p></div>
+            <div class="privacidade-contadores" aria-live="polite">
+              <div><strong id="privacyConversationsCount">—</strong><span>conversas</span></div>
+              <div><strong id="privacyMessagesCount">—</strong><span>mensagens</span></div>
+              <div><strong id="privacyEventsCount">—</strong><span>ações digitais</span></div>
+              <div><strong id="privacyNotificationsCount">—</strong><span>avisos</span></div>
+            </div>
+          </section>
+
+          <section class="privacidade-secao" aria-labelledby="privacyActionsTitle">
+            <header><span class="privacidade-etiqueta">Seus direitos</span><h2 id="privacyActionsTitle">Gerencie suas informações</h2><p>Cada ação explica exatamente o que será alterado.</p></header>
+            <div class="privacidade-acoes-grid">
+              <article class="privacidade-acao-card"><span class="privacidade-acao-icone azul"><i class="fa-solid fa-download"></i></span><div><h3>Baixar meus dados</h3><p>Receba um arquivo JSON com cadastro, conversas, ILD, consentimentos e demais registros da conta.</p></div><button type="button" class="botao botao-contorno" id="privacyDownloadButton">Preparar download</button></article>
+              <article class="privacidade-acao-card"><span class="privacidade-acao-icone roxo"><i class="fa-solid fa-broom"></i></span><div><h3>Limpar histórico</h3><p>Apaga conversas, mensagens, avaliações e solicitações de atendimento. Seu perfil e ILD atual permanecem.</p></div><button type="button" class="botao botao-contorno" data-open-privacy-dialog="privacyClearHistoryDialog">Limpar histórico</button></article>
+              <article class="privacidade-acao-card"><span class="privacidade-acao-icone amarelo"><i class="fa-solid fa-laptop-file"></i></span><div><h3>Revogar sessões</h3><p>Impede a renovação das sessões em navegadores e dispositivos. Este dispositivo sai imediatamente.</p></div><button type="button" class="botao botao-contorno" data-open-privacy-dialog="privacySessionsDialog">Sair de todos</button></article>
+              <article class="privacidade-acao-card privacidade-acao-perigo"><span class="privacidade-acao-icone vermelho"><i class="fa-solid fa-user-slash"></i></span><div><h3>Excluir minha conta</h3><p>Remove a conta e os dados associados. Esta ação é permanente e exige sua senha.</p></div><button type="button" class="botao botao-perigo" data-open-privacy-dialog="privacyDeleteAccountDialog">Excluir conta</button></article>
+            </div>
+          </section>
+
+          <section class="privacidade-secao" aria-labelledby="privacyConsentsTitle">
+            <header><span class="privacidade-etiqueta">Consentimentos</span><h2 id="privacyConsentsTitle">Escolhas de uso dos dados</h2><p>Você pode alterar ou revogar estas opções quando quiser.</p></header>
+            <div class="privacidade-consentimentos">
+              <label class="privacidade-consentimento"><span><strong>Atendimento personalizado</strong><small>Usa seu ILD e suas preferências para adaptar explicações e etapas.</small></span><input type="checkbox" data-privacy-consent="personalizacao"><i aria-hidden="true"></i></label>
+              <label class="privacidade-consentimento"><span><strong>Salvar histórico</strong><small>Mantém conversas e atendimentos disponíveis na sua conta.</small></span><input type="checkbox" data-privacy-consent="historico"><i aria-hidden="true"></i></label>
+              <label class="privacidade-consentimento"><span><strong>Dados de uso anônimos</strong><small>Ajuda a melhorar o serviço sem usar mensagens, nome, e-mail ou telefone.</small></span><input type="checkbox" data-privacy-consent="dados_uso_anonimos"><i aria-hidden="true"></i></label>
+              <label class="privacidade-consentimento"><span><strong>Novidades e comunicações</strong><small>Permite avisos opcionais sobre recursos e melhorias do AdaptAI.</small></span><input type="checkbox" data-privacy-consent="comunicacoes"><i aria-hidden="true"></i></label>
+            </div>
+            <p class="privacidade-status" id="privacyConsentStatus" role="status" aria-live="polite"><i class="fa-solid fa-lock"></i> Suas escolhas ficam vinculadas à sua conta.</p>
+          </section>
+
+          <section class="privacidade-secao privacidade-lgpd" aria-labelledby="privacyLgpdTitle">
+            <header><span class="privacidade-etiqueta">LGPD</span><h2 id="privacyLgpdTitle">Como tratamos seus dados</h2><p>Informações simples sobre finalidade, direitos e segurança.</p></header>
+            <div class="privacidade-lgpd-grid">
+              <article><i class="fa-solid fa-bullseye"></i><h3>Para que usamos</h3><p>Autenticação, atendimento adaptado, suporte, segurança e melhoria do serviço quando autorizada.</p></article>
+              <article><i class="fa-solid fa-scale-balanced"></i><h3>Seus direitos</h3><p>Acesso, correção, portabilidade, informação, revogação de consentimento e exclusão, respeitando obrigações legais.</p></article>
+              <article><i class="fa-solid fa-database"></i><h3>Dados armazenados</h3><p>Cadastro, preferências, indicadores do ILD, conversas autorizadas, eventos de uso, consentimentos e segurança.</p></article>
+              <article><i class="fa-solid fa-shield"></i><h3>Proteção</h3><p>Dados separados por usuário, acesso autenticado e chaves privadas mantidas somente no servidor.</p></article>
+            </div>
+            <div class="privacidade-politica"><i class="fa-solid fa-file-shield"></i><div><strong>Política de privacidade — versão <span id="privacyPolicyVersion">1.0</span></strong><p>Última atualização: <span id="privacyPolicyUpdatedAt">28/07/2026</span>. Para exercer um direito que não esteja nesta tela, use a Central de ajuda.</p></div><a href="central-de-ajuda.html" class="botao botao-contorno">Falar conosco</a></div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="privacidade-dialogo" id="privacyClearHistoryDialog"><form method="dialog" id="privacyClearHistoryForm"><button type="button" class="privacidade-dialogo-fechar" data-close-privacy-dialog aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button><span class="privacidade-dialogo-icone"><i class="fa-solid fa-broom"></i></span><h2>Apagar seu histórico?</h2><p>Conversas, mensagens, avaliações e solicitações serão removidas permanentemente.</p><label>Digite <strong>APAGAR HISTORICO</strong><input type="text" id="privacyClearHistoryConfirmation" autocomplete="off" required></label><div class="privacidade-dialogo-acoes"><button type="button" class="botao botao-contorno" data-close-privacy-dialog>Cancelar</button><button type="submit" class="botao botao-perigo" id="privacyClearHistoryConfirm">Apagar histórico</button></div></form></dialog>
+  <dialog class="privacidade-dialogo" id="privacySessionsDialog"><div><button type="button" class="privacidade-dialogo-fechar" data-close-privacy-dialog aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button><span class="privacidade-dialogo-icone"><i class="fa-solid fa-laptop-file"></i></span><h2>Sair de todos os dispositivos?</h2><p>As sessões não poderão ser renovadas. Este dispositivo voltará agora para a tela de login.</p><div class="privacidade-dialogo-acoes"><button type="button" class="botao botao-contorno" data-close-privacy-dialog>Cancelar</button><button type="button" class="botao botao-principal" id="privacySessionsConfirm">Revogar sessões</button></div></div></dialog>
+  <dialog class="privacidade-dialogo privacidade-dialogo-perigo" id="privacyDeleteAccountDialog"><form method="dialog" id="privacyDeleteAccountForm"><button type="button" class="privacidade-dialogo-fechar" data-close-privacy-dialog aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button><span class="privacidade-dialogo-icone"><i class="fa-solid fa-user-slash"></i></span><h2>Excluir sua conta permanentemente?</h2><p>Baixe seus dados antes de continuar. Depois da exclusão, não será possível recuperar a conta.</p><label>Sua senha<input type="password" id="privacyDeletePassword" autocomplete="current-password" required minlength="8"></label><label>Digite <strong>EXCLUIR MINHA CONTA</strong><input type="text" id="privacyDeleteConfirmation" autocomplete="off" required></label><div class="privacidade-dialogo-acoes"><button type="button" class="botao botao-contorno" data-close-privacy-dialog>Cancelar</button><button type="submit" class="botao botao-perigo" id="privacyDeleteConfirm">Excluir definitivamente</button></div></form></dialog>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+  <script src="script.js?v=30"></script>
+</body>
+</html>

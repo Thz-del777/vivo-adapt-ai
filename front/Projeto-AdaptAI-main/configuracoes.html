@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Vivo AdaptAI</title>
+    <link rel="stylesheet" href="style.css?v=44">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="configuracoes">
+    <div class="app-shell">
+    <app-header app-page></app-header>
+    <div class="layout-aplicativo">
+        <app-sidebar active-page="configuracoes"></app-sidebar>
+        <main class="conteudo-principal-app">
+            <section class="secao-configuracoes">
+                <header class="cabecalho-secao-app">
+                    <div>
+                        <h1 class="titulo-secao">Configurações</h1>
+                        <p class="texto-secao">Ajuste o idioma, o tema e o comportamento geral da sua conta no Vivo AdaptAI.</p>
+                    </div>
+                    <div class="mimo-configuracoes">
+                        <img src="Imagens/Perfil-Mimo.png" alt="Mimo" class="mimo-configuracoes-img" onerror="this.style.display='none'">
+                    </div>
+                </header>
+
+                <div class="configuracoes-grid">
+
+                    <!-- Coluna Principal -->
+                    <div class="configuracoes-coluna-principal">
+
+                        <!-- Cartão: Geral e Atendimento -->
+                        <div class="configuracoes-cartao" id="cartao-geral-atendimento">
+                            <div class="configuracoes-cartao-cabecalho">
+                                <h2 class="configuracoes-secao-titulo">Geral e Atendimento</h2>
+                            </div>
+                            <p class="configuracoes-subtitulo">Idioma, tema e comportamento padrão do Mimo.</p>
+
+                            <div class="configuracoes-lista">
+
+                                <!-- Idioma -->
+                                <div class="configuracao-item" data-config="idioma">
+                                    <div class="configuracao-item-esquerda">
+                                        <div class="configuracao-item-icone">
+                                            <i class="fa-solid fa-globe"></i>
+                                        </div>
+                                        <div class="configuracao-item-info">
+                                            <span class="configuracao-item-nome">Idioma</span>
+                                            <span class="configuracao-item-descricao">Define o idioma da interface do Vivo AdaptAI.</span>
+                                        </div>
+                                    </div>
+                                    <div class="configuracao-item-direita">
+                                        <div class="select-configuracao-wrapper">
+                                            <select id="selectIdioma" class="select-configuracao">
+                                                <option value="pt-br">Português (Brasil)</option>
+                                                <option value="en" disabled>English (em breve)</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down icone-select" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tema -->
+                                <div class="configuracao-item" data-config="tema">
+                                    <div class="configuracao-item-esquerda">
+                                        <div class="configuracao-item-icone">
+                                            <i class="fa-solid fa-palette"></i>
+                                        </div>
+                                        <div class="configuracao-item-info">
+                                            <span class="configuracao-item-nome">Tema</span>
+                                            <span class="configuracao-item-descricao">Escolha entre tema claro ou escuro.</span>
+                                        </div>
+                                    </div>
+                                    <div class="configuracao-item-direita">
+                                        <div class="select-configuracao-wrapper">
+                                            <select id="selectTema" class="select-configuracao">
+                                                <option value="claro">Claro</option>
+                                                <option value="escuro">Escuro</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down icone-select" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modo de atendimento padrão -->
+                                <div class="configuracao-item" data-config="modo-atendimento">
+                                    <div class="configuracao-item-esquerda">
+                                        <div class="configuracao-item-icone">
+                                            <i class="fa-solid fa-comment-dots"></i>
+                                        </div>
+                                        <div class="configuracao-item-info">
+                                            <span class="configuracao-item-nome">Modo de atendimento padrão</span>
+                                            <span class="configuracao-item-descricao">Escolha a forma de atendimento usada ao iniciar uma nova conversa.</span>
+                                        </div>
+                                    </div>
+                                    <div class="configuracao-item-direita">
+                                        <div class="select-configuracao-wrapper">
+                                            <select id="modoAtendimentoSelect" class="select-configuracao">
+                                                <option value="texto" selected>Texto</option>
+                                                <option value="voz">Voz</option>
+                                                <option value="hibrido">Híbrido</option>
+                                                <option value="texto-simplificado">Texto simplificado</option>
+                                                <option value="libras">Libras</option>
+                                                <option value="perguntar">Perguntar sempre</option>
+                                            </select>
+                                            <i class="fa-solid fa-chevron-down icone-select" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Confirmar antes de encerrar -->
+                                <div class="configuracao-item" data-config="confirmar-encerramento">
+                                    <div class="configuracao-item-esquerda">
+                                        <div class="configuracao-item-icone">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        </div>
+                                        <div class="configuracao-item-info">
+                                            <span class="configuracao-item-nome">Confirmar antes de encerrar</span>
+                                            <span class="configuracao-item-descricao">Pergunte antes de encerrar uma conversa em andamento.</span>
+                                        </div>
+                                    </div>
+                                    <div class="configuracao-item-direita">
+                                        <span class="configuracao-estado configuracao-estado-ativo" id="estadoConfirmarEncerramento">
+                                            <i class="fa-solid fa-check-circle"></i> Ativado
+                                        </span>
+                                        <label class="permissao-toggle" aria-label="Confirmar antes de encerrar atendimento">
+                                            <input type="checkbox" id="confirmarEncerramentoToggle" class="permissao-toggle-input" checked>
+                                            <span class="permissao-toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Cartão: Notificações -->
+                        <div class="configuracoes-cartao" id="cartao-notificacoes">
+                            <div class="configuracoes-cartao-cabecalho">
+                                <h2 class="configuracoes-secao-titulo">Notificações</h2>
+                            </div>
+                            <p class="configuracoes-subtitulo">Configure como e quando deseja receber avisos.</p>
+
+                            <div class="configuracoes-lista">
+
+                                <!-- Resumo do atendimento por e-mail -->
+                                <div class="configuracao-item" data-config="notif-resumo">
+                                    <div class="configuracao-item-esquerda">
+                                        <div class="configuracao-item-icone">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
+                                        <div class="configuracao-item-info">
+                                            <span class="configuracao-item-nome">Resumo do atendimento por e-mail</span>
+                                            <span class="configuracao-item-descricao">Receba um resumo por e-mail ao final de cada conversa com o Mimo.</span>
+                                        </div>
+                                    </div>
+                                    <div class="configuracao-item-direita">
+                                        <span class="configuracao-estado configuracao-estado-ativo" id="estadoNotifResumo">
+                                            <i class="fa-solid fa-check-circle"></i> Ativado
+                                        </span>
+                                        <label class="permissao-toggle" aria-label="Resumo do atendimento por e-mail">
+                                            <input type="checkbox" id="notifResumoToggle" class="permissao-toggle-input" checked>
+                                            <span class="permissao-toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Novidades e dicas -->
+                                <div class="configuracao-item" data-config="notif-novidades">
+                                    <div class="configuracao-item-esquerda">
+                                        <div class="configuracao-item-icone">
+                                            <i class="fa-solid fa-bell"></i>
+                                        </div>
+                                        <div class="configuracao-item-info">
+                                            <span class="configuracao-item-nome">Novidades e dicas do Vivo AdaptAI</span>
+                                            <span class="configuracao-item-descricao">Avisos sobre novos recursos e melhorias da plataforma.</span>
+                                        </div>
+                                    </div>
+                                    <div class="configuracao-item-direita">
+                                        <span class="configuracao-estado configuracao-estado-inativo" id="estadoNotifNovidades">
+                                            Desativado
+                                        </span>
+                                        <label class="permissao-toggle" aria-label="Novidades e dicas do Vivo AdaptAI">
+                                            <input type="checkbox" id="notifNovidadesToggle" class="permissao-toggle-input">
+                                            <span class="permissao-toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="configuracoes-rodape">
+                                <span class="configuracoes-aviso-salvo" id="statusSalvamentoConfiguracoes" role="status" aria-live="polite">
+                                    <i class="fa-solid fa-lock"></i> Suas alterações são salvas automaticamente.
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Coluna Lateral -->
+                    <div class="configuracoes-coluna-lateral">
+
+                        <!-- Card: Acessibilidade -->
+                        <div class="configuracoes-card-lateral">
+                            <div class="configuracoes-card-lateral-header">
+                                <i class="fa-solid fa-universal-access"></i>
+                                <span>Acessibilidade</span>
+                            </div>
+                            <p>Tamanho do texto, contraste, Libras, comandos por voz e outros recursos assistivos.</p>
+                            <a href="acessibilidade.html" class="configuracoes-link-card">
+                                Abrir <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- Card: Privacidade e Dados -->
+                        <div class="configuracoes-card-lateral">
+                            <div class="configuracoes-card-lateral-header">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>Privacidade e Dados</span>
+                            </div>
+                            <p>Suas preferências nos ajudam a personalizar seu atendimento e oferecer a melhor experiência.</p>
+                            <a href="privacidade.html" class="configuracoes-link-card">
+                                Abrir central de privacidade <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                            <a href="privacidade.html#privacyActionsTitle" class="configuracoes-link-card configuracoes-link-perigo">
+                                Gerenciar ou excluir dados <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="components.js?v=10"></script>
+    <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

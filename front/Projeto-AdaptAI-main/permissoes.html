@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permissões - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="permissoes">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+    <app-sidebar active-page="permissoes"></app-sidebar>
+
+    <main class="conteudo-principal-app">
+      <section class="secao-permissoes">
+        <header class="cabecalho-secao-app">
+          <div>
+            <a href="perfil.html" class="permissoes-link-voltar">
+              <i class="fa-solid fa-arrow-left"></i> Voltar
+            </a>
+            <h1 class="titulo-secao">Permissões</h1>
+            <p class="texto-secao">Controlar microfone, câmera e notificações.</p>
+          </div>
+          <div class="permissoes-imagem-cabecalho">
+            <img src="Imagens/Privacidade.png" alt="Mimo com escudo de privacidade" class="permissoes-ilustracao" onerror="this.style.display='none'">
+          </div>
+        </header>
+
+        <div class="permissoes-grid">
+
+          <!-- Coluna principal -->
+          <div class="permissoes-coluna-principal">
+
+            <!-- Seção: Suas permissões -->
+            <div class="permissoes-cartao">
+              <div class="permissoes-cartao-cabecalho">
+                <h2 class="permissoes-secao-titulo">Suas permissões</h2>
+                <button type="button" class="permissoes-link-entenda" id="btnEntendaCadaPermissao">
+                  <i class="fa-solid fa-circle-info"></i> Entenda cada permissão
+                </button>
+              </div>
+              <p class="permissoes-subtitulo">Você tem controle total sobre suas informações.</p>
+
+              <div class="permissoes-lista">
+
+                <!-- Perfil e preferências -->
+                <div class="permissao-item" data-permissao="perfil">
+                  <div class="permissao-item-esquerda">
+                    <i class="fa-solid fa-user-gear permissao-item-icone"></i>
+                    <div class="permissao-item-info">
+                      <span class="permissao-item-nome">Perfil e preferências</span>
+                      <span class="permissao-item-descricao">Permite salvar suas preferências de atendimento e personalizar sua experiência.</span>
+                    </div>
+                  </div>
+                  <div class="permissao-item-direita">
+                    <span class="permissao-estado permissao-estado-permitido" id="estado-perfil">
+                      <i class="fa-solid fa-check-circle"></i> Permitido
+                    </span>
+                    <label class="permissao-toggle" title="Usar perfil para personalizar o atendimento">
+                      <input type="checkbox" id="toggle-perfil" class="permissao-toggle-input" aria-label="Personalizar o atendimento usando meu perfil" checked>
+                      <span class="permissao-toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Histórico de conversas -->
+                <div class="permissao-item" data-permissao="historico">
+                  <div class="permissao-item-esquerda">
+                    <i class="fa-solid fa-comment-dots permissao-item-icone"></i>
+                    <div class="permissao-item-info">
+                      <span class="permissao-item-nome">Histórico de conversas</span>
+                      <span class="permissao-item-descricao">Permite salvar seu histórico de atendimentos para você acompanhar depois.</span>
+                    </div>
+                  </div>
+                  <div class="permissao-item-direita">
+                    <span class="permissao-estado permissao-estado-permitido" id="estado-historico">
+                      <i class="fa-solid fa-check-circle"></i> Permitido
+                    </span>
+                    <label class="permissao-toggle" title="Salvar histórico de conversas">
+                      <input type="checkbox" id="toggle-historico" class="permissao-toggle-input" aria-label="Salvar histórico de conversas" checked>
+                      <span class="permissao-toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Microfone -->
+                <div class="permissao-item" data-permissao="microfone">
+                  <div class="permissao-item-esquerda">
+                    <i class="fa-solid fa-microphone permissao-item-icone"></i>
+                    <div class="permissao-item-info">
+                      <span class="permissao-item-nome">Microfone</span>
+                      <span class="permissao-item-descricao">Permite o uso do microfone para você falar com o Mimo por comandos de voz.</span>
+                    </div>
+                  </div>
+                  <div class="permissao-item-direita">
+                    <span class="permissao-estado permissao-estado-opcional" id="estado-microfone">
+                      Não solicitado
+                    </span>
+                    <label class="permissao-toggle" title="Permitir uso do microfone">
+                      <input type="checkbox" id="toggle-microfone" class="permissao-toggle-input" aria-label="Permitir que o Mimo use o microfone">
+                      <span class="permissao-toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Câmera -->
+                <div class="permissao-item" data-permissao="camera">
+                  <div class="permissao-item-esquerda">
+                    <i class="fa-solid fa-video permissao-item-icone"></i>
+                    <div class="permissao-item-info">
+                      <span class="permissao-item-nome">Câmera</span>
+                      <span class="permissao-item-descricao">Autoriza a câmera somente quando um recurso de atendimento por vídeo precisar dela.</span>
+                    </div>
+                  </div>
+                  <div class="permissao-item-direita">
+                    <span class="permissao-estado permissao-estado-opcional" id="estado-camera">Não solicitado</span>
+                    <label class="permissao-toggle" title="Permitir uso da câmera">
+                      <input type="checkbox" id="toggle-camera" class="permissao-toggle-input" aria-label="Permitir que o Vivo AdaptAI use a câmera">
+                      <span class="permissao-toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Dados de uso (anônimos) -->
+                <div class="permissao-item" data-permissao="dados-uso">
+                  <div class="permissao-item-esquerda">
+                    <i class="fa-solid fa-chart-bar permissao-item-icone"></i>
+                    <div class="permissao-item-info">
+                      <span class="permissao-item-nome">Dados de uso (anônimos)</span>
+                      <span class="permissao-item-descricao">Permite coletar dados anônimos para melhorar continuamente o AdaptAI.</span>
+                    </div>
+                  </div>
+                  <div class="permissao-item-direita">
+                    <span class="permissao-estado permissao-estado-opcional" id="estado-dados-uso">
+                      Opcional
+                    </span>
+                    <label class="permissao-toggle">
+                      <input type="checkbox" id="toggle-dados-uso" class="permissao-toggle-input" aria-label="Compartilhar dados de uso anônimos">
+                      <span class="permissao-toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Notificações -->
+                <div class="permissao-item" data-permissao="notificacoes">
+                  <div class="permissao-item-esquerda">
+                    <i class="fa-solid fa-bell permissao-item-icone"></i>
+                    <div class="permissao-item-info">
+                      <span class="permissao-item-nome">Notificações</span>
+                      <span class="permissao-item-descricao">Permite enviar lembretes e novidades sobre seus atendimentos.</span>
+                    </div>
+                  </div>
+                  <div class="permissao-item-direita">
+                    <span class="permissao-estado permissao-estado-permitido" id="estado-notificacoes">
+                      <i class="fa-solid fa-check-circle"></i> Permitido
+                    </span>
+                    <label class="permissao-toggle">
+                      <input type="checkbox" id="toggle-notificacoes" class="permissao-toggle-input" aria-label="Permitir notificações do Vivo AdaptAI" checked>
+                      <span class="permissao-toggle-slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="permissoes-rodape">
+                <span class="permissoes-aviso-salvo" id="statusSalvamentoPermissoes" role="status" aria-live="polite">
+                  <i class="fa-solid fa-lock"></i> Suas alterações são salvas automaticamente.
+                </span>
+                <button type="button" class="botao botao-permissoes-restaurar" id="btnRestaurarPadroes">
+                  <i class="fa-solid fa-arrow-rotate-left"></i> Restaurar padrões
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Coluna lateral -->
+          <div class="permissoes-coluna-lateral">
+            <div class="permissoes-card-lateral">
+              <i class="fa-solid fa-shield-halved"></i>
+              <div>
+                <strong>Sua privacidade é prioridade</strong>
+                <p>O AdaptAI respeita sua privacidade e protege seus dados. Você pode alterar ou revogar permissões a qualquer momento.</p>
+              </div>
+              <button type="button" class="permissoes-link-privacidade" id="btnPoliticaPrivacidade">
+                <i class="fa-solid fa-file-shield"></i> Política de privacidade
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="modal-permissoes" id="modalEntendaPermissoes" aria-labelledby="tituloEntendaPermissoes">
+    <div class="modal-permissoes-cabecalho">
+      <div>
+        <span class="modal-permissoes-selo"><i class="fa-solid fa-sliders"></i> Controle nas suas mãos</span>
+        <h2 id="tituloEntendaPermissoes">Entenda cada permissão</h2>
+      </div>
+      <button type="button" class="modal-permissoes-fechar" data-fechar-dialogo aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-permissoes-conteudo">
+      <article><i class="fa-solid fa-user-gear"></i><div><strong>Personalização</strong><p>Quando ativa, o Mimo usa seu nome e seu ILD para ajustar a forma de explicar. Desativar não apaga seu cadastro.</p></div></article>
+      <article><i class="fa-solid fa-comment-dots"></i><div><strong>Histórico</strong><p>Controla se novas conversas são salvas. Ao desativar, conversas anteriores continuam disponíveis até você solicitar a exclusão.</p></div></article>
+      <article><i class="fa-solid fa-microphone"></i><div><strong>Microfone e câmera</strong><p>O navegador pedirá sua autorização. O AdaptAI só usa esses recursos quando você iniciar uma função que precise deles.</p></div></article>
+      <article><i class="fa-solid fa-chart-simple"></i><div><strong>Dados anônimos</strong><p>Ajuda a entender quais telas e recursos precisam melhorar, sem incluir o conteúdo das suas conversas.</p></div></article>
+      <article><i class="fa-solid fa-bell"></i><div><strong>Notificações</strong><p>Permite avisos do aplicativo. Você também pode bloquear ou liberar essa permissão nas configurações do navegador.</p></div></article>
+    </div>
+    <button type="button" class="botao botao-primario modal-permissoes-entendi" data-fechar-dialogo>Entendi</button>
+  </dialog>
+
+  <dialog class="modal-permissoes" id="modalPoliticaPrivacidade" aria-labelledby="tituloPoliticaPrivacidade">
+    <div class="modal-permissoes-cabecalho">
+      <div>
+        <span class="modal-permissoes-selo"><i class="fa-solid fa-shield-halved"></i> Privacidade</span>
+        <h2 id="tituloPoliticaPrivacidade">Como protegemos seus dados</h2>
+      </div>
+      <button type="button" class="modal-permissoes-fechar" data-fechar-dialogo aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-permissoes-texto">
+      <p>O Vivo AdaptAI usa apenas os dados necessários para autenticar sua conta, adaptar o atendimento ao seu nível de letramento digital e, quando autorizado, manter o histórico das conversas.</p>
+      <h3>Você decide</h3>
+      <p>Personalização, histórico, microfone, câmera, dados anônimos e notificações podem ser alterados nesta página. As escolhas da conta são protegidas pelas regras de acesso do Supabase.</p>
+      <h3>Microfone e câmera</h3>
+      <p>O acesso depende também da autorização do navegador. Áudio e vídeo não são iniciados em segundo plano e não são armazenados por esta tela.</p>
+      <h3>Seus direitos</h3>
+      <p>Você pode revisar as permissões, deixar de fornecer dados opcionais e solicitar correção ou exclusão dos seus dados pelos canais oficiais de atendimento.</p>
+    </div>
+    <button type="button" class="botao botao-primario modal-permissoes-entendi" data-fechar-dialogo>Fechar</button>
+  </dialog>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página não encontrada - Vivo AdaptAI</title>
+    <link rel="stylesheet" href="style.css?v=44">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque">
+
+    <app-header></app-header>
+
+    <main class="pagina-404">
+        <section class="conteudo-404" aria-labelledby="titulo404">
+            <img src="Imagens/Erro.png" alt="Mimo em pose neutra e cuidadosa" class="conteudo-404-imagem">
+
+            <h1 aria-hidden="true">404</h1>
+            <p id="titulo404" class="conteudo-404-subtitulo">Ops, essa página não existe</p>
+
+            <p>
+                Não encontramos o endereço que você tentou acessar. Ele pode ter mudado
+                ou não existir mais, mas você continua dentro do Vivo AdaptAI.
+            </p>
+
+            <div class="conteudo-404-acoes">
+                <a href="index.html" class="botao botao-principal" id="btnVoltarInicio404">
+                    <i class="fa-solid fa-house"></i> Voltar para o início
+                </a>
+                <a href="entrar.html" class="botao botao-contorno">
+                    <i class="fa-solid fa-right-to-bracket"></i> Entrar na minha conta
+                </a>
+            </div>
+
+            <p class="conteudo-404-ajuda">
+                Precisa de ajuda para encontrar o que procurava?
+                <a href="central-de-ajuda.html" class="link-acao">Acesse a Central de ajuda <i class="fa-solid fa-chevron-right"></i></a>
+            </p>
+        </section>
+    </main>
+
+    <script src="components.js?v=10"></script>
+    <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+    <script>
+      // F10: usuário autenticado que cai em um link inválido volta para a
+      // Home logada, não para o portal público — preserva a continuidade
+      // da sessão em vez de perder o contexto de login.
+      (function () {
+        var estaAutenticado = sessionStorage.getItem("vivo-adaptai-sessao-autenticada") === "1";
+        var btnVoltar = document.getElementById("btnVoltarInicio404");
+        if (estaAutenticado && btnVoltar) {
+          btnVoltar.setAttribute("href", "home.html");
+        }
+      })();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel de atendentes - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="dashboard">
+  <div class="app-shell">
+    <app-header app-page></app-header>
+    <div class="layout-aplicativo">
+      <app-sidebar active-page="dashboard"></app-sidebar>
+      <main class="painel-atendentes">
+        <header class="operacao-hero">
+          <div>
+            <span class="operacao-selo"><i class="fa-solid fa-headset"></i> Operação Vivo AdaptAI</span>
+            <h1>Fila de atendimentos</h1>
+            <p>Atenda cada pessoa no ritmo certo, com o contexto da conversa e o ILD sempre visíveis.</p>
+          </div>
+          <div class="operacao-status"><span></span> Operação online</div>
+        </header>
+
+        <section class="operacao-kpis" aria-label="Resumo da fila">
+          <article><span class="kpi-operacao-icone aberta"><i class="fa-regular fa-clock"></i></span><div><strong id="operacaoKpiAbertas">—</strong><span>Aguardando</span></div></article>
+          <article><span class="kpi-operacao-icone andamento"><i class="fa-solid fa-headset"></i></span><div><strong id="operacaoKpiAndamento">—</strong><span>Em andamento</span></div></article>
+          <article><span class="kpi-operacao-icone minhas"><i class="fa-regular fa-user"></i></span><div><strong id="operacaoKpiMinhas">—</strong><span>Comigo</span></div></article>
+          <article><span class="kpi-operacao-icone concluidas"><i class="fa-regular fa-circle-check"></i></span><div><strong id="operacaoKpiConcluidas">—</strong><span>Concluídos</span></div></article>
+        </section>
+
+        <section class="operacao-toolbar" aria-label="Filtros da fila">
+          <label class="operacao-busca" for="operacaoBusca"><i class="fa-solid fa-magnifying-glass"></i><input id="operacaoBusca" type="search" placeholder="Buscar por cliente, protocolo ou assunto" aria-label="Buscar atendimentos"></label>
+          <label class="sr-only" for="operacaoFiltroStatus">Filtrar por status</label>
+          <select id="operacaoFiltroStatus" class="controle-campo">
+            <option value="">Todos os status</option><option value="aberta">Aguardando</option><option value="em_andamento">Em andamento</option><option value="concluida">Concluídos</option>
+          </select>
+          <label class="operacao-toggle-meus"><input type="checkbox" id="operacaoSomenteMeus"><span>Somente meus</span></label>
+          <button type="button" class="botao botao-contorno botao-pequeno" id="operacaoAtualizar"><i class="fa-solid fa-rotate"></i> Atualizar</button>
+        </section>
+
+        <div class="operacao-layout">
+          <section class="operacao-fila" aria-labelledby="tituloFilaOperacao">
+            <header><div><h2 id="tituloFilaOperacao">Solicitações</h2><p id="operacaoContadorFila">Carregando fila...</p></div></header>
+            <div class="operacao-carregando" id="operacaoCarregando" role="status"><i class="fa-solid fa-circle-notch fa-spin"></i><span>Buscando atendimentos...</span></div>
+            <div class="operacao-erro" id="operacaoErro" hidden><i class="fa-solid fa-triangle-exclamation"></i><strong>Não foi possível carregar</strong><button type="button" class="botao botao-contorno" id="operacaoTentarNovamente">Tentar novamente</button></div>
+            <div class="operacao-lista" id="operacaoLista" role="listbox" aria-label="Fila de atendimentos"></div>
+            <div class="operacao-vazio" id="operacaoVazio" hidden><i class="fa-regular fa-circle-check"></i><strong>Fila organizada</strong><p>Não existem solicitações para este filtro.</p></div>
+          </section>
+
+          <section class="operacao-detalhe" id="operacaoDetalhe" aria-live="polite">
+            <div class="operacao-detalhe-inicial" id="operacaoDetalheInicial"><span><i class="fa-regular fa-comments"></i></span><h2>Selecione um atendimento</h2><p>O histórico, o perfil digital e as ações aparecerão aqui.</p></div>
+            <div id="operacaoDetalheConteudo" hidden>
+              <header class="operacao-detalhe-cabecalho">
+                <button type="button" class="operacao-voltar-fila" id="operacaoVoltarFila"><i class="fa-solid fa-arrow-left"></i><span>Voltar à fila</span></button>
+                <div class="operacao-cliente"><span class="operacao-avatar" id="operacaoClienteInicial">C</span><div><h2 id="operacaoClienteNome">Cliente</h2><p id="operacaoProtocolo">Protocolo</p></div></div>
+                <span class="status-operacao" id="operacaoDetalheStatus">Aguardando</span>
+              </header>
+              <div class="operacao-contexto">
+                <span id="operacaoTipo"><i class="fa-solid fa-tag"></i> Assunto</span>
+                <span id="operacaoIld"><i class="fa-solid fa-chart-line"></i> ILD</span>
+                <span id="operacaoResponsavel"><i class="fa-regular fa-user"></i> Sem responsável</span>
+              </div>
+              <div class="operacao-descricao"><strong>Pedido do cliente</strong><p id="operacaoDescricao"></p></div>
+              <div class="operacao-mensagens" id="operacaoMensagens" aria-label="Histórico da conversa"></div>
+              <div class="operacao-acoes" id="operacaoAcoes">
+                <button type="button" class="botao botao-principal" id="operacaoAssumir"><i class="fa-solid fa-headset"></i> Assumir atendimento</button>
+                <form id="operacaoFormularioResposta" hidden>
+                  <label for="operacaoResposta">Resposta ao cliente</label>
+                  <textarea id="operacaoResposta" rows="3" maxlength="2000" placeholder="Escreva uma orientação clara e respeitosa..."></textarea>
+                  <div><span id="operacaoRespostaContador">0/2000</span><button type="submit" class="botao botao-principal"><i class="fa-solid fa-paper-plane"></i> Enviar resposta</button></div>
+                </form>
+                <button type="button" class="botao botao-contorno operacao-concluir" id="operacaoConcluir" hidden><i class="fa-regular fa-circle-check"></i> Concluir atendimento</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <p class="nota-seguranca"><i class="fa-solid fa-shield-halved"></i> O acesso e todas as ações desta área são registrados com segurança.</p>
+      </main>
+    </div>
+  </div>
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+  <script src="script.js?v=30"></script>
+</body>
+</html>

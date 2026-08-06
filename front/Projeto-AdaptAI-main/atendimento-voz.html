@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atendimento por voz - Vivo AdaptAI</title>
+
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque" data-page="atendimento-voz">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+
+    <app-sidebar active-page="atendimento"></app-sidebar>
+
+    <main class="pagina-chat">
+      <section class="estrutura-chat">
+
+        <div class="cabecalho-chat">
+          <a href="home.html" class="voltar-chat"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+
+          <div class="contato-chat">
+            <span class="avatar-chat"><img src="Imagens/Perfil-Mimo.png" alt="Mimo"></span>
+            <div>
+              <p class="nome-chat">Mimo</p>
+              <p class="status-chat"><span class="ponto-status-chat"></span> Online</p>
+            </div>
+          </div>
+
+          <div class="acoes-chat">
+            <span class="modo-chat"><i class="fa-solid fa-microphone"></i> <span>Atendimento por voz</span></span>
+            <button class="botao botao-pequeno botao-perigo-suave" id="btnEncerrarAtendimento">Encerrar</button>
+
+            <div class="menu-chat">
+              <button class="botao-icone" id="menuChatTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Mais opções">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+
+              <div class="painel-perfil painel-menu-chat" id="menuChatPanel" role="menu">
+                <a href="resumo-atendimento.html" class="item-perfil" role="menuitem"><i class="fa-regular fa-file-lines"></i> Resumir conversa</a>
+                <button type="button" class="item-perfil item-perfil-botao" role="menuitem" id="btnAlterarModalidadeMenu"><i class="fa-solid fa-shuffle"></i> Alterar modalidade</button>
+                <a href="acessibilidade.html" class="item-perfil" role="menuitem"><i class="fa-solid fa-universal-access"></i> Configurações de acessibilidade</a>
+                <div class="divisor-perfil"></div>
+                <button type="button" class="item-perfil item-perfil-botao" role="menuitem" id="btnLimparConversaMenu"><i class="fa-solid fa-broom"></i> Limpar conversa</button>
+                <button type="button" class="item-perfil item-perfil-botao item-perfil-perigo" role="menuitem" id="btnEncerrarMenu"><i class="fa-solid fa-circle-xmark"></i> Encerrar atendimento</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Corpo do atendimento por voz: status, Mimo, transcrição sempre visível -->
+        <div class="corpo-voz" id="voiceBody">
+
+          <div>
+            <h2 class="titulo-voz" id="voiceStatusTitle" aria-live="polite">Como posso ajudar você hoje?</h2>
+            <p class="dica-voz" id="voiceStatusHint">Toque no microfone quando estiver pronto.</p>
+          </div>
+
+          <div class="mascote-voz" id="voiceMimo">
+            <span class="anel-voz"></span>
+            <span class="anel-voz anel-voz-2"></span>
+            <span class="anel-voz anel-voz-3"></span>
+            <span class="avatar-voz">
+              <img src="Imagens/CabeçaMimo.png" alt="Mimo">
+            </span>
+          </div>
+
+          <div class="transcricao">
+            <div class="cabecalho-transcricao">
+              <span class="rotulo-transcricao">Transcrição</span>
+              <span class="etiqueta-transcricao">Você</span>
+            </div>
+            <p class="texto-transcricao esta-aguardando-usuario" id="voiceTranscriptText" aria-live="polite">Aguardando você falar...</p>
+          </div>
+
+          <!-- Alternativa de texto, reaproveitando o .compositor já usado no atendimento por texto -->
+          <div class="alternativa-texto-voz" id="voiceTextFallback">
+            <form class="compositor" id="voiceComposerForm" action="#" method="POST">
+              
+              <button type="button" class="anexo-compositor" aria-label="Anexar arquivo">
+                <i class="fa-solid fa-paperclip"></i>
+              </button>
+
+              <input type="text" class="entrada-compositor" id="voiceComposerInput" name="mensagem_voz_fallback" placeholder="Digite sua mensagem para o Mimo" aria-label="Digite sua mensagem para o Mimo">
+
+              <div class="acoes-compositor">
+                <button type="submit" class="enviar-compositor" aria-label="Enviar mensagem">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+
+        <div class="controles-voz">
+          <button type="button" class="acao-voz" id="voiceTypeToggle" aria-pressed="false">
+            <i class="fa-solid fa-keyboard"></i>
+            <span>Digitar em vez de falar</span>
+          </button>
+
+          <button type="button" class="botao-microfone-voz" id="voiceMicBtn" aria-label="Falar com o Mimo" aria-pressed="false">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+
+          <a href="atendimento-texto.html" class="acao-voz">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <span>Sair do modo de voz</span>
+          </a>
+        </div>
+
+        <div class="envelope-compositor-chat" style="padding-top: 0; border-top: none;">
+          <div class="nota-seguranca" style="justify-content: center; margin-top: 0;">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Seus dados são protegidos durante o atendimento.</span>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  </div>
+
+  <footer class="alternador-modo">
+    <p class="rotulo-modo">Mude a forma de atendimento a qualquer momento</p>
+
+    <div class="opcoes-modo">
+      <a href="atendimento-texto.html" class="botao-modo"><i class="fa-regular fa-message"></i> Texto</a>
+      <a href="atendimento-voz.html" class="botao-modo esta-ativo"><i class="fa-solid fa-waveform-lines"></i> Voz</a>
+      <a href="atendimento-hibrido.html" class="botao-modo"><i class="fa-solid fa-table-columns"></i> Híbrido</a>
+      <a href="texto-simplificado.html" class="botao-modo"><i class="fa-solid fa-list-check"></i> Texto simplificado</a>
+      <a href="libras.html" class="botao-modo"><i class="fa-solid fa-hands"></i> Libras</a>
+      <a href="home.html" class="botao-modo botao-modo-tracejado"><i class="fa-regular fa-circle"></i> Sem preferência</a>
+    </div>
+  </footer>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

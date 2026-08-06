@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumo do Atendimento - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+
+    <app-sidebar active-page="historico"></app-sidebar>
+
+    <main class="conteudo-principal-app">
+      <section class="secao-resumo-atendimento">
+        
+        <!-- Trilha de navegação -->
+        <nav class="trilha-navegacao" aria-label="Trilha de navegação">
+          <a href="historico.html">Histórico</a>
+          <i class="fa-solid fa-chevron-right"></i>
+          <span aria-current="page">Resumo do atendimento</span>
+        </nav>
+
+        <!-- Cabeçalho do resumo -->
+        <div class="cabecalho-resumo">
+          <div class="titulo-e-status">
+            <h1 class="titulo-resumo">Resumo do atendimento</h1>
+            <span class="badge-status badge-concluido">Concluído</span>
+          </div>
+          <button class="botao botao-principal" id="btnBaixarResumo">
+            <i class="fa-solid fa-download"></i> Baixar resumo
+          </button>
+        </div>
+
+        <!-- Conteúdo principal em duas colunas -->
+        <div class="grid-resumo">
+
+          <!-- Coluna esquerda: informações principais -->
+          <div class="coluna-resumo-principal">
+
+            <!-- Card de informação principal -->
+            <div class="card-info-principal">
+              <div class="info-principal-conteudo">
+                <div class="icone-ocorrencia icone-ocorrencia-roxo">
+                  <i class="fa-solid fa-wifi"></i>
+                </div>
+                <div class="info-principal-texto">
+                  <h2 class="titulo-ocorrencia">Internet residencial não funciona</h2>
+                  <p class="preview-ocorrencia">Você: Minha internet parou de funcionar desde ontem à noite. Já reiniciei o roteador e não resolveu.</p>
+                </div>
+              </div>
+              <div class="info-principal-metadados">
+                <div class="metadado-item">
+                  <i class="fa-regular fa-calendar"></i>
+                  <div>
+                    <span class="metadado-label">Data</span>
+                    <span class="metadado-valor">Hoje, 20/07/2025</span>
+                  </div>
+                </div>
+                <div class="metadado-item">
+                  <i class="fa-regular fa-clock"></i>
+                  <div>
+                    <span class="metadado-label">Início</span>
+                    <span class="metadado-valor">14:20</span>
+                  </div>
+                </div>
+                <div class="metadado-item">
+                  <i class="fa-solid fa-hourglass-end"></i>
+                  <div>
+                    <span class="metadado-label">Duração</span>
+                    <span class="metadado-valor">12 min</span>
+                  </div>
+                </div>
+                <div class="metadado-item">
+                  <i class="fa-solid fa-comment-dots"></i>
+                  <div>
+                    <span class="metadado-label">Modalidade</span>
+                    <span class="metadado-valor">Texto</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Principais etapas do atendimento -->
+            <div class="card-etapas">
+              <h2 class="titulo-secao-resumo">Principais etapas do atendimento</h2>
+              <div class="timeline-etapas">
+                
+                <div class="etapa-item etapa-concluida">
+                  <div class="etapa-icone">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </div>
+                  <div class="etapa-conteudo">
+                    <h3 class="etapa-titulo">Identificação do problema</h3>
+                    <p class="etapa-descricao">Você informou que a internet parou de funcionar desde ontem à noite.</p>
+                  </div>
+                  <div class="etapa-status">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </div>
+                </div>
+
+                <div class="etapa-item etapa-concluida">
+                  <div class="etapa-icone">
+                    <i class="fa-solid fa-plug"></i>
+                  </div>
+                  <div class="etapa-conteudo">
+                    <h3 class="etapa-titulo">Verificação de conexão</h3>
+                    <p class="etapa-descricao">O Mimo orientou a verificar os cabos, ligar e desligar o modem e reiniciar o roteador.</p>
+                  </div>
+                  <div class="etapa-status">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </div>
+                </div>
+
+                <div class="etapa-item etapa-concluida">
+                  <div class="etapa-icone">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                  </div>
+                  <div class="etapa-conteudo">
+                    <h3 class="etapa-titulo">Teste realizado</h3>
+                    <p class="etapa-descricao">Você testou a conexão e confirmou que o teste retornou resultado normal.</p>
+                  </div>
+                  <div class="etapa-status">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </div>
+                </div>
+
+                <div class="etapa-item etapa-concluida">
+                  <div class="etapa-icone">
+                    <i class="fa-solid fa-lightbulb"></i>
+                  </div>
+                  <div class="etapa-conteudo">
+                    <h3 class="etapa-titulo">Solução aplicada</h3>
+                    <p class="etapa-descricao">Após a reinicialização, a internet voltou a funcionar normalmente.</p>
+                  </div>
+                  <div class="etapa-status">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </div>
+                </div>
+
+                <div class="etapa-item etapa-concluida">
+                  <div class="etapa-icone">
+                    <i class="fa-solid fa-shield-check"></i>
+                  </div>
+                  <div class="etapa-conteudo">
+                    <h3 class="etapa-titulo">Orientações finais</h3>
+                    <p class="etapa-descricao">O Mimo passou dicas para manter a internet estável e segura.</p>
+                  </div>
+                  <div class="etapa-status">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </div>
+                </div>
+
+                <div class="etapa-item etapa-concluida">
+                  <div class="etapa-icone">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                  <div class="etapa-conteudo">
+                    <h3 class="etapa-titulo">Problema resolvido</h3>
+                    <p class="etapa-descricao">Sua internet está funcionando normalmente.</p>
+                  </div>
+                  <div class="etapa-status">
+                    <i class="fa-solid fa-circle-check"></i>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Banner de segurança -->
+            <div class="banner-seguranca">
+              <i class="fa-solid fa-lock"></i>
+              <div class="banner-seguranca-conteudo">
+                <p class="banner-seguranca-titulo">Seus dados estão protegidos</p>
+                <p class="banner-seguranca-texto">A Vivo protege suas informações e a compatibilidade com a Lei Geral de Proteção de Dados (LGPD).</p>
+              </div>
+              <a href="#" class="banner-seguranca-link">Saiba mais sobre Privacidade de Procedimentos <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+
+          </div>
+
+          <!-- Coluna direita: painel lateral -->
+          <div class="coluna-resumo-lateral">
+
+            <!-- Card de solução encontrada -->
+            <div class="card-lateral">
+              <h3 class="titulo-card-lateral">
+                <i class="fa-solid fa-circle-check"></i> Solução encontrada
+              </h3>
+              <p class="texto-card-lateral">Reiniciar o modem e o roteador resolveu a instabilidade na sua internet.</p>
+            </div>
+
+            <!-- Card de orientações importantes -->
+            <div class="card-lateral">
+              <h3 class="titulo-card-lateral">
+                <i class="fa-solid fa-circle-info"></i> Orientações importantes
+              </h3>
+              <ul class="lista-orientacoes">
+                <li>Mantenha o roteador em local seguro</li>
+                <li>Evite obstruções e interferências de outros equipamentos</li>
+                <li>Realize a reinicialização periodicamente</li>
+                <li>Em caso de instabilidade, entre em contato com a Vivo</li>
+              </ul>
+            </div>
+
+            <!-- Widget de avaliação -->
+            <div class="card-lateral card-avaliacao-lateral">
+              <h3 class="titulo-card-lateral">Avalie sua experiência</h3>
+              <div class="estrelas-avaliacao-lateral">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="texto-avaliacao-lateral">Excelente!</p>
+              <button class="botao botao-contorno botao-bloco" id="btnAlterarAvaliacao">Alterar resposta</button>
+            </div>
+
+            <!-- Seção "O que deseja fazer agora?" -->
+            <div class="card-lateral">
+              <h3 class="titulo-card-lateral">O que deseja fazer agora?</h3>
+              <div class="acoes-laterais">
+                <button class="botao botao-principal botao-bloco" id="btnNovoAtendimento">
+                  <i class="fa-solid fa-comment-dots"></i> Iniciar novo atendimento
+                </button>
+                <button class="botao botao-contorno botao-bloco" id="btnFazerPergunta">
+                  <i class="fa-solid fa-circle-question"></i> Fazer outra pergunta
+                </button>
+                <button class="botao botao-contorno botao-bloco" id="btnCompartilharResumo">
+                  <i class="fa-solid fa-share-nodes"></i> Compartilhar
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+    </main>
+
+  </div>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+  <script>
+    // F13: link "Privacidade de Procedimentos" sem página própria ainda.
+    document.querySelector('.banner-seguranca-link')?.addEventListener('click', (evento) => {
+      evento.preventDefault();
+      mostrarToast({
+        tipo: 'info',
+        titulo: 'Em breve',
+        mensagem: 'Este conteúdo ainda está sendo preparado.'
+      });
+    });
+
+    // Funcionalidades do resumo de atendimento
+    document.getElementById('btnBaixarResumo')?.addEventListener('click', () => {
+      mostrarToast({ tipo: "info", mensagem: "Funcionalidade de download será implementada em breve." });
+    });
+
+    document.getElementById('btnNovoAtendimento')?.addEventListener('click', () => {
+      window.location.href = 'atendimento-texto.html';
+    });
+
+    document.getElementById('btnFazerPergunta')?.addEventListener('click', () => {
+      window.location.href = 'atendimento-texto.html';
+    });
+
+    document.getElementById('btnCompartilharResumo')?.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Resumo do Atendimento',
+          text: 'Veja o resumo do meu atendimento com o Mimo da Vivo AdaptAI'
+        });
+      } else {
+        mostrarToast({ tipo: "erro", mensagem: "Funcionalidade de compartilhamento não disponível neste navegador." });
+      }
+    });
+
+    document.getElementById('btnAlterarAvaliacao')?.addEventListener('click', () => {
+      window.location.href = 'conclusao.html';
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

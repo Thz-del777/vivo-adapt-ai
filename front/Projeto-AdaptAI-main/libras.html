@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atendimento em Libras - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="libras">
+
+  <div class="app-shell">
+    <app-header app-page></app-header>
+
+    <div class="layout-aplicativo">
+      <app-sidebar active-page="atendimento"></app-sidebar>
+
+      <main class="pagina-chat">
+        <section class="estrutura-chat">
+
+          <!-- Cabeçalho do chat -->
+          <div class="cabecalho-chat">
+            <a href="home.html" class="voltar-chat"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+
+            <div class="contato-chat">
+              <span class="avatar-chat"><img src="Imagens/Perfil-Mimo.png" alt="Mimo"></span>
+              <div>
+                <p class="nome-chat">Mimo</p>
+                <p class="status-chat"><span class="ponto-status-chat"></span> Online</p>
+              </div>
+            </div>
+
+            <div class="acoes-chat">
+              <span class="modo-chat"><i class="fa-solid fa-hands"></i> <span>Atendimento em Libras</span></span>
+              <button class="botao botao-pequeno botao-perigo-suave" id="btnEncerrarAtendimento">Encerrar</button>
+
+              <div class="menu-chat">
+                <button class="botao-icone" id="menuChatTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Mais opções">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+
+                <div class="painel-perfil painel-menu-chat" id="menuChatPanel" role="menu">
+                  <a href="resumo-atendimento.html" class="item-perfil" role="menuitem"><i class="fa-regular fa-file-lines"></i> Resumir conversa</a>
+                  <button type="button" class="item-perfil item-perfil-botao" role="menuitem" id="btnAlterarModalidadeMenu"><i class="fa-solid fa-shuffle"></i> Alterar modalidade</button>
+                  <a href="acessibilidade.html" class="item-perfil" role="menuitem"><i class="fa-solid fa-universal-access"></i> Configurações de acessibilidade</a>
+                  <div class="divisor-perfil"></div>
+                  <button type="button" class="item-perfil item-perfil-botao" role="menuitem" id="btnLimparConversaMenu"><i class="fa-solid fa-broom"></i> Limpar conversa</button>
+                  <button type="button" class="item-perfil item-perfil-botao item-perfil-perigo" role="menuitem" id="btnEncerrarMenu"><i class="fa-solid fa-circle-xmark"></i> Encerrar atendimento</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Corpo: intérprete + legenda -->
+          <div class="corpo-libras" id="librasBody">
+
+            <!-- Área de tradução visual em Libras -->
+            <div class="area-interprete">
+              <div class="video-interprete" id="videoInterprete">
+                <div class="painel-traducao-libras">
+                  <i class="fa-solid fa-hands-asl-interpreting" aria-hidden="true"></i>
+                  <h1>Tradução visual em Libras</h1>
+                  <p>Abra o tradutor e clique em uma resposta do Mimo para vê-la em Libras. As mensagens também ficam sempre disponíveis em texto.</p>
+                  <button type="button" class="botao botao-primario" id="btnAbrirTradutorLibras"><i class="fa-solid fa-play"></i> Abrir tradutor em Libras</button>
+                </div>
+                <div class="overlay-status">
+                  <span class="status-texto" id="statusTraducaoLibras" aria-live="polite">Preparando atendimento visual...</span>
+                </div>
+              </div>
+
+              <!-- Controles do intérprete -->
+              <div class="controles-interprete">
+                <button class="botao-controle" id="btnRepeat" aria-label="Abrir novamente o tradutor em Libras">
+                  <i class="fa-solid fa-rotate-right"></i> <span>Abrir tradutor</span>
+                </button>
+                <button class="botao-controle" id="btnLegenda" aria-label="Legenda">
+                  <i class="fa-solid fa-closed-captioning"></i> <span>Mostrar ou ocultar legenda</span>
+                </button>
+                <button class="botao-controle" id="btnTelaCheia" aria-label="Tela cheia">
+                  <i class="fa-solid fa-expand"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Legenda / Transcrição -->
+            <div class="legenda-interprete">
+              <div class="cabecalho-legenda">
+                <span class="rotulo-legenda">Legenda</span>
+                <span class="etiqueta-legenda">Intérprete</span>
+              </div>
+              <p class="texto-legenda" id="legendaTexto" aria-live="polite">Olá! Como posso ajudar você hoje?</p>
+            </div>
+            <section class="transcricao-libras" id="librasTranscricao" aria-label="Histórico visual do atendimento"></section>
+
+          </div>
+
+          <!-- Respostas rápidas e compositor -->
+          <div class="envelope-compositor-chat">
+            <div class="respostas-rapidas" id="librasRespostasRapidas" style="display: flex; flex-wrap: wrap; gap: var(--space-sm); max-width: 100%; margin-bottom: var(--space-sm);">
+              <button type="button" class="botao-resposta"><i class="fa-solid fa-wifi"></i> Minha internet não funciona</button>
+              <button type="button" class="botao-resposta"><i class="fa-solid fa-tag"></i> Quero conhecer os planos</button>
+              <button type="button" class="botao-resposta"><i class="fa-regular fa-comment-dots"></i> Preciso de outro tipo de ajuda</button>
+            </div>
+
+            <form class="compositor" id="chatComposerForm" action="#" method="POST">
+              <button type="button" class="anexo-compositor" aria-label="Anexar arquivo">
+                <i class="fa-solid fa-paperclip"></i>
+              </button>
+              <input type="text" class="entrada-compositor" id="chatComposerInput" name="mensagem" placeholder="Digite sua mensagem para o Mimo" aria-label="Digite sua mensagem para o Mimo">
+              <div class="acoes-compositor">
+                <button type="submit" class="enviar-compositor" aria-label="Enviar mensagem"><i class="fa-solid fa-paper-plane"></i></button>
+              </div>
+            </form>
+
+            <div class="nota-seguranca" style="justify-content: center;">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Seus dados são protegidos durante o atendimento.</span>
+            </div>
+          </div>
+
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Rodapé: alternador de modalidade -->
+  <footer class="alternador-modo">
+    <p class="rotulo-modo">Mude a forma de atendimento a qualquer momento</p>
+    <div class="opcoes-modo">
+      <a href="atendimento-texto.html" class="botao-modo"><i class="fa-regular fa-message"></i> Texto</a>
+      <a href="atendimento-voz.html" class="botao-modo"><i class="fa-solid fa-waveform-lines"></i> Voz</a>
+      <a href="atendimento-hibrido.html" class="botao-modo"><i class="fa-solid fa-table-columns"></i> Híbrido</a>
+      <a href="texto-simplificado.html" class="botao-modo"><i class="fa-solid fa-list-check"></i> Texto simplificado</a>
+      <a href="libras.html" class="botao-modo esta-ativo"><i class="fa-solid fa-hands"></i> Libras</a>
+      <a href="home.html" class="botao-modo botao-modo-tracejado"><i class="fa-regular fa-circle"></i> Sem preferência</a>
+    </div>
+  </footer>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+  <!-- Integração oficial do VLibras, disponível diretamente nesta tela. -->
+  <div id="vlibras-plugin" vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    if (window.VLibras) new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

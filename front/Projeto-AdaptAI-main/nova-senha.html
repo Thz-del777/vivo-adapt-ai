@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar nova senha - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+  <div class="layout-recuperacao">
+    <div class="painel-recuperacao">
+      <a href="entrar.html" class="voltar-recuperacao">
+        <i class="fa-solid fa-arrow-left"></i> Voltar para o login
+      </a>
+
+      <div class="cartao-recuperacao">
+        <div class="cabecalho-recuperacao">
+          <h1 class="titulo-recuperacao">Criar nova senha</h1>
+          <p class="subtitulo-recuperacao">Escolha uma senha segura para voltar a acessar sua conta.</p>
+        </div>
+
+        <form id="formNovaSenhaRecuperacao">
+          <div class="alerta-formulario" id="novaSenhaErro" role="alert" hidden>
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span></span>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="novaSenhaRecuperacao">Nova senha</label>
+              <div class="envelope-campo campo-senha">
+                <i class="fa-solid fa-lock icone-campo"></i>
+                <input class="controle-campo" type="password" id="novaSenhaRecuperacao" autocomplete="new-password" minlength="12" required>
+                <button type="button" class="botao-alternar-senha alternador-campo" data-target="novaSenhaRecuperacao" aria-label="Mostrar senha">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+              <small class="texto-ajuda-campo">Use 12 ou mais caracteres, com letra maiúscula, minúscula, número e símbolo.</small>
+            </div>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="grupo-formulario">
+              <label class="rotulo-formulario" for="confirmarNovaSenhaRecuperacao">Confirmar nova senha</label>
+              <div class="envelope-campo campo-senha">
+                <i class="fa-solid fa-lock icone-campo"></i>
+                <input class="controle-campo" type="password" id="confirmarNovaSenhaRecuperacao" autocomplete="new-password" minlength="12" required>
+                <button type="button" class="botao-alternar-senha alternador-campo" data-target="confirmarNovaSenhaRecuperacao" aria-label="Mostrar senha">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="botao botao-principal botao-bloco" id="novaSenhaSalvar">Salvar nova senha</button>
+        </form>
+
+        <div class="caixa-ajuda" id="novaSenhaAviso" hidden aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="api-config.js?v=1"></script>
+  <script src="script.js?v=31"></script>
+</body>
+</html>

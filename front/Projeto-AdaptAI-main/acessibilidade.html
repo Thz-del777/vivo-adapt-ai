@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acessibilidade - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body class="tema-destaque" data-page="acessibilidade">
+
+  <div class="app-shell">
+  <app-header app-page></app-header>
+
+  <div class="layout-aplicativo">
+
+    <app-sidebar active-page="acessibilidade"></app-sidebar>
+
+    <main class="conteudo-principal-app">
+      <section class="secao-acessibilidade-nova">
+        
+        <!-- Cabeçalho de acessibilidade -->
+        <div class="cabecalho-acessibilidade">
+          <div class="acessibilidade-info">
+            <h1 class="titulo-acessibilidade">Acessibilidade</h1>
+            <p class="subtitulo-acessibilidade">Personalize o atendimento para ficar do seu jeito.</p>
+          </div>
+          <div class="mascote-acessibilidade">
+            <div class="icones-flutuantes">
+              <div class="icone-flutuante icone-voz"><i class="fa-solid fa-microphone"></i></div>
+              <div class="icone-flutuante icone-ouvido"><i class="fa-solid fa-ear-listen"></i></div>
+              <div class="icone-flutuante icone-mao"><i class="fa-solid fa-hand"></i></div>
+            </div>
+            <img src="Imagens/Perfil-Mimo.png" alt="Mimo Acessibilidade" class="mimo-img-acessibilidade">
+          </div>
+        </div>
+
+        <div class="container-configuracoes-acessibilidade">
+          
+          <!-- Seção: Visão -->
+          <div class="grupo-acessibilidade">
+            <h2 class="titulo-grupo-acessibilidade">Visão</h2>
+            
+            <div class="item-acessibilidade">
+              <div class="item-acessibilidade-icone">
+                <i class="fa-solid fa-text-height"></i>
+              </div>
+              <div class="item-acessibilidade-conteudo">
+                <h3 class="item-acessibilidade-titulo">Tamanho do texto</h3>
+                <p class="item-acessibilidade-descricao">Ajuste o tamanho do texto em toda a plataforma.</p>
+              </div>
+              <div class="item-acessibilidade-controle">
+                <div class="slider-wrapper">
+                  <input type="range" min="1" max="3" value="2" class="slider-acessibilidade" id="rangeTexto">
+                  <span class="slider-label">Normal</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="item-acessibilidade">
+              <div class="item-acessibilidade-icone">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+              </div>
+              <div class="item-acessibilidade-conteudo">
+                <h3 class="item-acessibilidade-titulo">Alto contraste</h3>
+                <p class="item-acessibilidade-descricao">Aumenta o contraste entre cores para facilitar a leitura.</p>
+              </div>
+              <div class="item-acessibilidade-controle">
+                <label class="toggle-acessibilidade">
+                  <input type="checkbox" id="checkContraste">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="item-acessibilidade">
+              <div class="item-acessibilidade-icone">
+                <i class="fa-solid fa-palette"></i>
+              </div>
+              <div class="item-acessibilidade-conteudo">
+                <h3 class="item-acessibilidade-titulo">Cores</h3>
+                <p class="item-acessibilidade-descricao">Escolha uma paleta de cores que fique melhor para você.</p>
+              </div>
+            </div>
+
+            <div class="item-acessibilidade">
+              <div class="item-acessibilidade-icone">
+                <i class="fa-solid fa-arrows-left-right-to-line"></i>
+              </div>
+              <div class="item-acessibilidade-conteudo">
+                <h3 class="item-acessibilidade-titulo">Espaçamento ampliado</h3>
+                <p class="item-acessibilidade-descricao">Aumenta o espaçamento entre textos, botões e elementos.</p>
+              </div>
+              <div class="item-acessibilidade-controle">
+                <label class="toggle-acessibilidade">
+                  <input type="checkbox" id="checkEspacamento">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seção: Audição -->
+          <div class="grupo-acessibilidade">
+            <h2 class="titulo-grupo-acessibilidade">Audição</h2>
+            
+            <div class="item-acessibilidade">
+              <div class="item-acessibilidade-icone">
+                <i class="fa-solid fa-volume-high"></i>
+              </div>
+              <div class="item-acessibilidade-conteudo">
+                <h3 class="item-acessibilidade-titulo">Respostas com áudio</h3>
+                <p class="item-acessibilidade-descricao">Ouça as respostas do Mimo em voz alta.</p>
+              </div>
+              <div class="item-acessibilidade-controle">
+                <label class="toggle-acessibilidade">
+                  <input type="checkbox" checked id="checkAudio">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seção: Interação -->
+          <div class="grupo-acessibilidade">
+            <h2 class="titulo-grupo-acessibilidade">Interação</h2>
+            
+            <div class="item-acessibilidade">
+              <div class="item-acessibilidade-icone">
+                <i class="fa-solid fa-hands-asl-interpreting"></i>
+              </div>
+              <div class="item-acessibilidade-conteudo">
+                <h3 class="item-acessibilidade-titulo">Libras</h3>
+                <p class="item-acessibilidade-descricao">Ative o atendimento em Libras.</p>
+              </div>
+              <div class="item-acessibilidade-controle">
+                <label class="toggle-acessibilidade" aria-label="Ativar atendimento em Libras">
+                  <input type="checkbox" id="checkLibras">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="item-acessibilidade">
+              <div class="item-acessibilidade-icone">
+                <i class="fa-solid fa-microphone-lines"></i>
+              </div>
+              <div class="item-acessibilidade-conteudo">
+                <h3 class="item-acessibilidade-titulo">Comandos por voz</h3>
+                <p class="item-acessibilidade-descricao">Navegue e interaja usando comandos de voz.</p>
+              </div>
+              <div class="item-acessibilidade-controle">
+                <label class="toggle-acessibilidade">
+                  <input type="checkbox" id="checkComandosVoz">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card "Precisa de ajuda?" -->
+          <div class="card-ajuda-acessibilidade">
+            <div class="card-ajuda-icone">
+              <i class="fa-solid fa-comment-dots"></i>
+            </div>
+            <div class="card-ajuda-texto">
+              <h3 class="card-ajuda-titulo">Precisa de ajuda?</h3>
+              <p class="card-ajuda-descricao">Fale com o Mimo que ele te orienta.</p>
+            </div>
+            <button class="botao-falar-mimo" onclick="window.location.href='atendimento-texto.html'">
+              <i class="fa-solid fa-comment-dots"></i> Falar com o Mimo
+            </button>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  </div>
+
+  <script src="components.js?v=10"></script>
+  <script src="api-config.js?v=1"></script>
+<script src="script.js?v=30"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
