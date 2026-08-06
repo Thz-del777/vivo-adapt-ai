@@ -137,7 +137,18 @@ function inicializarSelectTema() {
 })();
 
 // Ponto de entrada único - evita listeners duplicados
-document.addEventListener("DOMContentLoaded", inicializarAplicacao);
+document.addEventListener("DOMContentLoaded", () => {
+    const titulo = document.getElementById("tituloSaudacao");
+    if (!titulo) return;
+
+    const usuario = JSON.parse(
+        sessionStorage.getItem("vivo-adaptai-usuario") || "{}"
+    );
+
+    const nome = usuario.nome || usuario.name || "Cliente";
+
+    titulo.innerHTML = `Olá, ${nome}! 👋<br>Como posso te ajudar hoje?`;
+});
 
 // mostrarToast({ tipo, titulo, mensagem, duracao, acaoTexto, aoAcionar })
 // tipo: "sucesso" | "erro" | "aviso" | "info"
