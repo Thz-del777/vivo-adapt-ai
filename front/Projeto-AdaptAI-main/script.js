@@ -1948,6 +1948,148 @@ if (voiceMicBtn) {
   });
 }
 
+// Reconhecimento de voz real. O listener em captura substitui a simulação.
+let reconhecimentoVozAtual = null;
+
+function iniciarReconhecimentoVoz({ aoIniciar, aoTranscrever, aoFinalizar, aoEncerrar, aoErro }) {
+  const Reconhecimento = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!Reconhecimento) {
+    mostrarToast({ tipo: "aviso", titulo: "Voz indisponível", mensagem: "Use o Chrome para falar com o Mimo ou escolha a opção de digitar." });
+    return null;
+  }
+  reconhecimentoVozAtual?.abort?.();
+  const reconhecimento = new Reconhecimento();
+  reconhecimento.lang = "pt-BR";
+  reconhecimento.continuous = false;
+  reconhecimento.interimResults = true;
+  reconhecimento.maxAlternatives = 1;
+  let textoFinal = "";
+  reconhecimento.onstart = () => {
+    localStorage.setItem('vivo-adaptai-permissao-usar_microfone', 'true');
+    aoIniciar?.();
+  };
+  reconhecimento.onresult = (evento) => {
+    let parcial = "";
+    for (let indice = evento.resultIndex; indice < evento.results.length; indice += 1) {
+      const trecho = evento.results[indice][0].transcript;
+      if (evento.results[indice].isFinal) textoFinal += `${trecho} `;
+      else parcial += trecho;
+    }
+    const transcricao = `${textoFinal}${parcial}`.trim();
+    aoTranscrever?.(transcricao);
+    if (textoFinal.trim()) aoFinalizar?.(textoFinal.trim());
+  };
+  reconhecimento.onerror = (evento) => {
+    const mensagens = {
+      "not-allowed": "Permita o microfone nas configurações do navegador e tente novamente.",
+      "service-not-allowed": "O reconhecimento de voz foi bloqueado pelo navegador.",
+      "no-speech": "Não consegui ouvir sua voz. Aproxime-se do microfone e tente novamente.",
+      "audio-capture": "Nenhum microfone foi encontrado neste dispositivo.",
+      "network": "O reconhecimento de voz precisa de conexão com a internet."
+    };
+    const mensagem = mensagens[evento.error] || "Não foi possível usar o microfone agora.";
+    aoErro?.(mensagem);
+    mostrarToast({ tipo: "aviso", titulo: "Não consegui ouvir", mensagem });
+  };
+  reconhecimento.onend = () => {
+    if (reconhecimentoVozAtual === reconhecimento) reconhecimentoVozAtual = null;
+    aoEncerrar?.(textoFinal.trim());
+  };
+  reconhecimentoVozAtual = reconhecimento;
+  try { reconhecimento.start(); }
+  catch (_) {
+    reconhecimentoVozAtual = null;
+    mostrarToast({ tipo: "aviso", titulo: "Microfone ocupado", mensagem: "Aguarde um instante e tente novamente." });
+    return null;
+  }
+  return reconhecimento;
+}
+
+if (voiceMicBtn) {
+  voiceMicBtn.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    evento.stopImmediatePropagation();
+    if (reconhecimentoVozAtual) { reconhecimentoVozAtual.stop(); return; }
+    let mensagemEnviada = false;
+    iniciarReconhecimentoVoz({
+      aoIniciar: () => {
+        voiceMicBtn.classList.add("esta-ouvindo");
+        voiceMicBtn.setAttribute("aria-pressed", "true");
+        voiceStatusTitle.textContent = "Ouvindo você...";
+        voiceStatusHint.textContent = "Fale agora. Toque novamente para parar.";
+        voiceTranscriptText.textContent = "...";
+        voiceTranscriptText.classList.remove("esta-aguardando-usuario");
+        voiceMimo.classList.add("esta-ouvindo");
+      },
+      aoTranscrever: (texto) => { if (texto) voiceTranscriptText.textContent = texto; },
+      aoFinalizar: async (texto) => {
+        if (!texto || mensagemEnviada) return;
+        mensagemEnviada = true;
+        voiceStatusTitle.textContent = "Processando...";
+        voiceStatusHint.textContent = "Só um instante, o Mimo está preparando a resposta.";
+        voiceMimo.classList.remove("esta-ouvindo");
+        voiceMimo.classList.add("esta-processando");
+        try {
+          const resultado = await solicitarRespostaDoMimo(texto);
+          const resposta = resultado.resposta || "Não consegui preparar uma resposta agora.";
+          voiceTranscriptText.textContent = resposta;
+          voiceStatusTitle.textContent = "Respondendo...";
+          voiceStatusHint.textContent = "Toque no microfone para falar novamente.";
+          voiceMimo.classList.remove("esta-processando");
+          voiceMimo.classList.add("esta-respondendo");
+          if ("speechSynthesis" in window) {
+            window.speechSynthesis.cancel();
+            const fala = new SpeechSynthesisUtterance(resposta);
+            fala.lang = "pt-BR";
+            fala.rate = .95;
+            window.speechSynthesis.speak(fala);
+          }
+        } catch (_) {
+          voiceStatusTitle.textContent = "Não consegui responder";
+          voiceStatusHint.textContent = "Tente novamente ou escolha a opção de digitar.";
+          voiceMimo.classList.remove("esta-processando");
+        }
+      },
+      aoErro: () => {
+        voiceStatusTitle.textContent = "Microfone não disponível";
+        voiceStatusHint.textContent = "Tente novamente ou digite sua mensagem.";
+      },
+      aoEncerrar: () => {
+        voiceMicBtn.classList.remove("esta-ouvindo");
+        voiceMicBtn.setAttribute("aria-pressed", "false");
+        voiceMimo.classList.remove("esta-ouvindo");
+      }
+    });
+  }, { capture: true });
+}
+
+document.querySelectorAll(".microfone-compositor").forEach((botao) => {
+  botao.setAttribute("aria-label", "Falar mensagem");
+  const formulario = botao.closest("form") || botao.closest(".compositor");
+  const entrada = formulario?.querySelector(".entrada-compositor, input[type='text'], textarea");
+  if (!entrada) return;
+  entrada.dataset.placeholderOriginal ||= entrada.placeholder;
+  botao.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    evento.stopImmediatePropagation();
+    if (reconhecimentoVozAtual) { reconhecimentoVozAtual.stop(); return; }
+    iniciarReconhecimentoVoz({
+      aoIniciar: () => {
+        botao.classList.add("esta-ouvindo");
+        botao.setAttribute("aria-pressed", "true");
+        entrada.placeholder = "Ouvindo... fale sua mensagem";
+      },
+      aoTranscrever: (texto) => { entrada.value = texto; },
+      aoFinalizar: (texto) => { entrada.value = texto; entrada.focus(); },
+      aoEncerrar: () => {
+        botao.classList.remove("esta-ouvindo");
+        botao.setAttribute("aria-pressed", "false");
+        entrada.placeholder = entrada.dataset.placeholderOriginal;
+      }
+    });
+  }, { capture: true });
+});
+
 // Toggle entre modo de voz e digitação
 const voiceTypeToggle = document.getElementById("voiceTypeToggle");
 const voiceTextFallback = document.getElementById("voiceTextFallback");

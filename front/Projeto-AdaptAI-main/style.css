@@ -3170,6 +3170,17 @@ body.pagina-cadastro .secao-autenticacao {
   background-color: var(--home-surface-info);
 }
 
+.microfone-compositor.esta-ouvindo {
+  color: #ffffff;
+  background: #d21867;
+  box-shadow: 0 0 0 .35rem color-mix(in srgb, #d21867 20%, transparent);
+  animation: pulsar-microfone 1.15s ease-in-out infinite;
+}
+
+@keyframes pulsar-microfone {
+  50% { transform: scale(1.08); box-shadow: 0 0 0 .6rem color-mix(in srgb, #d21867 8%, transparent); }
+}
+
 .microfone-compositor i {
   color: inherit;
 }
