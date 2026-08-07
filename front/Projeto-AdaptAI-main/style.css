@@ -11917,8 +11917,9 @@ html::-webkit-scrollbar-thumb,
 @media (min-width: 64em) {
   body[data-page="home"] .cabecalho {
     min-height: 4.25rem;
-    background: rgba(255, 255, 255, 0.96);
-    box-shadow: none;
+    border-bottom: 0.0625rem solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: 0 0.25rem 1.25rem rgba(57, 19, 82, 0.04);
   }
 
   body[data-page="home"] .cabecalho-conteudo {
@@ -11926,8 +11927,8 @@ html::-webkit-scrollbar-thumb,
   }
 
   body[data-page="home"] .cabecalho .logotipo {
-    visibility: hidden;
-    width: 10.75rem;
+    visibility: visible;
+    width: auto;
   }
 
   body[data-page="home"] .acoes-cabecalho {
@@ -11940,28 +11941,20 @@ html::-webkit-scrollbar-thumb,
 
   body[data-page="home"] .item-navegacao,
   body[data-page="home"] .item-navegacao button {
-    font-size: 0.72rem !important;
+    font-size: var(--fs-sm) !important;
   }
 
   body[data-page="home"] .layout-aplicativo > app-sidebar {
-    flex-basis: 10.75rem;
-    border-right: 0.0625rem solid #eee8f4;
+    flex-basis: 16.75rem;
+    border-right: 0.0625rem solid var(--color-border);
   }
 
   body[data-page="home"] .barra-lateral {
-    padding: 0.75rem 0.48rem 0.9rem;
+    padding: 1.35rem 0.8rem;
   }
 
   body[data-page="home"] .marca-lateral-home {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    height: 2.55rem;
-    margin: 0 0.75rem 0.85rem;
-    color: #270059;
-    font-size: 0.85rem;
-    font-weight: 800;
-    text-decoration: none;
+    display: none;
   }
 
   body[data-page="home"] .marca-lateral-home img {
@@ -11979,15 +11972,15 @@ html::-webkit-scrollbar-thumb,
   }
 
   body[data-page="home"] .link-lateral {
-    min-height: 2.05rem;
-    padding: 0.45rem 0.68rem;
-    border-radius: 0.45rem;
-    font-size: 0.68rem;
+    min-height: 2.8rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 0.7rem;
+    font-size: var(--fs-sm);
   }
 
   body[data-page="home"] .link-lateral i {
-    width: 0.9rem;
-    font-size: 0.72rem;
+    width: 1.125rem;
+    font-size: 0.86rem;
   }
 
   body[data-page="home"] .divisor-lateral {
@@ -11996,33 +11989,34 @@ html::-webkit-scrollbar-thumb,
 
   body[data-page="home"] .link-lateral[href="configuracoes.html"],
   body[data-page="home"] .link-lateral[href="permissoes.html"] {
-    display: none;
+    display: flex;
   }
 
   body[data-page="home"] .ajuda-lateral {
     margin: auto 0.15rem 0;
-    padding: 0.7rem 0.55rem 0.65rem;
-    border-radius: 0.5rem;
+    padding: var(--space-md) var(--space-sm);
+    border-radius: var(--radius-lg);
   }
 
   body[data-page="home"] .ajuda-lateral img {
-    width: 5.1rem;
-    margin: -0.4rem auto 0.15rem;
+    width: 5.5rem;
+    height: 5.5rem;
+    margin: 0 auto var(--space-sm);
   }
 
   body[data-page="home"] .titulo-ajuda-lateral {
-    font-size: 0.7rem;
+    font-size: var(--fs-sm);
   }
 
   body[data-page="home"] .texto-ajuda-lateral {
-    font-size: 0.59rem;
-    line-height: 1.45;
+    font-size: var(--fs-xs);
+    line-height: var(--lh-base);
   }
 
   body[data-page="home"] .botao-ajuda-lateral {
-    min-height: 1.85rem;
-    padding: 0.35rem 0.28rem;
-    font-size: 0.59rem;
+    min-height: 2.5rem;
+    padding-inline: var(--space-xs);
+    font-size: var(--fs-xs);
   }
 
   body[data-page="home"] .home-principal {
@@ -12155,6 +12149,14 @@ html::-webkit-scrollbar-thumb,
 }
 
 /* Conteúdo complementar da página inicial: ocupa a tela com atalhos úteis. */
+@media (min-width: 64em) {
+  html[data-theme="escuro"] body[data-page="home"] .cabecalho {
+    border-bottom-color: rgba(224, 192, 255, 0.12);
+    background: rgba(23, 16, 31, 0.9);
+    box-shadow: 0 0.35rem 1.35rem rgba(0, 0, 0, 0.2);
+  }
+}
+
 .resumo-inicial,
 .home-informacoes {
   border: 0.0625rem solid #e8dff0;
