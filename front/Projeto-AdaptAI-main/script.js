@@ -1720,6 +1720,27 @@ const isSimplificadoPage = !!document.getElementById('simplificadoBody');
 const isVozPage = !!document.getElementById('voiceBody');
 const chatPageEspecifica = isLibrasPage || isSimplificadoPage || isVozPage;
 
+function adicionarAcoesPassoGuiado(mensagem) {
+  if (!mensagem || mensagem.querySelector(".acoes-passo-guiado")) return;
+  const balao = mensagem.querySelector(".balao-robo");
+  if (!balao) return;
+  const acoes = document.createElement("div");
+  acoes.className = "acoes-passo-guiado";
+  acoes.innerHTML = `
+    <button type="button" class="acao-passo-guiado acao-consegui"><i class="fa-solid fa-check"></i> Consegui</button>
+    <button type="button" class="acao-passo-guiado acao-nao-consegui"><i class="fa-solid fa-life-ring"></i> Não consegui</button>
+  `;
+  acoes.querySelector(".acao-consegui").addEventListener("click", () => {
+    acoes.querySelectorAll("button").forEach((botao) => { botao.disabled = true; });
+    enviarMensagemChat("Consegui concluir esta etapa. Qual é a próxima ação?");
+  });
+  acoes.querySelector(".acao-nao-consegui").addEventListener("click", () => {
+    acoes.querySelectorAll("button").forEach((botao) => { botao.disabled = true; });
+    enviarMensagemChat("Não consegui concluir esta etapa. Explique de outra forma, com uma ação ainda mais simples.");
+  });
+  balao.appendChild(acoes);
+}
+
 function atualizarInterfaceModoGuiado() {
   const ativo = modoGuiadoAtivo();
   const botao = document.getElementById("btnModoGuiado");
@@ -1752,6 +1773,12 @@ if (chatBody) {
       const novoEstado = !modoGuiadoAtivo();
       sessionStorage.setItem(CHAVE_MODO_GUIADO, String(novoEstado));
       atualizarInterfaceModoGuiado();
+      if (novoEstado) {
+        const mensagensMimo = chatBody.querySelectorAll(".mensagem-robo");
+        adicionarAcoesPassoGuiado(mensagensMimo[mensagensMimo.length - 1]);
+      } else {
+        chatBody.querySelectorAll(".acoes-passo-guiado").forEach((acoes) => acoes.remove());
+      }
       mostrarToast({
         tipo: "sucesso",
         titulo: novoEstado ? "Passo a passo ativado" : "Passo a passo desativado",
@@ -1759,6 +1786,10 @@ if (chatBody) {
       });
     });
     atualizarInterfaceModoGuiado();
+    if (modoGuiadoAtivo()) {
+      const mensagensMimo = chatBody.querySelectorAll(".mensagem-robo");
+      adicionarAcoesPassoGuiado(mensagensMimo[mensagensMimo.length - 1]);
+    }
   }
 }
 
@@ -1865,23 +1896,7 @@ function adicionarMensagemRobo(texto) {
     <span class="horario-mensagem">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
   `;
   mensagem.querySelector("p").textContent = texto;
-  if (modoGuiadoAtivo()) {
-    const acoes = document.createElement("div");
-    acoes.className = "acoes-passo-guiado";
-    acoes.innerHTML = `
-      <button type="button" class="acao-passo-guiado acao-consegui"><i class="fa-solid fa-check"></i> Consegui</button>
-      <button type="button" class="acao-passo-guiado acao-nao-consegui"><i class="fa-solid fa-life-ring"></i> Não consegui</button>
-    `;
-    acoes.querySelector(".acao-consegui").addEventListener("click", () => {
-      acoes.querySelectorAll("button").forEach((botao) => { botao.disabled = true; });
-      enviarMensagemChat("Consegui concluir esta etapa. Qual é a próxima ação?");
-    });
-    acoes.querySelector(".acao-nao-consegui").addEventListener("click", () => {
-      acoes.querySelectorAll("button").forEach((botao) => { botao.disabled = true; });
-      enviarMensagemChat("Não consegui concluir esta etapa. Explique de outra forma, com uma ação ainda mais simples.");
-    });
-    mensagem.querySelector(".balao-robo").appendChild(acoes);
-  }
+  if (modoGuiadoAtivo()) adicionarAcoesPassoGuiado(mensagem);
   chatBody.appendChild(mensagem);
   chatBody.scrollTop = chatBody.scrollHeight;
 }
