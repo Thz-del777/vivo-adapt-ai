@@ -2966,6 +2966,78 @@ function inicializarPerfilLegado() {
   }
 }
 
+function renderizarPainelIld(dados) {
+  const painel = document.getElementById("painelIld");
+  if (!painel) return;
+  const definir = (id, valor) => {
+    const elemento = document.getElementById(id);
+    if (elemento) elemento.textContent = valor;
+  };
+  const perfil = dados.perfil || "intermediario";
+  const textos = {
+    iniciante: ["Atendimento guiado", "O Mimo explica uma ação por vez, usa palavras simples e confirma se você conseguiu."],
+    intermediario: ["Atendimento equilibrado", "O Mimo apresenta instruções claras, com detalhes quando eles forem úteis."],
+    avancado: ["Atendimento objetivo", "O Mimo prioriza respostas diretas e oferece detalhes adicionais quando você pedir."]
+  };
+  const motivos = {
+    avaliacao_inicial: "Definido pelas respostas do seu cadastro",
+    evento_acesso_app: "Atualizado após um novo acesso",
+    evento_acao: "Atualizado após uma ação no site",
+    evento_tarefa_iniciada: "Atualizado ao iniciar uma tarefa",
+    evento_tarefa_concluida: "Atualizado após concluir uma tarefa",
+    evento_erro: "Atualizado após uma dificuldade encontrada",
+    evento_tarefa_abandonada: "Atualizado após interromper uma tarefa",
+    evento_pedido_suporte: "Atualizado após solicitar ajuda",
+    recalculo: "Índice recalculado com suas atividades"
+  };
+  const medidor = document.getElementById("ildMedidor");
+  medidor?.style.setProperty("--ild-valor", String(dados.ild));
+  medidor?.setAttribute("aria-label", `Seu ILD atual é ${dados.ild} de 100, perfil ${perfil}`);
+  definir("ildValorAtual", dados.ild);
+  definir("ildPerfilAtual", perfil);
+  definir("ildTituloAdaptacao", textos[perfil]?.[0] || "Atendimento personalizado");
+  definir("ildTextoAdaptacao", textos[perfil]?.[1] || "O Mimo adapta as explicações ao seu ritmo.");
+  definir("ildUltimoMotivo", motivos[dados.motivo_ultima_atualizacao] || "Índice atualizado com suas atividades");
+  const data = dados.ultima_atualizacao ? new Date(dados.ultima_atualizacao) : null;
+  definir("ildUltimaAtualizacao", data && !Number.isNaN(data.getTime())
+    ? `Atualizado em ${data.toLocaleDateString("pt-BR")} às ${data.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`
+    : "Aguardando a primeira atualização");
+  definir("ildAcessos", dados.indicadores.acessos_app);
+  definir("ildTempo", `${dados.indicadores.tempo_medio_tarefa} min`);
+  definir("ildErros", dados.indicadores.erros);
+  definir("ildAbandonos", dados.indicadores.tarefas_abandonadas);
+  definir("ildSuporte", dados.indicadores.chamadas_suporte);
+
+  const grafico = document.getElementById("ildGrafico");
+  const historico = dados.historico || [];
+  if (!grafico) return;
+  if (!historico.length) {
+    grafico.innerHTML = '<p class="ild-estado">Sua evolução aparecerá aqui conforme você usar o site.</p>';
+    return;
+  }
+  grafico.innerHTML = "";
+  historico.forEach((item) => {
+    const barra = document.createElement("span");
+    const dataItem = item.calculado_em ? new Date(item.calculado_em) : null;
+    const dataCurta = dataItem && !Number.isNaN(dataItem.getTime()) ? dataItem.toLocaleDateString("pt-BR") : "Registro";
+    barra.className = "ild-grafico-barra";
+    barra.tabIndex = 0;
+    barra.style.setProperty("--ild-ponto", String(item.ild));
+    barra.dataset.rotulo = `${dataCurta}: ${item.ild} pontos`;
+    barra.setAttribute("aria-label", barra.dataset.rotulo);
+    grafico.appendChild(barra);
+  });
+}
+
+function exibirErroPainelIld(mensagem) {
+  const grafico = document.getElementById("ildGrafico");
+  if (grafico) grafico.innerHTML = '<p class="ild-estado"></p>';
+  const estado = grafico?.querySelector(".ild-estado");
+  if (estado) estado.textContent = mensagem;
+  const atualizacao = document.getElementById("ildUltimaAtualizacao");
+  if (atualizacao) atualizacao.textContent = "Dados temporariamente indisponíveis";
+}
+
 // Perfil conectado ao backend: consulta e salva somente dados da própria conta.
 function inicializarPerfil() {
   const formPerfil = document.getElementById("formPerfil");
@@ -3032,11 +3104,16 @@ function inicializarPerfil() {
       return;
     }
     try {
-      const dados = await requisitarApi("/perfil", { headers: { Authorization: `Bearer ${token}` } });
+      const [dados, painelIld] = await Promise.all([
+        requisitarApi("/perfil", { headers: { Authorization: `Bearer ${token}` } }),
+        requisitarApi("/perfil/ild", { headers: { Authorization: `Bearer ${token}` } })
+      ]);
       preencherPerfil(dados);
+      renderizarPainelIld(painelIld);
     } catch (erro) {
       status.textContent = mensagemErroAutenticacao(erro);
       status.className = "status-perfil esta-erro";
+      exibirErroPainelIld("Não foi possível carregar sua evolução agora. Tente atualizar a página.");
     }
   }
 

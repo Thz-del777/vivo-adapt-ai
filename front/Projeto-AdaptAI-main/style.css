@@ -7699,6 +7699,54 @@ body[data-page="libras"] .estrutura-chat {
   margin: 0 0 var(--space-lg) 0;
 }
 
+/* Painel de evolução do ILD */
+.painel-ild { overflow: hidden; }
+.painel-ild-cabecalho,
+.ild-evolucao-topo { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-lg); }
+.painel-ild-cabecalho .perfil-secao-titulo { margin: .45rem 0 .25rem; }
+.painel-ild-cabecalho p,
+.ild-evolucao-topo p { margin: 0; color: var(--color-text-secondary); font-size: var(--fs-xs); }
+.painel-ild-selo { display: inline-flex; align-items: center; gap: .4rem; color: var(--color-primary); font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.painel-ild-atualizacao { flex-shrink: 0; padding: .45rem .7rem; border-radius: var(--radius-full); background: var(--color-surface-muted); color: var(--color-text-secondary); font-size: .75rem; }
+.painel-ild-resumo { display: grid; grid-template-columns: 9rem 1fr; align-items: center; gap: var(--space-xl); margin: var(--space-xl) 0; padding: var(--space-lg); border-radius: var(--radius-lg); background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 9%, var(--color-surface)), var(--color-surface)); border: .0625rem solid var(--color-border); }
+.ild-medidor { --ild-valor: 0; width: 8.5rem; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--color-primary) calc(var(--ild-valor) * 1%), var(--color-border) 0); position: relative; }
+.ild-medidor::before { content: ""; position: absolute; inset: .65rem; border-radius: inherit; background: var(--color-surface); }
+.ild-medidor-centro { position: relative; display: flex; flex-direction: column; align-items: center; line-height: 1; }
+.ild-medidor-centro strong { color: var(--color-primary-dark); font-size: 2.15rem; }
+.ild-medidor-centro span { margin-top: .35rem; color: var(--color-text-secondary); font-size: .72rem; }
+.ild-resumo-texto h3 { margin: .55rem 0 .35rem; color: var(--color-text); font-size: 1.15rem; }
+.ild-resumo-texto > p { margin: 0; color: var(--color-text-secondary); line-height: 1.55; }
+.ild-perfil-badge { display: inline-flex; padding: .35rem .65rem; border-radius: var(--radius-full); background: var(--color-primary); color: var(--color-text-on-brand); font-size: .75rem; font-weight: 700; text-transform: capitalize; }
+.ild-ultimo-motivo { display: flex; align-items: center; gap: .4rem; margin-top: .75rem !important; font-size: .78rem; }
+.ild-indicadores { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .65rem; }
+.ild-indicadores article { min-width: 0; padding: .85rem .7rem; border: .0625rem solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); text-align: center; }
+.ild-indicadores i { display: block; color: var(--color-primary); margin-bottom: .45rem; }
+.ild-indicadores strong { display: block; color: var(--color-text); font-size: 1.05rem; }
+.ild-indicadores span { display: block; margin-top: .2rem; color: var(--color-text-secondary); font-size: .68rem; line-height: 1.25; }
+.ild-evolucao { margin-top: var(--space-xl); padding-top: var(--space-lg); border-top: .0625rem solid var(--color-border); }
+.ild-evolucao-topo h3 { margin: 0 0 .2rem; color: var(--color-text); font-size: var(--fs-sm); }
+.ild-legenda { display: inline-flex; align-items: center; gap: .4rem; color: var(--color-text-secondary); font-size: .72rem; }
+.ild-legenda i { width: .65rem; height: .65rem; border-radius: 50%; background: var(--color-primary); }
+.ild-grafico { min-height: 9.5rem; display: flex; align-items: end; gap: .45rem; margin-top: var(--space-lg); padding: .75rem .5rem 0; border-bottom: .0625rem solid var(--color-border); background: repeating-linear-gradient(to top, transparent 0, transparent 2.25rem, color-mix(in srgb, var(--color-border) 55%, transparent) 2.3rem); }
+.ild-grafico-barra { flex: 1; min-width: .75rem; max-width: 3rem; height: calc(var(--ild-ponto) * 1%); min-height: .25rem; position: relative; border-radius: .45rem .45rem 0 0; background: linear-gradient(to top, var(--color-primary-dark), var(--color-primary)); transition: height .45s ease; }
+.ild-grafico-barra:hover::before,
+.ild-grafico-barra:focus-visible::before { content: attr(data-rotulo); position: absolute; left: 50%; bottom: calc(100% + .4rem); transform: translateX(-50%); z-index: 2; white-space: nowrap; padding: .35rem .5rem; border-radius: .35rem; background: var(--color-text); color: var(--color-surface); font-size: .68rem; }
+.ild-estado { align-self: center; width: 100%; text-align: center; color: var(--color-text-secondary); font-size: var(--fs-xs); }
+.ild-aviso { display: flex; align-items: flex-start; gap: .65rem; margin-top: var(--space-lg); padding: .8rem 1rem; border-radius: var(--radius-md); background: var(--color-surface-muted); color: var(--color-text-secondary); }
+.ild-aviso i { margin-top: .15rem; color: var(--color-primary); }
+.ild-aviso p { margin: 0; font-size: .75rem; line-height: 1.45; }
+.ild-aviso strong { color: var(--color-text); }
+
+@media (max-width: 48em) {
+  .painel-ild-cabecalho { flex-direction: column; }
+  .painel-ild-resumo { grid-template-columns: 1fr; text-align: center; }
+  .ild-medidor { margin-inline: auto; }
+  .ild-ultimo-motivo { justify-content: center; }
+  .ild-indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ild-indicadores article:first-child { grid-column: 1 / -1; }
+  .ild-grafico { gap: .25rem; }
+}
+
 /* Seção: Informações da conta */
 .perfil-conta-info {
   display: flex;

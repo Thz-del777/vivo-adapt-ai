@@ -171,6 +171,30 @@ class PerfilUpdateRequest(BaseModel):
     telefone: str | None = Field(default=None, max_length=30)
 
 
+class IldHistoricoItemResponse(BaseModel):
+    ild: int = Field(ge=0, le=100)
+    perfil: Perfil
+    motivo: str
+    calculado_em: datetime | None = None
+
+
+class IldIndicadoresResponse(BaseModel):
+    acessos_app: int = Field(ge=0)
+    chamadas_suporte: int = Field(ge=0)
+    tempo_medio_tarefa: int = Field(ge=0)
+    erros: int = Field(ge=0)
+    tarefas_abandonadas: int = Field(ge=0)
+
+
+class IldPainelResponse(BaseModel):
+    ild: int = Field(ge=0, le=100)
+    perfil: Perfil
+    ultima_atualizacao: datetime | None = None
+    motivo_ultima_atualizacao: str
+    indicadores: IldIndicadoresResponse
+    historico: list[IldHistoricoItemResponse]
+
+
 class PreferenciasResponse(BaseModel):
     tema: Literal["claro", "escuro"] = "claro"
     idioma: Literal["pt-br", "en"] = "pt-br"

@@ -659,6 +659,15 @@ def test_perfil_consulta_e_atualiza_apenas_cliente_autenticado(monkeypatch):
             cliente.update({"nome": nome, "telefone": telefone})
             return cliente
 
+        def listar_historico_ild(self, cliente_id):
+            assert cliente_id == 42
+            return [{
+                "ild": 31,
+                "perfil": "intermediario",
+                "motivo_calculo": "evento_tarefa_concluida",
+                "calculado_em": "2026-08-07T12:00:00Z",
+            }]
+
     monkeypatch.setattr(perfil_router, "AuthService", lambda _settings: AuthServicePerfilFalso())
     monkeypatch.setattr(perfil_router, "SupabaseClienteRepository", lambda *_args: RepositorioPerfilFalso())
     monkeypatch.setattr(
@@ -671,6 +680,12 @@ def test_perfil_consulta_e_atualiza_apenas_cliente_autenticado(monkeypatch):
     assert consulta.status_code == 200
     assert consulta.json()["nome"] == "Maria"
     assert consulta.json()["perfil"] == "intermediario"
+
+    painel = client.get("/perfil/ild", headers={"Authorization": "Bearer token"})
+    assert painel.status_code == 200
+    assert painel.json()["ild"] == 31
+    assert painel.json()["indicadores"]["acessos_app"] == 3
+    assert painel.json()["historico"][0]["motivo"] == "evento_tarefa_concluida"
 
     atualizacao = client.patch(
         "/perfil",

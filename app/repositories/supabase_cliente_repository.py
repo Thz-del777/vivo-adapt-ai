@@ -77,3 +77,14 @@ class SupabaseClienteRepository:
             .execute()
         )
         return response.data[0] if response.data else None
+
+    def listar_historico_ild(self, cliente_id: int, limite: int = 12) -> list[dict[str, Any]]:
+        response = (
+            self.client.table("historico_ild")
+            .select("ild,perfil,motivo_calculo,calculado_em")
+            .eq("cliente_id", cliente_id)
+            .order("calculado_em", desc=True)
+            .limit(limite)
+            .execute()
+        )
+        return response.data or []

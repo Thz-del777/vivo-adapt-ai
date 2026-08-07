@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meu Perfil - Vivo AdaptAI</title>
-<link rel="stylesheet" href="style.css?v=61">
+<link rel="stylesheet" href="style.css?v=62">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body class="tema-destaque" data-page="perfil">
@@ -117,6 +117,44 @@
               </div>
               <p class="texto-secao" id="perfilIldDescricao">O Mimo usa suas preferências e sua experiência digital para explicar cada etapa.</p>
             </div>
+
+            <section class="perfil-secao painel-ild" id="painelIld" aria-labelledby="painelIldTitulo">
+              <div class="painel-ild-cabecalho">
+                <div>
+                  <span class="painel-ild-selo"><i class="fa-solid fa-chart-line"></i> Evolução do atendimento</span>
+                  <h2 class="perfil-secao-titulo" id="painelIldTitulo">Seu Índice de Letramento Digital</h2>
+                  <p>O ILD ajuda o Mimo a escolher o nível de detalhe ideal para você.</p>
+                </div>
+                <span class="painel-ild-atualizacao" id="ildUltimaAtualizacao">Carregando dados...</span>
+              </div>
+
+              <div class="painel-ild-resumo" aria-live="polite">
+                <div class="ild-medidor" id="ildMedidor" role="img" aria-label="ILD carregando">
+                  <div class="ild-medidor-centro"><strong id="ildValorAtual">--</strong><span>de 100</span></div>
+                </div>
+                <div class="ild-resumo-texto">
+                  <span class="ild-perfil-badge" id="ildPerfilAtual">Carregando</span>
+                  <h3 id="ildTituloAdaptacao">Preparando seu atendimento</h3>
+                  <p id="ildTextoAdaptacao">Estamos consultando sua evolução para adaptar as explicações.</p>
+                  <p class="ild-ultimo-motivo"><i class="fa-solid fa-rotate"></i> <span id="ildUltimoMotivo">Aguardando atualização</span></p>
+                </div>
+              </div>
+
+              <div class="ild-indicadores" aria-label="Indicadores considerados no ILD">
+                <article><i class="fa-solid fa-right-to-bracket"></i><strong id="ildAcessos">--</strong><span>Acessos ao site</span></article>
+                <article><i class="fa-solid fa-circle-check"></i><strong id="ildTempo">--</strong><span>Tempo médio</span></article>
+                <article><i class="fa-solid fa-triangle-exclamation"></i><strong id="ildErros">--</strong><span>Erros encontrados</span></article>
+                <article><i class="fa-solid fa-person-walking-arrow-right"></i><strong id="ildAbandonos">--</strong><span>Tarefas interrompidas</span></article>
+                <article><i class="fa-solid fa-headset"></i><strong id="ildSuporte">--</strong><span>Pedidos de suporte</span></article>
+              </div>
+
+              <div class="ild-evolucao">
+                <div class="ild-evolucao-topo"><div><h3>Sua evolução</h3><p>Últimas atualizações registradas</p></div><span class="ild-legenda"><i></i> Pontuação ILD</span></div>
+                <div class="ild-grafico" id="ildGrafico" role="img" aria-label="Gráfico da evolução do ILD"><p class="ild-estado">Carregando evolução...</p></div>
+              </div>
+
+              <div class="ild-aviso"><i class="fa-solid fa-circle-info"></i><p><strong>Este índice não mede inteligência.</strong> Ele apenas ajuda a adaptar o atendimento e pode mudar conforme sua experiência com o site.</p></div>
+            </section>
 
             <div class="perfil-secao seguranca-conta" id="segurancaConta">
               <div class="seguranca-conta-cabecalho">
@@ -309,7 +347,7 @@
 
 <script src="components.js?v=12"></script>
   <script src="api-config.js?v=1"></script>
-<script src="script.js?v=43"></script>
+<script src="script.js?v=44"></script>
 </body>
 </html>
 

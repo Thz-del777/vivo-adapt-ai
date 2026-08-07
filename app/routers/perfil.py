@@ -4,7 +4,13 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from app.core.config import get_settings
-from app.models.schemas import PerfilResponse, PerfilUpdateRequest
+from app.models.schemas import (
+    IldHistoricoItemResponse,
+    IldIndicadoresResponse,
+    IldPainelResponse,
+    PerfilResponse,
+    PerfilUpdateRequest,
+)
 from app.repositories.supabase_cliente_repository import SupabaseClienteRepository
 from app.services.auth_service import AuthService
 from app.services.ild_service import calcular_ild, classificar_perfil
@@ -53,6 +59,45 @@ def obter_perfil(
 ) -> PerfilResponse:
     usuario, cliente, _ = _dados_da_sessao(credenciais)
     return _resposta(usuario, cliente)
+
+
+@router.get("/ild", response_model=IldPainelResponse)
+def obter_painel_ild(
+    credenciais: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
+) -> IldPainelResponse:
+    _, cliente, repositorio = _dados_da_sessao(credenciais)
+    try:
+        historico_banco = repositorio.listar_historico_ild(int(cliente["id"]))
+    except Exception:
+        logger.exception("Falha ao carregar historico do ILD")
+        historico_banco = []
+
+    ild = calcular_ild(cliente)
+    perfil = classificar_perfil(ild)
+    historico = [
+        IldHistoricoItemResponse(
+            ild=round(float(item.get("ild", ild))),
+            perfil=item.get("perfil") or classificar_perfil(round(float(item.get("ild", ild)))),
+            motivo=item.get("motivo_calculo") or "recalculo",
+            calculado_em=item.get("calculado_em"),
+        )
+        for item in reversed(historico_banco)
+    ]
+    ultimo = historico_banco[0] if historico_banco else {}
+    return IldPainelResponse(
+        ild=ild,
+        perfil=perfil,
+        ultima_atualizacao=ultimo.get("calculado_em"),
+        motivo_ultima_atualizacao=ultimo.get("motivo_calculo") or "avaliacao_inicial",
+        indicadores=IldIndicadoresResponse(
+            acessos_app=max(0, int(cliente.get("acessos_app", 0))),
+            chamadas_suporte=max(0, int(cliente.get("chamadas_suporte", 0))),
+            tempo_medio_tarefa=max(0, round(float(cliente.get("tempo_medio_tarefa", 0)))),
+            erros=max(0, int(cliente.get("erros", 0))),
+            tarefas_abandonadas=max(0, int(cliente.get("tarefas_abandonadas", 0))),
+        ),
+        historico=historico,
+    )
 
 
 @router.patch("", response_model=PerfilResponse)
