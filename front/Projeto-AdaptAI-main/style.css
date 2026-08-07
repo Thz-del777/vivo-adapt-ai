@@ -11825,6 +11825,45 @@ body[data-page="libras"] .mensagem-libras { max-width: 100%; }
   body[data-page="libras"] .secao-transcricao-libras { order: 3; }
 }
 
+/* Acabamento da tela de Libras: remove sobreposições e ações duplicadas. */
+@media (min-width: 48.0625rem) {
+  body[data-page="libras"] .painel-traducao-libras > i {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+  body[data-page="libras"] .selos-libras { margin-top: .25rem; }
+  body[data-page="libras"] .painel-traducao-libras .botao { min-height: 2.65rem; }
+  body[data-page="libras"] .controles-interprete { min-height: 4.6rem; }
+}
+body[data-page="libras"] .recursos-acessiveis {
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  left: .6rem;
+  transform: translateY(-50%);
+}
+body[data-page="libras"] .botao-recurso-acessivel {
+  width: 2.75rem;
+  height: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+}
+body[data-page="libras"] .botao-recurso-acessivel span { display: none; }
+body[data-page="libras"] .overlay-status { display: none; }
+
+@media (max-width: 48rem) {
+  body[data-page="libras"] .recursos-acessiveis {
+    top: auto;
+    right: .55rem;
+    bottom: 5.3rem;
+    left: auto;
+    flex-direction: row;
+    transform: none;
+  }
+  body[data-page="libras"] .botao-recurso-acessivel { width: 2.6rem; height: 2.6rem; min-height: 2.6rem; }
+}
+
 /* Paletas acessíveis globais.
    Esta camada fica por último para substituir cores roxas legadas em todas as
    páginas sem interferir no modo de alto contraste. */
