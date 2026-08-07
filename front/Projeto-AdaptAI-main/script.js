@@ -138,17 +138,39 @@ function inicializarSelectTema() {
 })();
 
 // Ponto de entrada único - evita listeners duplicados
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const titulo = document.getElementById("tituloSaudacao");
     if (!titulo) return;
 
-    const usuario = JSON.parse(
-        sessionStorage.getItem("vivo-adaptai-usuario") || "{}"
-    );
+    const usuario = JSON.parse(sessionStorage.getItem("vivo-adaptai-usuario") || "{}");
 
-    const nome = usuario.nome || usuario.name || "Cliente";
+    function primeiroNome(nomeCompleto) {
+      return String(nomeCompleto || "").trim().split(/\s+/)[0] || "";
+    }
 
-    titulo.innerHTML = `Olá, ${nome}! 👋<br>Como posso te ajudar hoje?`;
+    function aplicarNome(nomeCompleto) {
+      const nome = primeiroNome(nomeCompleto);
+      titulo.replaceChildren(
+        document.createTextNode(nome ? `Olá, ${nome}!` : "Olá!"),
+        document.createElement("br"),
+        document.createTextNode("Como posso te ajudar hoje?")
+      );
+      if (!nome) return;
+      document.querySelectorAll(".nome-perfil").forEach((elemento) => { elemento.textContent = nome; });
+      document.querySelectorAll(".avatar-perfil").forEach((elemento) => { elemento.textContent = nome.charAt(0).toUpperCase(); });
+    }
+
+    aplicarNome(usuario.nome || usuario.name);
+
+    const token = sessionStorage.getItem("vivo-adaptai-access-token");
+    if (!token) return;
+    try {
+      const perfil = await requisitarApi("/perfil", { headers: { Authorization: `Bearer ${token}` } });
+      aplicarNome(perfil.nome);
+      sessionStorage.setItem("vivo-adaptai-usuario", JSON.stringify({ ...usuario, nome: perfil.nome }));
+    } catch (_) {
+      // A saudação local continua utilizável enquanto o perfil não responde.
+    }
 });
 
 // mostrarToast({ tipo, titulo, mensagem, duracao, acaoTexto, aoAcionar })
