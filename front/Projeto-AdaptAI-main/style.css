@@ -11558,6 +11558,262 @@ body {
   }
 }
 
+/* Tema escuro — acabamento final
+   Não é uma simples inversão de cores: os tons foram organizados em camadas
+   para preservar a identidade Vivo e deixar leitura, cartões e navegação
+   confortáveis durante a noite. */
+html[data-theme="escuro"] {
+  color-scheme: dark;
+  --vivo-purple: #c78cff;
+  --vivo-purple-deep: #f0dbff;
+  --adapt-magenta: #ef76cd;
+  --digital-blue: #7aabff;
+  --inclusive-cyan: #62d7cf;
+  --bg-main: #100d16;
+  --bg-alt: #17121f;
+  --border-light: #342b40;
+  --color-bg: #100d16;
+  --color-bg-alt: #17121f;
+  --color-surface: #201a29;
+  --color-surface-hover: #2a2235;
+  --color-surface-muted: #292131;
+  --color-border: #3a3046;
+  --color-text: #f7f2fa;
+  --color-text-primary: #f7f2fa;
+  --color-text-secondary: #c9c0d0;
+  --color-text-placeholder: #968aa2;
+  --color-background: #17121f;
+  --color-primary: #c78cff;
+  --color-primary-dark: #ead2ff;
+  --shadow-sm: 0 .35rem 1rem rgba(0, 0, 0, .22);
+  --shadow-md: 0 1rem 2.6rem rgba(0, 0, 0, .32);
+  --shadow-elevated: 0 1.25rem 3rem rgba(0, 0, 0, .4);
+  --shadow-hover: 0 .7rem 1.7rem rgba(0, 0, 0, .35);
+}
+
+html[data-theme="escuro"] body {
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at 88% 4%, rgba(199, 140, 255, .12), transparent 24rem),
+    radial-gradient(circle at 4% 28%, rgba(239, 118, 205, .07), transparent 20rem),
+    linear-gradient(145deg, #100d16 0%, #15101d 52%, #110e18 100%);
+}
+
+html[data-theme="escuro"] .cabecalho,
+html[data-theme="escuro"] .barra-lateral,
+html[data-theme="escuro"] .cabecalho-chat {
+  border-color: rgba(207, 178, 233, .12);
+  background: rgba(24, 19, 32, .92);
+  box-shadow: 0 .25rem 1.35rem rgba(0, 0, 0, .2);
+}
+
+html[data-theme="escuro"] .layout-aplicativo,
+html[data-theme="escuro"] .conteudo-principal-app,
+html[data-theme="escuro"] .conteudo-configuracoes {
+  background: transparent;
+}
+
+html[data-theme="escuro"] .configuracoes-cartao,
+html[data-theme="escuro"] .configuracao-item,
+html[data-theme="escuro"] .item-acessibilidade,
+html[data-theme="escuro"] .dashboard-card-kpi,
+html[data-theme="escuro"] .cartao-kpi,
+html[data-theme="escuro"] .perfil-secao-protecao,
+html[data-theme="escuro"] .perfil-card-lateral,
+html[data-theme="escuro"] .cartao-dashboard,
+html[data-theme="escuro"] .card-conversa,
+html[data-theme="escuro"] .painel-notificacoes,
+html[data-theme="escuro"] .privacidade-secao,
+html[data-theme="escuro"] .seguranca-dispositivo {
+  border-color: rgba(207, 178, 233, .14);
+  background: linear-gradient(145deg, rgba(39, 32, 50, .98), rgba(28, 23, 37, .98));
+  box-shadow: 0 .7rem 1.8rem rgba(0, 0, 0, .16);
+}
+
+html[data-theme="escuro"] .item-acessibilidade:hover,
+html[data-theme="escuro"] .configuracao-item:hover,
+html[data-theme="escuro"] .cartao-dashboard:hover,
+html[data-theme="escuro"] .card-conversa:hover {
+  background: #31283e;
+  border-color: rgba(215, 176, 255, .38);
+}
+
+/* Tema escuro — identidade visual própria, com contraste confortável e
+   superfícies em camadas. Mantido no fim para não receber o fundo claro de
+   componentes mais antigos. */
+html[data-theme="escuro"] {
+  color-scheme: dark;
+  --color-primary: #ca7cff;
+  --color-primary-dark: #ead0ff;
+  --color-accent-pink: #f39ad8;
+  --color-accent-lilac: #bda2ff;
+  --color-bg: #100b17;
+  --color-bg-alt: #17101f;
+  --color-surface: #1d1527;
+  --color-surface-hover: #281d35;
+  --color-surface-muted: #241a30;
+  --color-border: #3c2d4c;
+  --color-text: #f8f4fb;
+  --color-text-primary: #f8f4fb;
+  --color-text-secondary: #cbbfd4;
+  --color-text-placeholder: #9d90aa;
+  --color-text-on-brand: #fff;
+  --gradient-primary: linear-gradient(115deg, #8e31c7 0%, #b34ae4 52%, #dc66c5 100%);
+  --home-ink: #f8f4fb;
+  --home-surface-info: #2a1d38;
+  --home-gradient-title: linear-gradient(90deg, #e7b9ff, #8fe8df);
+  --home-gradient-panel: linear-gradient(135deg, #3e175c 0%, #66278e 54%, #214a76 100%);
+  --shadow-elevated: 0 1.15rem 3rem rgba(0, 0, 0, .34);
+  --shadow-focus: 0 0 0 .22rem rgba(202, 124, 255, .32);
+  --shadow-hover: 0 .7rem 1.6rem rgba(0, 0, 0, .3);
+}
+
+html[data-theme="escuro"] body {
+  background:
+    radial-gradient(circle at 92% -8%, rgba(190, 84, 233, .18), transparent 31rem),
+    radial-gradient(circle at -8% 35%, rgba(72, 169, 205, .12), transparent 27rem),
+    linear-gradient(145deg, #100b17 0%, #15101d 48%, #0f0b15 100%);
+}
+
+html[data-theme="escuro"] .cabecalho {
+  background: rgba(23, 16, 31, .9);
+  border-bottom-color: rgba(224, 192, 255, .12);
+  box-shadow: 0 .35rem 1.35rem rgba(0, 0, 0, .2);
+}
+
+html[data-theme="escuro"] .barra-lateral {
+  background: linear-gradient(180deg, rgba(29, 21, 39, .98), rgba(20, 14, 28, .98));
+  border-right-color: rgba(224, 192, 255, .1);
+}
+
+html[data-theme="escuro"] .link-lateral { color: #d6cadf; }
+html[data-theme="escuro"] .link-lateral i { color: #bfa2d8; }
+html[data-theme="escuro"] .link-lateral:hover {
+  background: rgba(202, 124, 255, .12);
+  color: #f5ebff;
+}
+html[data-theme="escuro"] .link-lateral.esta-ativo {
+  background: linear-gradient(100deg, rgba(171, 68, 225, .32), rgba(98, 60, 177, .18));
+  box-shadow: inset 0 0 0 1px rgba(223, 178, 255, .15);
+  color: #fff;
+}
+html[data-theme="escuro"] .link-lateral.esta-ativo i { color: #e3b5ff; }
+
+html[data-theme="escuro"] .ajuda-lateral,
+html[data-theme="escuro"] .cartao-autenticacao,
+html[data-theme="escuro"] .cartao-recuperacao,
+html[data-theme="escuro"] .vazio-historico,
+html[data-theme="escuro"] .painel-notificacoes,
+html[data-theme="escuro"] .modal__content,
+html[data-theme="escuro"] .privacidade-dialogo {
+  background: linear-gradient(145deg, #21182c, #19121f);
+  border-color: rgba(224, 192, 255, .14);
+}
+
+html[data-theme="escuro"] .configuracoes-cartao,
+html[data-theme="escuro"] .configuracao-item,
+html[data-theme="escuro"] .item-acessibilidade,
+html[data-theme="escuro"] .dashboard-card-kpi,
+html[data-theme="escuro"] .cartao-kpi,
+html[data-theme="escuro"] .perfil-secao-protecao,
+html[data-theme="escuro"] .perfil-card-lateral,
+html[data-theme="escuro"] .cartao-dashboard,
+html[data-theme="escuro"] .card-conversa,
+html[data-theme="escuro"] .privacidade-secao,
+html[data-theme="escuro"] .seguranca-dispositivo {
+  background: linear-gradient(145deg, rgba(36, 26, 48, .98), rgba(25, 18, 33, .98));
+  border-color: rgba(224, 192, 255, .13);
+}
+
+html[data-theme="escuro"] .corpo-chat,
+html[data-theme="escuro"] .corpo-voz,
+html[data-theme="escuro"] .abas {
+  background: transparent;
+}
+html[data-theme="escuro"] .balao-robo,
+html[data-theme="escuro"] .compositor,
+html[data-theme="escuro"] .envelope-compositor-chat,
+html[data-theme="escuro"] .controle-campo,
+html[data-theme="escuro"] .area-texto,
+html[data-theme="escuro"] input[type="text"],
+html[data-theme="escuro"] input[type="email"],
+html[data-theme="escuro"] input[type="password"],
+html[data-theme="escuro"] input[type="tel"],
+html[data-theme="escuro"] textarea,
+html[data-theme="escuro"] select {
+  background: #1a1323;
+  border-color: #443252;
+  color: #f8f4fb;
+}
+html[data-theme="escuro"] input::placeholder,
+html[data-theme="escuro"] textarea::placeholder { color: #9d90aa; }
+
+html[data-theme="escuro"] .botao-principal,
+html[data-theme="escuro"] .botao-modal-primary {
+  background: var(--gradient-primary);
+  box-shadow: 0 .55rem 1.35rem rgba(144, 49, 199, .25);
+}
+html[data-theme="escuro"] .botao-contorno,
+html[data-theme="escuro"] .botao-social {
+  background: rgba(36, 26, 48, .72);
+  border-color: #554065;
+  color: #f3eafd;
+}
+html[data-theme="escuro"] .botao-contorno:hover,
+html[data-theme="escuro"] .botao-social:hover {
+  background: rgba(202, 124, 255, .14);
+  border-color: #ca7cff;
+}
+
+html[data-theme="escuro"] ::selection { background: rgba(202, 124, 255, .42); color: #fff; }
+html[data-theme="escuro"] ::-webkit-scrollbar-thumb { background: #8e4cc1; }
+
+html[data-theme="escuro"] .link-lateral.esta-ativo,
+html[data-theme="escuro"] .modo-chat,
+html[data-theme="escuro"] .chip-filtro.esta-ativo {
+  color: #f1e5ff;
+  border-color: rgba(199, 140, 255, .35);
+  background: linear-gradient(90deg, rgba(157, 73, 222, .28), rgba(104, 63, 181, .2));
+}
+
+html[data-theme="escuro"] .link-lateral:hover,
+html[data-theme="escuro"] .item-perfil:hover,
+html[data-theme="escuro"] .botao-resposta:hover {
+  background: rgba(199, 140, 255, .12);
+  color: #f5ebff;
+}
+
+html[data-theme="escuro"] input,
+html[data-theme="escuro"] textarea,
+html[data-theme="escuro"] select,
+html[data-theme="escuro"] .controle-campo,
+html[data-theme="escuro"] .envelope-campo,
+html[data-theme="escuro"] .compositor {
+  color: var(--color-text);
+  border-color: #443951;
+  background: #18131f;
+}
+
+html[data-theme="escuro"] input:focus,
+html[data-theme="escuro"] textarea:focus,
+html[data-theme="escuro"] select:focus,
+html[data-theme="escuro"] .envelope-campo:focus-within {
+  border-color: #c78cff;
+  box-shadow: 0 0 0 .2rem rgba(199, 140, 255, .18);
+}
+
+html[data-theme="escuro"] .estrutura-chat .corpo-chat {
+  background:
+    radial-gradient(circle at 90% 85%, rgba(98, 215, 207, .08), transparent 18rem),
+    #17121f;
+}
+
+html[data-theme="escuro"] .estrutura-chat .balao-robo,
+html[data-theme="escuro"] .balao-robo {
+  border-color: #43374e;
+  background: #2a2233;
+}
+
 /* Atendimento: leitura centrada e navegação lateral realmente útil. */
 @media (min-width: 64em) {
   .layout-aplicativo {
@@ -13139,4 +13395,35 @@ html[data-alto-contraste="true"] button:not(.botao-recurso-acessivel) {
   .ajuda-lateral { margin-top: .85rem; padding: .85rem .7rem; }
   .ajuda-lateral img { width: 4.6rem; height: 4.6rem; margin-bottom: .45rem; transform: scale(1.25); }
   .texto-ajuda-lateral { margin-bottom: .55rem; }
+}
+
+/* Mantido no fim para prevalecer sobre estilos específicos de páginas. */
+html[data-theme="escuro"] .layout-aplicativo,
+html[data-theme="escuro"] .conteudo-principal-app,
+html[data-theme="escuro"] .conteudo-configuracoes {
+  background: transparent;
+}
+
+html[data-theme="escuro"] .configuracoes-cartao,
+html[data-theme="escuro"] .configuracao-item,
+html[data-theme="escuro"] .item-acessibilidade,
+html[data-theme="escuro"] .dashboard-card-kpi,
+html[data-theme="escuro"] .cartao-kpi,
+html[data-theme="escuro"] .perfil-secao-protecao,
+html[data-theme="escuro"] .perfil-card-lateral,
+html[data-theme="escuro"] .cartao-dashboard,
+html[data-theme="escuro"] .card-conversa,
+html[data-theme="escuro"] .privacidade-secao,
+html[data-theme="escuro"] .seguranca-dispositivo {
+  border-color: rgba(207, 178, 233, .14);
+  background: linear-gradient(145deg, rgba(39, 32, 50, .98), rgba(28, 23, 37, .98));
+  box-shadow: 0 .7rem 1.8rem rgba(0, 0, 0, .16);
+}
+
+html[data-theme="escuro"] .item-acessibilidade:hover,
+html[data-theme="escuro"] .configuracao-item:hover,
+html[data-theme="escuro"] .cartao-dashboard:hover,
+html[data-theme="escuro"] .card-conversa:hover {
+  background: #31283e;
+  border-color: rgba(215, 176, 255, .38);
 }
