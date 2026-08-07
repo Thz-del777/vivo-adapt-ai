@@ -11638,6 +11638,173 @@ html[data-theme="escuro"] .card-conversa:hover {
   border-color: rgba(215, 176, 255, .38);
 }
 
+/* Prioridade final das paletas sobre os estilos específicos do tema escuro. */
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) {
+  --color-primary: var(--palette-primary);
+  --color-primary-dark: var(--palette-deep);
+  --vivo-purple: var(--palette-primary);
+  --vivo-purple-deep: var(--palette-deep);
+  --color-accent-pink: var(--palette-secondary);
+  --adapt-magenta: var(--palette-secondary);
+  --inclusive-cyan: var(--palette-secondary);
+  --gradient-primary: linear-gradient(115deg, var(--palette-deep), var(--palette-primary) 56%, var(--palette-secondary));
+}
+html[data-theme="escuro"][data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) {
+  --color-primary: color-mix(in srgb, var(--palette-primary) 58%, white);
+  --color-primary-dark: color-mix(in srgb, var(--palette-primary) 24%, white);
+  --color-accent-pink: color-mix(in srgb, var(--palette-secondary) 68%, white);
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) body {
+  background: radial-gradient(circle at 92% -8%, var(--palette-glow), transparent 31rem), radial-gradient(circle at -8% 38%, color-mix(in srgb, var(--palette-secondary) 13%, transparent), transparent 28rem), var(--color-bg);
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(.cabecalho, .barra-lateral) {
+  border-color: var(--palette-border);
+  background: color-mix(in srgb, var(--palette-primary) 5%, var(--color-surface));
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(.cartao-dashboard, .cartao-atalho, .dashboard-card-kpi, .cartao-kpi, .configuracoes-cartao, .configuracao-item, .item-acessibilidade, .perfil-secao, .perfil-secao-protecao, .perfil-card-lateral, .permissoes-cartao, .privacidade-resumo, .privacidade-secao, .privacidade-acao-card, .privacidade-login, .seguranca-senha-card, .seguranca-dispositivos-card, .seguranca-dispositivo, .card-conversa, .operacao-kpis article, .operacao-toolbar, .operacao-layout, .painel-notificacoes, .modal__content, .compositor) {
+  border-color: var(--palette-border);
+  background: linear-gradient(145deg, var(--color-surface), var(--palette-soft));
+  box-shadow: 0 .7rem 1.9rem color-mix(in srgb, var(--palette-primary) 9%, transparent);
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(.privacidade-hero, .operacao-hero, .secao-hero, .hero-dashboard) {
+  border-color: var(--palette-border);
+  background: linear-gradient(125deg, var(--palette-soft-strong), color-mix(in srgb, var(--palette-secondary) 8%, var(--color-surface)));
+}
+
+/* Paletas acessíveis globais.
+   Esta camada fica por último para substituir cores roxas legadas em todas as
+   páginas sem interferir no modo de alto contraste. */
+html[data-paleta-cores="protanopia"] {
+  --palette-primary: #1769c2;
+  --palette-secondary: #e7b416;
+  --palette-deep: #0b407d;
+}
+html[data-paleta-cores="deuteranopia"] {
+  --palette-primary: #2457c5;
+  --palette-secondary: #e57816;
+  --palette-deep: #14377f;
+}
+html[data-paleta-cores="tritanopia"] {
+  --palette-primary: #b51d68;
+  --palette-secondary: #008d91;
+  --palette-deep: #771043;
+}
+html[data-paleta-cores="monocromatica"] {
+  --palette-primary: #595959;
+  --palette-secondary: #858585;
+  --palette-deep: #202020;
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) {
+  --color-primary: var(--palette-primary);
+  --color-primary-dark: var(--palette-deep);
+  --vivo-purple: var(--palette-primary);
+  --vivo-purple-deep: var(--palette-deep);
+  --home-purple-1: var(--palette-primary);
+  --home-purple-2: color-mix(in srgb, var(--palette-primary) 76%, var(--palette-secondary));
+  --color-accent-pink: var(--palette-secondary);
+  --adapt-magenta: var(--palette-secondary);
+  --inclusive-cyan: var(--palette-secondary);
+  --gradient-primary: linear-gradient(115deg, var(--palette-deep), var(--palette-primary) 56%, var(--palette-secondary));
+  --home-gradient-title: linear-gradient(90deg, var(--palette-deep), var(--palette-primary) 58%, var(--palette-secondary));
+  --home-gradient-panel: linear-gradient(135deg, var(--palette-deep), var(--palette-primary) 58%, var(--palette-secondary));
+  --palette-border: color-mix(in srgb, var(--palette-primary) 23%, var(--color-border));
+  --palette-soft: color-mix(in srgb, var(--palette-primary) 7%, var(--color-surface));
+  --palette-soft-strong: color-mix(in srgb, var(--palette-primary) 13%, var(--color-surface));
+  --palette-glow: color-mix(in srgb, var(--palette-primary) 22%, transparent);
+}
+
+html[data-theme="escuro"][data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) {
+  --color-primary: color-mix(in srgb, var(--palette-primary) 58%, white);
+  --color-primary-dark: color-mix(in srgb, var(--palette-primary) 24%, white);
+  --color-accent-pink: color-mix(in srgb, var(--palette-secondary) 68%, white);
+  --color-border: color-mix(in srgb, var(--palette-primary) 25%, #302b36);
+  --home-gradient-title: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary) 58%, var(--color-accent-pink));
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) body {
+  background:
+    radial-gradient(circle at 92% -8%, var(--palette-glow), transparent 31rem),
+    radial-gradient(circle at -8% 38%, color-mix(in srgb, var(--palette-secondary) 13%, transparent), transparent 28rem),
+    var(--color-bg);
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) .cabecalho,
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) .barra-lateral {
+  border-color: var(--palette-border);
+  background: color-mix(in srgb, var(--palette-primary) 5%, var(--color-surface));
+  box-shadow: 0 .35rem 1.4rem color-mix(in srgb, var(--palette-primary) 10%, transparent);
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(
+  .cartao-dashboard, .cartao-atalho, .dashboard-card-kpi, .cartao-kpi,
+  .configuracoes-cartao, .configuracao-item, .item-acessibilidade,
+  .perfil-secao, .perfil-secao-protecao, .perfil-card-lateral,
+  .permissoes-cartao, .privacidade-resumo, .privacidade-secao,
+  .privacidade-acao-card, .privacidade-login, .seguranca-senha-card,
+  .seguranca-dispositivos-card, .seguranca-dispositivo, .card-conversa,
+  .operacao-kpis article, .operacao-toolbar, .operacao-layout,
+  .painel-notificacoes, .modal__content, .compositor
+) {
+  border-color: var(--palette-border);
+  background: linear-gradient(145deg, var(--color-surface), var(--palette-soft));
+  box-shadow: 0 .7rem 1.9rem color-mix(in srgb, var(--palette-primary) 9%, transparent);
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(
+  .cartao-dashboard, .cartao-atalho, .configuracao-item, .item-acessibilidade,
+  .perfil-card-lateral, .card-conversa, .privacidade-acao-card
+):hover {
+  border-color: color-mix(in srgb, var(--palette-primary) 48%, var(--color-border));
+  background: var(--palette-soft-strong);
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(
+  .link-lateral.esta-ativo, .link-lateral:hover, .menu-usuario-item:hover,
+  .item-menu-usuario:hover, .operacao-item.esta-selecionado
+) {
+  color: var(--color-primary);
+  background: var(--palette-soft-strong);
+  box-shadow: inset .2rem 0 var(--color-primary);
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(
+  .icone-cartao-dashboard, .item-acessibilidade-icone, .configuracao-item-icone,
+  .privacidade-acao-icone, .seguranca-bloco-titulo > span,
+  .seguranca-dispositivo-icone, .kpi-operacao-icone, .operacao-detalhe-inicial > span
+) {
+  color: var(--color-primary);
+  background: var(--palette-soft-strong);
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(
+  input, textarea, select, .controle-paleta, .slider-wrapper,
+  .operacao-busca, .operacao-contexto span, .mensagem-operacao
+) {
+  border-color: var(--palette-border);
+  background-color: color-mix(in srgb, var(--palette-primary) 3%, var(--color-surface));
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(
+  .privacidade-hero, .operacao-hero, .secao-hero, .hero-dashboard
+) {
+  border-color: var(--palette-border);
+  background: linear-gradient(125deg, var(--palette-soft-strong), color-mix(in srgb, var(--palette-secondary) 8%, var(--color-surface)));
+}
+
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(
+  .privacidade-hero-icone, .operacao-avatar, .avatar-perfil, .botao-principal,
+  .mensagem-operacao.remetente-cliente
+) {
+  background: var(--gradient-primary);
+}
+
+html[data-paleta-cores="monocromatica"]:not([data-alto-contraste="true"]) :is(
+  img, video, canvas, .mascote, .mascot-saudacao, .ajuda-lateral img
+) {
+  filter: grayscale(1);
+}
+
 /* Acessibilidade global: controles, paletas e preferências aplicadas em todas as telas. */
 .controle-paleta {
   display: grid;
@@ -13655,4 +13822,37 @@ html[data-theme="escuro"] .cartao-dashboard:hover,
 html[data-theme="escuro"] .card-conversa:hover {
   background: #31283e;
   border-color: rgba(215, 176, 255, .38);
+}
+
+/* A escolha de cor prevalece também sobre as superfícies do tema escuro. */
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) {
+  --color-primary: var(--palette-primary);
+  --color-primary-dark: var(--palette-deep);
+  --vivo-purple: var(--palette-primary);
+  --vivo-purple-deep: var(--palette-deep);
+  --color-accent-pink: var(--palette-secondary);
+  --adapt-magenta: var(--palette-secondary);
+  --inclusive-cyan: var(--palette-secondary);
+  --gradient-primary: linear-gradient(115deg, var(--palette-deep), var(--palette-primary) 56%, var(--palette-secondary));
+}
+html[data-theme="escuro"][data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) {
+  --color-primary: color-mix(in srgb, var(--palette-primary) 58%, white);
+  --color-primary-dark: color-mix(in srgb, var(--palette-primary) 24%, white);
+  --color-accent-pink: color-mix(in srgb, var(--palette-secondary) 68%, white);
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) body {
+  background: radial-gradient(circle at 92% -8%, var(--palette-glow), transparent 31rem), radial-gradient(circle at -8% 38%, color-mix(in srgb, var(--palette-secondary) 13%, transparent), transparent 28rem), var(--color-bg);
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(.cabecalho, .barra-lateral) {
+  border-color: var(--palette-border);
+  background: color-mix(in srgb, var(--palette-primary) 5%, var(--color-surface));
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(.cartao-dashboard, .cartao-atalho, .dashboard-card-kpi, .cartao-kpi, .configuracoes-cartao, .configuracao-item, .item-acessibilidade, .perfil-secao, .perfil-secao-protecao, .perfil-card-lateral, .permissoes-cartao, .privacidade-resumo, .privacidade-secao, .privacidade-acao-card, .privacidade-login, .seguranca-senha-card, .seguranca-dispositivos-card, .seguranca-dispositivo, .card-conversa, .operacao-kpis article, .operacao-toolbar, .operacao-layout, .painel-notificacoes, .modal__content, .compositor) {
+  border-color: var(--palette-border);
+  background: linear-gradient(145deg, var(--color-surface), var(--palette-soft));
+  box-shadow: 0 .7rem 1.9rem color-mix(in srgb, var(--palette-primary) 9%, transparent);
+}
+html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contraste="true"]) :is(.privacidade-hero, .operacao-hero, .secao-hero, .hero-dashboard) {
+  border-color: var(--palette-border);
+  background: linear-gradient(125deg, var(--palette-soft-strong), color-mix(in srgb, var(--palette-secondary) 8%, var(--color-surface)));
 }
