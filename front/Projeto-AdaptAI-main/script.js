@@ -1402,11 +1402,23 @@ const homeChatComposerInput = document.getElementById("chatComposerInput");
 const CHAVE_MENSAGEM_PENDENTE = "vivo-adaptai-mensagem-pendente";
 const CHAVE_CLIENTE_API = "vivo-adaptai-cliente-id";
 const CHAVE_MODO_GUIADO = "vivo-adaptai-modo-guiado";
-const API_BASE_URL = (
-  document.querySelector('meta[name="vivo-adaptai-api-url"]')?.getAttribute("content") ||
-  window.VIVO_ADAPTAI_API_URL ||
-  "https://vivo-adapt-ai.onrender.com"
-).replace(/\/$/, "");
+function obterApiBaseUrl() {
+  const candidatos = [
+    document.querySelector('meta[name="vivo-adaptai-api-url"]')?.getAttribute("content"),
+    window.VIVO_ADAPTAI_API_URL,
+    "https://vivo-adapt-ai.onrender.com"
+  ];
+  for (const candidato of candidatos) {
+    if (!candidato || /\s/.test(candidato)) continue;
+    try {
+      const url = new URL(candidato);
+      if (url.protocol === "http:" || url.protocol === "https:") return url.href.replace(/\/$/, "");
+    } catch (_) { /* tenta o próximo endereço configurado */ }
+  }
+  return "https://vivo-adapt-ai.onrender.com";
+}
+
+const API_BASE_URL = obterApiBaseUrl();
 
 // Acorda o servidor hospedado antes da primeira interação. A falha é
 // silenciosa: cada ação ainda mostra uma mensagem amigável se necessário.
