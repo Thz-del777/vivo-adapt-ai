@@ -65,7 +65,7 @@ def chat(
     perfil_resposta = perfil_real if personalizacao_ativa else "intermediario"
     if settings.demo_mode:
         logger.info("Gerando resposta em modo demo")
-        resposta, origem = gerar_resposta_demo(perfil_resposta, payload.mensagem), "demo"
+        resposta, origem = gerar_resposta_demo(perfil_resposta, payload.mensagem, payload.modo_guiado), "demo"
     else:
         try:
             logger.info("Tentando gerar resposta com Groq")
@@ -76,13 +76,22 @@ def chat(
             )
             nome_prompt = cliente["nome"] if personalizacao_ativa else "cliente"
             ild_prompt = ild if personalizacao_ativa else 50
-            prompt = criar_prompt(nome_prompt, ild_prompt, perfil_resposta, payload.mensagem, contexto)
+            prompt = criar_prompt(
+                nome_prompt,
+                ild_prompt,
+                perfil_resposta,
+                payload.mensagem,
+                contexto,
+                modo_guiado=payload.modo_guiado,
+            )
             resposta = GroqService(settings).gerar_resposta(prompt, perfil_resposta)
             origem = "groq"
         except Exception:
             logger.exception("Falha ao gerar resposta com Groq; usando fallback")
             logger.info("Gerando resposta com fallback local")
-            resposta, origem = gerar_resposta_fallback(perfil_resposta, payload.mensagem), "fallback"
+            resposta, origem = gerar_resposta_fallback(
+                perfil_resposta, payload.mensagem, payload.modo_guiado
+            ), "fallback"
 
     # Historico so e associado a uma conta autenticada; visitantes do demo nao
     # podem gravar mensagens no perfil de outro cliente.

@@ -3181,6 +3181,30 @@ body.pagina-cadastro .secao-autenticacao {
   50% { transform: scale(1.08); box-shadow: 0 0 0 .6rem color-mix(in srgb, #d21867 8%, transparent); }
 }
 
+/* Modo guiado: uma ação por vez para pessoas com menor familiaridade digital. */
+.painel-modo-guiado { display: grid; gap: .55rem; margin-bottom: .7rem; }
+.botao-modo-guiado { display: flex; align-items: center; gap: .65rem; width: max-content; max-width: 100%; min-height: 2.8rem; padding: .55rem .8rem; border: 1px solid color-mix(in srgb,var(--color-primary) 24%,var(--color-border)); border-radius: .85rem; color: var(--color-text); background: var(--color-surface); font: inherit; cursor: pointer; transition: .2s; }
+.botao-modo-guiado > i { display: grid; width: 1.9rem; height: 1.9rem; place-items: center; border-radius: .55rem; color: var(--color-primary); background: color-mix(in srgb,var(--color-primary) 10%,var(--color-surface)); }
+.botao-modo-guiado span { font-size: .8rem; font-weight: 800; }
+.botao-modo-guiado small { color: var(--color-text-secondary); font-size: .67rem; }
+.botao-modo-guiado:hover,.botao-modo-guiado.esta-ativo { border-color: var(--color-primary); background: color-mix(in srgb,var(--color-primary) 7%,var(--color-surface)); }
+.botao-modo-guiado.esta-ativo > i { color: #fff; background: var(--color-primary); }
+.faixa-modo-guiado { display: flex; align-items: flex-start; gap: .5rem; padding: .65rem .75rem; border-radius: .75rem; color: var(--color-text-secondary); background: color-mix(in srgb,var(--color-primary) 6%,var(--color-surface)); font-size: .72rem; line-height: 1.4; }
+.faixa-modo-guiado[hidden] { display: none; }
+.faixa-modo-guiado i { margin-top: .1rem; color: var(--color-primary); }
+.acoes-passo-guiado { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; padding-top: .65rem; border-top: 1px solid var(--color-border); }
+.acao-passo-guiado { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.45rem; padding: .45rem .75rem; border: 1px solid var(--color-border); border-radius: .7rem; color: var(--color-text); background: var(--color-surface); font: inherit; font-size: .76rem; font-weight: 800; cursor: pointer; }
+.acao-passo-guiado:hover { border-color: var(--color-primary); color: var(--color-primary); background: color-mix(in srgb,var(--color-primary) 7%,var(--color-surface)); }
+.acao-passo-guiado:disabled { opacity: .55; cursor: not-allowed; }
+.acao-consegui { color: #16753b; border-color: color-mix(in srgb,#1f9d55 35%,var(--color-border)); }
+.acao-nao-consegui { color: #9b5500; border-color: color-mix(in srgb,#d98200 35%,var(--color-border)); }
+
+@media (max-width: 48rem) {
+  .botao-modo-guiado { width: 100%; }
+  .botao-modo-guiado small { margin-left: auto; }
+  .acoes-passo-guiado,.acao-passo-guiado { width: 100%; }
+}
+
 .microfone-compositor i {
   color: inherit;
 }

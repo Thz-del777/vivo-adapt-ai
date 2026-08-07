@@ -1401,6 +1401,7 @@ const homeChatComposerForm = document.getElementById("chatComposerForm");
 const homeChatComposerInput = document.getElementById("chatComposerInput");
 const CHAVE_MENSAGEM_PENDENTE = "vivo-adaptai-mensagem-pendente";
 const CHAVE_CLIENTE_API = "vivo-adaptai-cliente-id";
+const CHAVE_MODO_GUIADO = "vivo-adaptai-modo-guiado";
 const API_BASE_URL = (
   document.querySelector('meta[name="vivo-adaptai-api-url"]')?.getAttribute("content") ||
   window.VIVO_ADAPTAI_API_URL ||
@@ -1604,8 +1605,13 @@ function obterClienteApiId() {
   return Number.isInteger(idSalvo) && idSalvo > 0 ? idSalvo : 1;
 }
 
-async function solicitarRespostaDoMimo(mensagem) {
+function modoGuiadoAtivo() {
+  return sessionStorage.getItem(CHAVE_MODO_GUIADO) === "true";
+}
+
+async function solicitarRespostaDoMimo(mensagem, opcoes = {}) {
   const token = sessionStorage.getItem(CHAVE_TOKEN_ACESSO);
+  const modoGuiado = opcoes.modoGuiado ?? modoGuiadoAtivo();
   const resposta = await fetch(`${API_BASE_URL}/chat`, {
     method: "POST",
     headers: {
@@ -1613,7 +1619,9 @@ async function solicitarRespostaDoMimo(mensagem) {
       ...(token ? { Authorization: `Bearer ${token}` } : {})
     },
     // Com login, o backend encontra o cliente pelo token, sem aceitar um ID escolhido pelo navegador.
-    body: JSON.stringify(token ? { mensagem } : { cliente_id: obterClienteApiId(), mensagem })
+    body: JSON.stringify(token
+      ? { mensagem, modo_guiado: modoGuiado }
+      : { cliente_id: obterClienteApiId(), mensagem, modo_guiado: modoGuiado })
   });
 
   if (!resposta.ok) throw new Error(`API respondeu com status ${resposta.status}`);
@@ -1711,6 +1719,48 @@ const isLibrasPage = !!document.getElementById('librasBody');
 const isSimplificadoPage = !!document.getElementById('simplificadoBody');
 const isVozPage = !!document.getElementById('voiceBody');
 const chatPageEspecifica = isLibrasPage || isSimplificadoPage || isVozPage;
+
+function atualizarInterfaceModoGuiado() {
+  const ativo = modoGuiadoAtivo();
+  const botao = document.getElementById("btnModoGuiado");
+  const faixa = document.getElementById("faixaModoGuiado");
+  if (botao) {
+    botao.classList.toggle("esta-ativo", ativo);
+    botao.setAttribute("aria-pressed", String(ativo));
+    botao.innerHTML = ativo
+      ? '<i class="fa-solid fa-route"></i><span>Passo a passo ativado</span><small>Desativar</small>'
+      : '<i class="fa-solid fa-route"></i><span>Guiar passo a passo</span><small>Uma ação por vez</small>';
+  }
+  if (faixa) faixa.hidden = !ativo;
+}
+
+if (chatBody) {
+  const envelope = chatBody.closest(".estrutura-chat")?.querySelector(".envelope-compositor-chat");
+  if (envelope && !document.getElementById("btnModoGuiado")) {
+    const painel = document.createElement("section");
+    painel.className = "painel-modo-guiado";
+    painel.setAttribute("aria-label", "Modo de orientação");
+    painel.innerHTML = `
+      <button type="button" class="botao-modo-guiado" id="btnModoGuiado" aria-pressed="false"></button>
+      <div class="faixa-modo-guiado" id="faixaModoGuiado" hidden>
+        <i class="fa-solid fa-circle-info"></i>
+        <span>O Mimo mostrará somente uma ação por vez. Use “Consegui” ou “Não consegui” para continuar.</span>
+      </div>
+    `;
+    envelope.insertBefore(painel, envelope.firstChild);
+    painel.querySelector("#btnModoGuiado").addEventListener("click", () => {
+      const novoEstado = !modoGuiadoAtivo();
+      sessionStorage.setItem(CHAVE_MODO_GUIADO, String(novoEstado));
+      atualizarInterfaceModoGuiado();
+      mostrarToast({
+        tipo: "sucesso",
+        titulo: novoEstado ? "Passo a passo ativado" : "Passo a passo desativado",
+        mensagem: novoEstado ? "Agora o Mimo explicará uma ação de cada vez." : "O Mimo voltou ao atendimento normal."
+      });
+    });
+    atualizarInterfaceModoGuiado();
+  }
+}
 
 if (btnEncerrarAtendimento && !chatPageEspecifica) {
   btnEncerrarAtendimento.addEventListener("click", () => {
@@ -1815,6 +1865,23 @@ function adicionarMensagemRobo(texto) {
     <span class="horario-mensagem">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
   `;
   mensagem.querySelector("p").textContent = texto;
+  if (modoGuiadoAtivo()) {
+    const acoes = document.createElement("div");
+    acoes.className = "acoes-passo-guiado";
+    acoes.innerHTML = `
+      <button type="button" class="acao-passo-guiado acao-consegui"><i class="fa-solid fa-check"></i> Consegui</button>
+      <button type="button" class="acao-passo-guiado acao-nao-consegui"><i class="fa-solid fa-life-ring"></i> Não consegui</button>
+    `;
+    acoes.querySelector(".acao-consegui").addEventListener("click", () => {
+      acoes.querySelectorAll("button").forEach((botao) => { botao.disabled = true; });
+      enviarMensagemChat("Consegui concluir esta etapa. Qual é a próxima ação?");
+    });
+    acoes.querySelector(".acao-nao-consegui").addEventListener("click", () => {
+      acoes.querySelectorAll("button").forEach((botao) => { botao.disabled = true; });
+      enviarMensagemChat("Não consegui concluir esta etapa. Explique de outra forma, com uma ação ainda mais simples.");
+    });
+    mensagem.querySelector(".balao-robo").appendChild(acoes);
+  }
   chatBody.appendChild(mensagem);
   chatBody.scrollTop = chatBody.scrollHeight;
 }

@@ -15,6 +15,10 @@ class ChatRequest(BaseModel):
         description="Usado apenas no modo DEMO sem uma sessao autenticada.",
     )
     mensagem: str = Field(min_length=1, max_length=2_000, examples=["Quero tirar a segunda via da minha fatura"])
+    modo_guiado: bool = Field(
+        default=False,
+        description="Quando ativo, o Mimo orienta uma única ação por vez.",
+    )
 
 
 class ChatResponse(BaseModel):

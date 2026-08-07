@@ -19,6 +19,7 @@ from app.models.schemas import AvaliacaoInicial, AuthSessionResponse, AuthUserRe
 from app.repositories.cliente_repository import ClienteRepository
 from app.repositories.supabase_cliente_repository import SupabaseClienteRepository
 from app.services.prompt_service import criar_prompt
+from app.services.fallback_service import gerar_resposta_fallback
 from app.services.onboarding_service import definir_ild_inicial
 from app.services.auth_service import AuthService
 from app.services.password_security_service import PasswordSecurityService, SenhaInseguraError
@@ -467,6 +468,24 @@ def test_prompt_usa_historico_e_evitar_repeticao():
     assert "Mimo: Vamos configurar o roteador passo a passo." in prompt
     assert "nao repita perguntas ja respondidas" in prompt
     assert "Nao informe enderecos IP" in prompt
+
+
+def test_modo_guiado_limita_resposta_a_uma_acao():
+    prompt = criar_prompt(
+        "Arthur",
+        25,
+        "iniciante",
+        "Quero a segunda via da fatura",
+        modo_guiado=True,
+    )
+    resposta_fallback = gerar_resposta_fallback(
+        "iniciante", "Quero a segunda via da fatura", modo_guiado=True
+    )
+
+    assert "MODO GUIADO ATIVO" in prompt
+    assert "exatamente uma acao pratica" in prompt
+    assert "Você conseguiu" in resposta_fallback
+    assert "Primeiro" in resposta_fallback
 
 
 def test_avaliacao_inicial_define_tres_perfis():

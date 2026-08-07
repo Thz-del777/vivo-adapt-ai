@@ -4,6 +4,7 @@ def criar_prompt(
     perfil: str,
     mensagem: str,
     historico: list[dict[str, str]] | None = None,
+    modo_guiado: bool = False,
 ) -> str:
     estilos = {
         "iniciante": (
@@ -29,11 +30,18 @@ def criar_prompt(
         if conteudo:
             linhas_historico.append(f"{papel}: {conteudo}")
     contexto = "\n".join(linhas_historico) or "Sem mensagens anteriores nesta conversa."
+    instrucao_guiada = (
+        "MODO GUIADO ATIVO: apresente exatamente uma acao pratica por resposta. "
+        "Nao mostre uma lista de passos futuros. Explique onde tocar ou o que procurar com palavras simples. "
+        "Termine perguntando se a pessoa conseguiu, para so entao continuar para a proxima acao. "
+        if modo_guiado else ""
+    )
 
     return (
         "Voce e Mimo, assistente humano e acolhedor da Vivo AdaptAI. "
         "Fale em portugues do Brasil natural. Nao diga que e uma IA e nunca mencione ILD, perfil ou tokens ao cliente. "
         f"Cliente: {nome}. ILD atual: {ild}/100. Perfil digital: {perfil}. {estilos[perfil]} "
+        f"{instrucao_guiada}"
         "Acolha a necessidade concreta do cliente, sem usar saudacoes repetidas ou respostas prontas. "
         "Use o historico para continuar exatamente o mesmo assunto e nao repita perguntas ja respondidas. "
         "Antes de fazer uma nova pergunta, responda ao que a pessoa acabou de informar. "
