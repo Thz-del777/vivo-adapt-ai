@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atendimento em Libras - Vivo AdaptAI</title>
-<link rel="stylesheet" href="style.css?v=55">
+<link rel="stylesheet" href="style.css?v=56">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 <body class="tema-destaque" data-page="libras">
@@ -59,9 +59,21 @@
               <div class="video-interprete" id="videoInterprete">
                 <div class="painel-traducao-libras">
                   <i class="fa-solid fa-hands-asl-interpreting" aria-hidden="true"></i>
-                  <h1>Tradução visual em Libras</h1>
-                  <p>Abra o tradutor e clique em uma resposta do Mimo para vê-la em Libras. As mensagens também ficam sempre disponíveis em texto.</p>
-                  <button type="button" class="botao botao-primario" id="btnAbrirTradutorLibras"><i class="fa-solid fa-play"></i> Abrir tradutor em Libras</button>
+                  <div class="selos-libras" aria-label="Recursos deste atendimento">
+                    <span><i class="fa-solid fa-eye"></i> Atendimento visual</span>
+                    <span><i class="fa-solid fa-closed-captioning"></i> Texto sempre visível</span>
+                  </div>
+                  <h1>Atendimento com tradução em Libras</h1>
+                  <p>Converse por texto com o Mimo e traduza cada resposta quando desejar.</p>
+                  <ol class="passos-libras" aria-label="Como usar o atendimento em Libras">
+                    <li><span>1</span> Envie sua dúvida</li>
+                    <li><span>2</span> Receba a resposta em texto</li>
+                    <li><span>3</span> Toque em “Traduzir em Libras”</li>
+                  </ol>
+                  <div class="acoes-painel-libras">
+                    <button type="button" class="botao botao-primario" id="btnAbrirTradutorLibras"><i class="fa-solid fa-hands"></i> Abrir tradutor</button>
+                    <button type="button" class="botao botao-secundario" id="btnComoUsarLibras"><i class="fa-regular fa-circle-question"></i> Como funciona</button>
+                  </div>
                 </div>
                 <div class="overlay-status">
                   <span class="status-texto" id="statusTraducaoLibras" aria-live="polite">Preparando atendimento visual...</span>
@@ -90,7 +102,13 @@
               </div>
               <p class="texto-legenda" id="legendaTexto" aria-live="polite">Olá! Como posso ajudar você hoje?</p>
             </div>
-            <section class="transcricao-libras" id="librasTranscricao" aria-label="Histórico visual do atendimento"></section>
+            <section class="secao-transcricao-libras" aria-labelledby="tituloTranscricaoLibras">
+              <div class="cabecalho-transcricao-libras">
+                <div><span>Conversa em texto</span><h2 id="tituloTranscricaoLibras">Histórico do atendimento</h2></div>
+                <span class="estado-tradutor-libras" id="estadoTradutorLibras"><i></i> Verificando tradutor</span>
+              </div>
+              <div class="transcricao-libras" id="librasTranscricao" aria-label="Histórico visual do atendimento" aria-live="polite"></div>
+            </section>
 
           </div>
 
@@ -147,7 +165,7 @@
   <script>
     if (window.VLibras) new window.VLibras.Widget('https://vlibras.gov.br/app');
   </script>
-<script src="script.js?v=36"></script>
+<script src="script.js?v=37"></script>
 </body>
 </html>
 

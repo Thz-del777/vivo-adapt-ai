@@ -11671,6 +11671,47 @@ html[data-paleta-cores]:not([data-paleta-cores="padrao"]):not([data-alto-contras
   background: linear-gradient(125deg, var(--palette-soft-strong), color-mix(in srgb, var(--palette-secondary) 8%, var(--color-surface)));
 }
 
+/* Atendimento em Libras: experiência visual guiada e tradução por mensagem. */
+.selos-libras { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.selos-libras span { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .7rem; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; color: #fff; background: rgba(255,255,255,.1); font-size: .72rem; font-weight: 750; }
+.passos-libras { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .65rem; width: min(42rem,100%); margin: .2rem 0; padding: 0; list-style: none; }
+.passos-libras li { display: flex; align-items: center; gap: .55rem; min-width: 0; padding: .7rem; border: 1px solid rgba(255,255,255,.17); border-radius: .85rem; color: #f7f0ff; background: rgba(255,255,255,.07); font-size: .78rem; text-align: left; }
+.passos-libras li > span { display: grid; flex: 0 0 1.7rem; width: 1.7rem; height: 1.7rem; place-items: center; border-radius: 50%; color: #29103e; background: #fff; font-weight: 850; }
+.acoes-painel-libras { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; }
+.painel-traducao-libras .botao-secundario { border-color: rgba(255,255,255,.35); color: #fff; background: rgba(255,255,255,.09); }
+.secao-transcricao-libras { min-width: 0; padding: 1rem; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+.cabecalho-transcricao-libras { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .8rem; }
+.cabecalho-transcricao-libras span:first-child { color: var(--color-primary); font-size: .68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.cabecalho-transcricao-libras h2 { margin: .12rem 0 0; color: var(--color-text); font-size: 1rem; }
+.estado-tradutor-libras { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .65rem; border-radius: 999px; color: var(--color-text-secondary); background: var(--color-surface-muted); font-size: .68rem; font-weight: 700; white-space: nowrap; }
+.estado-tradutor-libras i { width: .48rem; height: .48rem; border-radius: 50%; background: #d28b00; }
+.estado-tradutor-libras[data-estado="pronto"] i { background: #20a562; }
+.estado-tradutor-libras[data-estado="ativo"] i { background: var(--color-primary); animation: pulsar-realtime 1.2s ease-in-out infinite; }
+.estado-tradutor-libras[data-estado="indisponivel"] i { background: #cf334b; }
+.secao-transcricao-libras .transcricao-libras { max-height: 17rem; padding: 0; border: 0; border-radius: 0; }
+.mensagem-libras { transition: border-color .2s, box-shadow .2s, background .2s; }
+.mensagem-libras p.aguardando-traducao { border-radius: .45rem; outline: .18rem solid color-mix(in srgb,var(--color-primary) 35%,transparent); background: color-mix(in srgb,var(--color-primary) 12%,transparent); }
+.acoes-mensagem-libras { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .65rem; padding-top: .55rem; border-top: 1px solid var(--color-border); }
+.acao-mensagem-libras { display: inline-flex; align-items: center; gap: .35rem; min-height: 2rem; padding: .35rem .6rem; border: 0; border-radius: .55rem; color: var(--color-text-secondary); background: transparent; font: inherit; font-size: .7rem; font-weight: 750; cursor: pointer; }
+.acao-mensagem-libras:hover,.acao-mensagem-libras:focus-visible { color: var(--color-primary); background: color-mix(in srgb,var(--color-primary) 9%,var(--color-surface)); outline: none; }
+.acao-traduzir-libras { color: var(--color-primary); background: color-mix(in srgb,var(--color-primary) 8%,var(--color-surface)); }
+
+@media (max-width: 48rem) {
+  body[data-page="libras"] .video-interprete { min-height: 32rem; }
+  .painel-traducao-libras { justify-content: stretch; align-content: center; gap: .7rem; overflow-y: auto; }
+  .painel-traducao-libras > i { font-size: 2.8rem; }
+  .passos-libras { grid-template-columns: 1fr; gap: .4rem; }
+  .passos-libras li { padding: .52rem .65rem; }
+  .acoes-painel-libras,.acoes-painel-libras .botao { width: 100%; }
+  .cabecalho-transcricao-libras { align-items: flex-start; flex-direction: column; }
+  .estado-tradutor-libras { white-space: normal; }
+  .secao-transcricao-libras { padding: .8rem; }
+  .secao-transcricao-libras .transcricao-libras { max-height: 21rem; }
+  .mensagem-libras { max-width: 100%; }
+  .acoes-mensagem-libras,.acao-mensagem-libras { width: 100%; }
+  .acao-mensagem-libras { justify-content: center; min-height: 2.55rem; }
+}
+
 /* Paletas acessíveis globais.
    Esta camada fica por último para substituir cores roxas legadas em todas as
    páginas sem interferir no modo de alto contraste. */

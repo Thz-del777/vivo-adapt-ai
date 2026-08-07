@@ -3843,7 +3843,8 @@ function inicializarRecursosAcessiveis() {
     persistirPreferenciasLocais(preferencias);
     aplicarTema(preferencias.tema || temaAtual());
     aplicarAcessibilidade(preferencias);
-    preferencias.libras ? ativarTradutorLibras() : desativarTradutorLibras();
+    const paginaExigeLibras = document.body.dataset.page === 'libras';
+    (preferencias.libras || paginaExigeLibras) ? ativarTradutorLibras() : desativarTradutorLibras();
     renderizarRecursosAcessiveis(preferencias);
   });
 }
@@ -4136,7 +4137,50 @@ function inicializarLibras() {
   const formulario = document.getElementById('chatComposerForm');
   const entrada = document.getElementById('chatComposerInput');
   const encerrar = document.getElementById('btnEncerrarAtendimento');
+  const btnComoUsar = document.getElementById('btnComoUsarLibras');
+  const estadoTradutor = document.getElementById('estadoTradutorLibras');
+  const painelTraducao = document.querySelector('.painel-traducao-libras');
   let legendaVisivel = true;
+
+  function atualizarEstadoTradutor(estado, texto) {
+    if (!estadoTradutor) return;
+    estadoTradutor.dataset.estado = estado;
+    estadoTradutor.lastChild.textContent = ` ${texto}`;
+  }
+
+  function verificarTradutor() {
+    let tentativas = 0;
+    const temporizador = window.setInterval(() => {
+      const pronto = Boolean(document.querySelector('[vw-access-button]'));
+      tentativas += 1;
+      if (pronto) {
+        window.clearInterval(temporizador);
+        atualizarEstadoTradutor('pronto', 'Tradutor disponível');
+      } else if (tentativas >= 40) {
+        window.clearInterval(temporizador);
+        atualizarEstadoTradutor('indisponivel', 'Tradutor indisponível');
+      }
+    }, 300);
+  }
+
+  function selecionarTexto(elemento) {
+    if (!elemento || !window.getSelection) return;
+    const selecao = window.getSelection();
+    const intervalo = document.createRange();
+    intervalo.selectNodeContents(elemento);
+    selecao.removeAllRanges();
+    selecao.addRange(intervalo);
+    elemento.classList.add('aguardando-traducao');
+    elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.setTimeout(() => elemento.classList.remove('aguardando-traducao'), 3500);
+  }
+
+  function traduzirMensagem(elementoTexto) {
+    selecionarTexto(elementoTexto);
+    abrirPainelTradutorLibras();
+    if (status) status.textContent = 'Resposta selecionada. Use o avatar do VLibras para acompanhar a tradução.';
+    atualizarEstadoTradutor('ativo', 'Tradução solicitada');
+  }
 
   function mostrarMensagem(remetente, texto) {
     const prefixo = remetente === 'mimo' ? 'Mimo' : 'Você';
@@ -4149,6 +4193,30 @@ function inicializarLibras() {
       const conteudo = document.createElement('p');
       conteudo.textContent = texto;
       item.append(titulo, conteudo);
+      if (remetente === 'mimo') {
+        const acoes = document.createElement('div');
+        acoes.className = 'acoes-mensagem-libras';
+        const traduzir = document.createElement('button');
+        traduzir.type = 'button';
+        traduzir.className = 'acao-mensagem-libras acao-traduzir-libras';
+        traduzir.innerHTML = '<i class="fa-solid fa-hands" aria-hidden="true"></i> Traduzir em Libras';
+        traduzir.addEventListener('click', () => traduzirMensagem(conteudo));
+        const copiar = document.createElement('button');
+        copiar.type = 'button';
+        copiar.className = 'acao-mensagem-libras';
+        copiar.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i> Copiar texto';
+        copiar.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(texto);
+            copiar.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> Copiado';
+            window.setTimeout(() => { copiar.innerHTML = '<i class="fa-regular fa-copy" aria-hidden="true"></i> Copiar texto'; }, 1800);
+          } catch (_) {
+            mostrarToast({ tipo: 'aviso', mensagem: 'Não foi possível copiar automaticamente.' });
+          }
+        });
+        acoes.append(traduzir, copiar);
+        item.appendChild(acoes);
+      }
       transcricao.appendChild(item);
       transcricao.scrollTop = transcricao.scrollHeight;
     }
@@ -4161,22 +4229,29 @@ function inicializarLibras() {
     mostrarMensagem('usuario', mensagem);
     entrada.value = '';
     entrada.disabled = true;
+    formulario?.setAttribute('aria-busy', 'true');
     if (status) status.textContent = 'Mimo está preparando uma resposta em texto e Libras.';
     try {
       const resposta = await solicitarRespostaDoMimo(mensagem);
       mostrarMensagem('mimo', resposta.resposta || 'Não consegui preparar uma resposta agora.');
-      abrirPainelTradutorLibras();
+      if (status) status.textContent = 'Resposta pronta. Escolha “Traduzir em Libras” para abrir o intérprete.';
     } catch (_) {
       mostrarMensagem('mimo', 'Não foi possível conectar agora. Você pode tentar novamente ou escolher uma das opções de ajuda.');
       if (status) status.textContent = 'Não foi possível traduzir esta resposta no momento.';
     } finally {
       entrada.disabled = false;
+      formulario?.removeAttribute('aria-busy');
       entrada.focus();
     }
   }
 
   btnTradutor?.addEventListener('click', abrirPainelTradutorLibras);
   btnRepetir?.addEventListener('click', abrirPainelTradutorLibras);
+  btnComoUsar?.addEventListener('click', () => {
+    painelTraducao?.classList.toggle('mostrar-passos');
+    document.querySelector('.passos-libras')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (status) status.textContent = 'Envie sua dúvida, aguarde a resposta e escolha “Traduzir em Libras”.';
+  });
   btnLegenda?.addEventListener('click', () => {
     legendaVisivel = !legendaVisivel;
     legenda.parentElement.hidden = !legendaVisivel;
@@ -4189,6 +4264,7 @@ function inicializarLibras() {
 
   mostrarMensagem('mimo', 'Olá! Escreva sua dúvida ou escolha uma opção. Cada resposta ficará visível em texto e poderá ser traduzida para Libras.');
   if (status) status.textContent = 'Atendimento visual pronto. Você controla quando abrir o tradutor em Libras.';
+  verificarTradutor();
 }
 
 // Página de Texto Simplificado (texto-simplificado.html)
