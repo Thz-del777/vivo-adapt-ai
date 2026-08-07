@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acessibilidade - Vivo AdaptAI</title>
-<link rel="stylesheet" href="style.css?v=53">
+<link rel="stylesheet" href="style.css?v=54">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
@@ -52,8 +52,8 @@
               </div>
               <div class="item-acessibilidade-controle">
                 <div class="slider-wrapper">
-                  <input type="range" min="1" max="3" value="2" class="slider-acessibilidade" id="rangeTexto">
-                  <span class="slider-label">Normal</span>
+                  <input type="range" min="1" max="3" value="2" step="1" class="slider-acessibilidade" id="rangeTexto" aria-label="Tamanho do texto" aria-describedby="labelTamanhoTexto">
+                  <span class="slider-label" id="labelTamanhoTexto" aria-live="polite">Normal</span>
                 </div>
               </div>
             </div>
@@ -67,7 +67,7 @@
                 <p class="item-acessibilidade-descricao">Aumenta o contraste entre cores para facilitar a leitura.</p>
               </div>
               <div class="item-acessibilidade-controle">
-                <label class="toggle-acessibilidade">
+                <label class="toggle-acessibilidade" aria-label="Ativar alto contraste">
                   <input type="checkbox" id="checkContraste">
                   <span class="toggle-slider"></span>
                 </label>
@@ -82,6 +82,19 @@
                 <h3 class="item-acessibilidade-titulo">Cores</h3>
                 <p class="item-acessibilidade-descricao">Escolha uma paleta de cores que fique melhor para você.</p>
               </div>
+              <div class="item-acessibilidade-controle controle-paleta">
+                <label for="selectPaletaCores" class="rotulo-paleta">Paleta da interface</label>
+                <div class="seletor-paleta-wrapper">
+                  <span class="amostra-paleta" id="amostraPaleta" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <select id="selectPaletaCores" class="select-paleta" aria-label="Paleta de cores da interface">
+                    <option value="padrao">Padrão Vivo</option>
+                    <option value="protanopia">Azul e amarelo</option>
+                    <option value="deuteranopia">Azul e laranja</option>
+                    <option value="tritanopia">Rosa e turquesa</option>
+                    <option value="monocromatica">Escala de cinza</option>
+                  </select>
+                </div>
+              </div>
             </div>
 
             <div class="item-acessibilidade">
@@ -93,7 +106,7 @@
                 <p class="item-acessibilidade-descricao">Aumenta o espaçamento entre textos, botões e elementos.</p>
               </div>
               <div class="item-acessibilidade-controle">
-                <label class="toggle-acessibilidade">
+                <label class="toggle-acessibilidade" aria-label="Ativar espaçamento ampliado">
                   <input type="checkbox" id="checkEspacamento">
                   <span class="toggle-slider"></span>
                 </label>
@@ -114,7 +127,7 @@
                 <p class="item-acessibilidade-descricao">Ouça as respostas do Mimo em voz alta.</p>
               </div>
               <div class="item-acessibilidade-controle">
-                <label class="toggle-acessibilidade">
+                <label class="toggle-acessibilidade" aria-label="Ativar respostas com áudio">
                   <input type="checkbox" checked id="checkAudio">
                   <span class="toggle-slider"></span>
                 </label>
@@ -151,13 +164,18 @@
                 <p class="item-acessibilidade-descricao">Navegue e interaja usando comandos de voz.</p>
               </div>
               <div class="item-acessibilidade-controle">
-                <label class="toggle-acessibilidade">
+                <label class="toggle-acessibilidade" aria-label="Ativar comandos por voz">
                   <input type="checkbox" id="checkComandosVoz">
                   <span class="toggle-slider"></span>
                 </label>
               </div>
             </div>
           </div>
+
+          <p class="status-acessibilidade" id="statusAcessibilidade" role="status" aria-live="polite">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            Suas escolhas são aplicadas em toda a plataforma.
+          </p>
 
           <!-- Card "Precisa de ajuda?" -->
           <div class="card-ajuda-acessibilidade">
@@ -183,7 +201,7 @@
 
 <script src="components.js?v=12"></script>
   <script src="api-config.js?v=1"></script>
-<script src="script.js?v=35"></script>
+<script src="script.js?v=36"></script>
 </body>
 </html>
 

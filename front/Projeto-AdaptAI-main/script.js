@@ -26,6 +26,7 @@ function inicializarAplicacao() {
   }
 
   inicializarTema();          // deve rodar antes dos componentes para evitar flash
+  aplicarAcessibilidade(lerPreferenciasLocais());
   inicializarComponentesDinamicos();
   inicializarNotificacoes();
   inicializarPrivacidade();
@@ -3430,6 +3431,13 @@ const CHAVES_PREFERENCIAS_LOCAIS = {
   confirmar_encerramento: 'vivo-adaptai-confirmar-encerramento',
   notificacoes_resumo: 'vivo-adaptai-notif-resumo',
   notificacoes_novidades: 'vivo-adaptai-notif-novidades',
+  tamanho_texto: 'vivo-adaptai-acessibilidade-tamanho-texto',
+  alto_contraste: 'vivo-adaptai-acessibilidade-alto-contraste',
+  paleta_cores: 'vivo-adaptai-acessibilidade-paleta-cores',
+  espacamento_ampliado: 'vivo-adaptai-acessibilidade-espacamento',
+  leitura_voz_alta: 'vivo-adaptai-acessibilidade-audio',
+  libras: 'vivo-adaptai-acessibilidade-libras',
+  comandos_voz: 'vivo-adaptai-acessibilidade-comandos-voz',
   personalizacao_atendimento: 'vivo-adaptai-permissao-personalizacao_atendimento',
   salvar_historico: 'vivo-adaptai-permissao-salvar_historico',
   usar_microfone: 'vivo-adaptai-permissao-usar_microfone',
@@ -3445,6 +3453,13 @@ const PADROES_PREFERENCIAS_GERAIS = {
   confirmar_encerramento: true,
   notificacoes_resumo: true,
   notificacoes_novidades: false,
+  tamanho_texto: 2,
+  alto_contraste: false,
+  paleta_cores: 'padrao',
+  espacamento_ampliado: false,
+  leitura_voz_alta: true,
+  libras: false,
+  comandos_voz: false,
   personalizacao_atendimento: true,
   salvar_historico: true,
   usar_microfone: false,
@@ -3464,7 +3479,9 @@ function lerPreferenciasLocais() {
   Object.entries(CHAVES_PREFERENCIAS_LOCAIS).forEach(([chave, chaveLocal]) => {
     const valor = localStorage.getItem(chaveLocal);
     if (valor === null) return;
-    preferencias[chave] = typeof PADROES_PREFERENCIAS_GERAIS[chave] === 'boolean' ? valor === 'true' : valor;
+    if (typeof PADROES_PREFERENCIAS_GERAIS[chave] === 'boolean') preferencias[chave] = valor === 'true';
+    else if (typeof PADROES_PREFERENCIAS_GERAIS[chave] === 'number') preferencias[chave] = Number(valor);
+    else preferencias[chave] = valor;
   });
   return preferencias;
 }
@@ -3605,43 +3622,98 @@ function inicializarConfiguracoes() {
 
 function aplicarAcessibilidade(preferencias) {
   const raiz = document.documentElement;
-  if (preferencias.tamanho_texto !== undefined) raiz.dataset.tamanhoTexto = String(preferencias.tamanho_texto);
+  if (preferencias.tamanho_texto !== undefined) {
+    const tamanho = Math.min(3, Math.max(1, Number(preferencias.tamanho_texto) || 2));
+    raiz.dataset.tamanhoTexto = String(tamanho);
+  }
   if (preferencias.alto_contraste !== undefined) raiz.dataset.altoContraste = String(Boolean(preferencias.alto_contraste));
+  if (preferencias.paleta_cores !== undefined) {
+    const paletas = ['padrao', 'protanopia', 'deuteranopia', 'tritanopia', 'monocromatica'];
+    raiz.dataset.paletaCores = paletas.includes(preferencias.paleta_cores) ? preferencias.paleta_cores : 'padrao';
+  }
   if (preferencias.espacamento_ampliado !== undefined) raiz.dataset.espacamentoAmpliado = String(Boolean(preferencias.espacamento_ampliado));
 }
 
+function obterPreferenciasAcessibilidade() {
+  const locais = lerPreferenciasLocais();
+  const token = sessionStorage.getItem(CHAVE_TOKEN_ACESSO);
+  if (!token) return Promise.resolve(locais);
+  return requisitarApi('/preferencias', { headers: obterCabecalhoAutorizado() })
+    .then((remotas) => ({ ...locais, ...remotas }))
+    .catch(() => locais);
+}
+
+function atualizarRotuloTamanhoTexto(valor) {
+  const rotulo = document.getElementById('labelTamanhoTexto');
+  if (rotulo) rotulo.textContent = ({ 1: 'Menor', 2: 'Normal', 3: 'Maior' })[Number(valor)] || 'Normal';
+}
+
+function informarStatusAcessibilidade(mensagem, estado = 'sucesso') {
+  const status = document.getElementById('statusAcessibilidade');
+  if (!status) return;
+  status.dataset.estado = estado;
+  const icone = estado === 'salvando' ? 'fa-spinner fa-spin' : estado === 'aviso' ? 'fa-triangle-exclamation' : 'fa-circle-check';
+  status.innerHTML = `<i class="fa-solid ${icone}" aria-hidden="true"></i> ${mensagem}`;
+}
+
 function inicializarAcessibilidade() {
-  const pagina = document.querySelector('[data-page="acessibilidade"]');
-  if (!pagina) return;
+  if (document.body.dataset.page !== 'acessibilidade') return;
   const campos = {
     tamanho_texto: document.getElementById('rangeTexto'),
     alto_contraste: document.getElementById('checkContraste'),
+    paleta_cores: document.getElementById('selectPaletaCores'),
     espacamento_ampliado: document.getElementById('checkEspacamento'),
     leitura_voz_alta: document.getElementById('checkAudio'),
     libras: document.getElementById('checkLibras'),
     comandos_voz: document.getElementById('checkComandosVoz')
   };
-  requisitarApi('/preferencias', { headers: obterCabecalhoAutorizado() }).then((preferencias) => {
-    persistirPreferenciasLocais(preferencias);
+  const token = sessionStorage.getItem(CHAVE_TOKEN_ACESSO);
+  let preferenciasAtuais = lerPreferenciasLocais();
+
+  const preencherCampos = (preferencias) => {
+    preferenciasAtuais = { ...PADROES_PREFERENCIAS_GERAIS, ...preferencias };
     Object.entries(campos).forEach(([chave, campo]) => {
-      if (!campo || preferencias[chave] === undefined) return;
-      campo.type === 'range' ? campo.value = preferencias[chave] : campo.checked = preferencias[chave];
+      if (!campo || preferenciasAtuais[chave] === undefined) return;
+      if (campo.type === 'range' || campo.tagName === 'SELECT') campo.value = preferenciasAtuais[chave];
+      else campo.checked = Boolean(preferenciasAtuais[chave]);
     });
-    aplicarAcessibilidade(preferencias);
-  }).catch(() => {});
+    atualizarRotuloTamanhoTexto(preferenciasAtuais.tamanho_texto);
+    aplicarAcessibilidade(preferenciasAtuais);
+  };
+
+  preencherCampos(preferenciasAtuais);
+  informarStatusAcessibilidade('Carregando suas preferências...', 'salvando');
+  obterPreferenciasAcessibilidade().then((preferencias) => {
+    persistirPreferenciasLocais(preferencias);
+    preencherCampos(preferencias);
+    informarStatusAcessibilidade(token ? 'Preferências sincronizadas com sua conta.' : 'Preferências salvas neste dispositivo.');
+  });
+
+  campos.tamanho_texto?.addEventListener('input', () => {
+    atualizarRotuloTamanhoTexto(campos.tamanho_texto.value);
+    aplicarAcessibilidade({ tamanho_texto: Number(campos.tamanho_texto.value) });
+  });
+
   Object.entries(campos).forEach(([chave, campo]) => {
     if (!campo) return;
     campo.addEventListener('change', async () => {
-      const valor = campo.type === 'range' ? Number(campo.value) : campo.checked;
-      if (chave === 'tamanho_texto' || chave === 'alto_contraste' || chave === 'espacamento_ampliado') aplicarAcessibilidade({ [chave]: valor });
+      const valor = campo.type === 'range' ? Number(campo.value) : campo.tagName === 'SELECT' ? campo.value : campo.checked;
+      preferenciasAtuais = { ...preferenciasAtuais, [chave]: valor };
+      persistirPreferenciasLocais(preferenciasAtuais);
+      aplicarAcessibilidade(preferenciasAtuais);
+      atualizarRotuloTamanhoTexto(preferenciasAtuais.tamanho_texto);
+      renderizarRecursosAcessiveis(preferenciasAtuais);
+      if (chave === 'libras') valor ? ativarTradutorLibras() : desativarTradutorLibras();
+      informarStatusAcessibilidade(token ? 'Salvando na sua conta...' : 'Preferência aplicada neste dispositivo.', token ? 'salvando' : 'sucesso');
+
+      if (!token) return;
       try {
         await salvarPreferencia({ [chave]: valor });
-        if (chave === 'libras' && valor) {
-          ativarTradutorLibras();
-          mostrarToast({ tipo: 'sucesso', titulo: 'Libras ativada', mensagem: 'O tradutor visual está disponível nesta página.', acaoTexto: 'Abrir atendimento', aoAcionar: () => { window.location.href = 'libras.html'; } });
-        }
+        informarStatusAcessibilidade('Preferência salva na sua conta.');
       }
-      catch (erro) { mostrarToast({ tipo: 'erro', titulo: 'Não foi possível salvar', mensagem: mensagemErroAutenticacao(erro) }); }
+      catch (_) {
+        informarStatusAcessibilidade('Aplicada neste dispositivo; a sincronização será tentada novamente.', 'aviso');
+      }
     });
   });
 }
@@ -3696,6 +3768,7 @@ function ativarTradutorLibras() {
   estrutura.innerHTML = '<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>';
   document.body.appendChild(estrutura);
   const script = document.createElement('script');
+  script.id = 'vlibras-script';
   script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
   script.async = true;
   script.onload = () => {
@@ -3704,6 +3777,12 @@ function ativarTradutorLibras() {
   };
   script.onerror = () => estrutura.remove();
   document.body.appendChild(script);
+}
+
+function desativarTradutorLibras() {
+  document.getElementById('vlibras-plugin')?.remove();
+  document.getElementById('vlibras-script')?.remove();
+  document.querySelectorAll('[vw], [vw-access-button], [vw-plugin-wrapper]').forEach((elemento) => elemento.remove());
 }
 
 function executarComandoDeVoz(comando) {
@@ -3739,27 +3818,34 @@ function iniciarComandosDeVoz() {
   reconhecimento.start();
 }
 
+function renderizarRecursosAcessiveis(preferencias) {
+  document.querySelector('.recursos-acessiveis')?.remove();
+  pararLeituraDaPagina();
+  if (!preferencias.leitura_voz_alta && !preferencias.comandos_voz) return;
+  const painel = document.createElement('div');
+  painel.className = 'recursos-acessiveis';
+  painel.setAttribute('role', 'group');
+  painel.setAttribute('aria-label', 'Recursos de acessibilidade');
+  if (preferencias.leitura_voz_alta) {
+    painel.innerHTML += '<button type="button" class="botao-recurso-acessivel" id="btnLerPagina" aria-pressed="false"><i class="fa-solid fa-volume-high" aria-hidden="true"></i><span>Ouvir página</span></button>';
+  }
+  if (preferencias.comandos_voz) {
+    painel.innerHTML += '<button type="button" class="botao-recurso-acessivel" id="btnComandoVoz"><i class="fa-solid fa-microphone" aria-hidden="true"></i><span>Comando de voz</span></button>';
+  }
+  document.body.appendChild(painel);
+  document.getElementById('btnLerPagina')?.addEventListener('click', lerPaginaEmVozAlta);
+  document.getElementById('btnComandoVoz')?.addEventListener('click', iniciarComandosDeVoz);
+}
+
 function inicializarRecursosAcessiveis() {
-  if (!document.body.dataset.page || document.body.dataset.page === 'acessibilidade') return;
-  requisitarApi('/preferencias', { headers: obterCabecalhoAutorizado() }).then((preferencias) => {
+  if (!document.body.dataset.page) return;
+  obterPreferenciasAcessibilidade().then((preferencias) => {
     persistirPreferenciasLocais(preferencias);
     aplicarTema(preferencias.tema || temaAtual());
     aplicarAcessibilidade(preferencias);
-    if (preferencias.libras) ativarTradutorLibras();
-    if (!preferencias.leitura_voz_alta && !preferencias.comandos_voz) return;
-    const painel = document.createElement('div');
-    painel.className = 'recursos-acessiveis';
-    painel.setAttribute('aria-label', 'Recursos de acessibilidade');
-    if (preferencias.leitura_voz_alta) {
-      painel.innerHTML += '<button type="button" class="botao-recurso-acessivel" id="btnLerPagina" aria-pressed="false"><i class="fa-solid fa-volume-high"></i><span>Ouvir página</span></button>';
-    }
-    if (preferencias.comandos_voz) {
-      painel.innerHTML += '<button type="button" class="botao-recurso-acessivel" id="btnComandoVoz"><i class="fa-solid fa-microphone"></i><span>Comando de voz</span></button>';
-    }
-    document.body.appendChild(painel);
-    document.getElementById('btnLerPagina')?.addEventListener('click', lerPaginaEmVozAlta);
-    document.getElementById('btnComandoVoz')?.addEventListener('click', iniciarComandosDeVoz);
-  }).catch(() => {});
+    preferencias.libras ? ativarTradutorLibras() : desativarTradutorLibras();
+    renderizarRecursosAcessiveis(preferencias);
+  });
 }
 
 // dashboard.html: estados carregando/vazio/erro com dados simulados; filtrar, exportar, detalhar, limpar filtros

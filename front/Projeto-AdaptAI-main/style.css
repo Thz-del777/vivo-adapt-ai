@@ -11638,6 +11638,233 @@ html[data-theme="escuro"] .card-conversa:hover {
   border-color: rgba(215, 176, 255, .38);
 }
 
+/* Acessibilidade global: controles, paletas e preferências aplicadas em todas as telas. */
+.controle-paleta {
+  display: grid;
+  gap: 0.4rem;
+  min-width: min(100%, 15rem);
+}
+
+.rotulo-paleta {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+}
+
+.seletor-paleta-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.45rem 0.3rem 0.7rem;
+  border: 0.0625rem solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface-muted);
+}
+
+.amostra-paleta { display: inline-flex; flex: 0 0 auto; }
+.amostra-paleta i {
+  width: 1rem;
+  height: 1rem;
+  margin-left: -0.2rem;
+  border: 0.125rem solid var(--color-surface-muted);
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+.amostra-paleta i:nth-child(2) { background: var(--color-accent-pink); }
+.amostra-paleta i:nth-child(3) { background: var(--inclusive-cyan); }
+
+.select-paleta {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  color: var(--color-text);
+  background: transparent;
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 650;
+}
+
+.status-acessibilidade {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: -0.5rem 0 0;
+  padding: 0.8rem 1rem;
+  border: 0.0625rem solid color-mix(in srgb, var(--color-primary) 22%, var(--color-border));
+  border-radius: 0.85rem;
+  color: var(--color-text-secondary);
+  background: color-mix(in srgb, var(--color-primary) 7%, var(--color-surface));
+  font-size: var(--fs-xs);
+}
+.status-acessibilidade i { color: #20a562; }
+.status-acessibilidade[data-estado="salvando"] i { color: var(--color-primary); }
+.status-acessibilidade[data-estado="aviso"] i { color: #d98a00; }
+
+html[data-paleta-cores="protanopia"] {
+  --color-primary: #1769c2;
+  --color-primary-dark: #0b407d;
+  --vivo-purple: #1769c2;
+  --vivo-purple-deep: #0b407d;
+  --home-purple-1: #1769c2;
+  --home-purple-2: #275ec2;
+  --color-accent-pink: #e7b416;
+  --adapt-magenta: #e7b416;
+  --inclusive-cyan: #38a9b8;
+  --gradient-primary: linear-gradient(115deg, #0d559f, #1769c2 55%, #d4a400);
+}
+
+html[data-paleta-cores="deuteranopia"] {
+  --color-primary: #2457c5;
+  --color-primary-dark: #14377f;
+  --vivo-purple: #2457c5;
+  --vivo-purple-deep: #14377f;
+  --home-purple-1: #2457c5;
+  --home-purple-2: #3c65bd;
+  --color-accent-pink: #e57816;
+  --adapt-magenta: #e57816;
+  --inclusive-cyan: #42a7b9;
+  --gradient-primary: linear-gradient(115deg, #143f98, #2457c5 55%, #d46a0c);
+}
+
+html[data-paleta-cores="tritanopia"] {
+  --color-primary: #b51d68;
+  --color-primary-dark: #771043;
+  --vivo-purple: #b51d68;
+  --vivo-purple-deep: #771043;
+  --home-purple-1: #b51d68;
+  --home-purple-2: #9c346f;
+  --color-accent-pink: #d64b88;
+  --adapt-magenta: #d64b88;
+  --inclusive-cyan: #008d91;
+  --gradient-primary: linear-gradient(115deg, #86134b, #b51d68 52%, #008d91);
+}
+
+html[data-paleta-cores="monocromatica"] {
+  --color-primary: #595959;
+  --color-primary-dark: #202020;
+  --vivo-purple: #595959;
+  --vivo-purple-deep: #202020;
+  --home-purple-1: #595959;
+  --home-purple-2: #707070;
+  --color-accent-pink: #858585;
+  --adapt-magenta: #858585;
+  --inclusive-cyan: #696969;
+  --gradient-primary: linear-gradient(115deg, #292929, #5e5e5e 55%, #858585);
+}
+
+html[data-theme="escuro"][data-paleta-cores="protanopia"] { --color-primary: #70b7ff; --color-primary-dark: #c6e4ff; }
+html[data-theme="escuro"][data-paleta-cores="deuteranopia"] { --color-primary: #83a7ff; --color-primary-dark: #d1ddff; }
+html[data-theme="escuro"][data-paleta-cores="tritanopia"] { --color-primary: #ff80b7; --color-primary-dark: #ffd1e5; }
+html[data-theme="escuro"][data-paleta-cores="monocromatica"] { --color-primary: #d5d5d5; --color-primary-dark: #ffffff; }
+
+html[data-espacamento-ampliado="true"] p,
+html[data-espacamento-ampliado="true"] li,
+html[data-espacamento-ampliado="true"] label,
+html[data-espacamento-ampliado="true"] .texto-secao,
+html[data-espacamento-ampliado="true"] .item-acessibilidade-descricao {
+  line-height: 1.9;
+  letter-spacing: 0.025em;
+  word-spacing: 0.08em;
+}
+html[data-espacamento-ampliado="true"] .link-lateral,
+html[data-espacamento-ampliado="true"] button,
+html[data-espacamento-ampliado="true"] input,
+html[data-espacamento-ampliado="true"] select,
+html[data-espacamento-ampliado="true"] textarea {
+  letter-spacing: 0.035em;
+}
+html[data-espacamento-ampliado="true"] .item-acessibilidade,
+html[data-espacamento-ampliado="true"] .configuracao-item,
+html[data-espacamento-ampliado="true"] .link-lateral {
+  padding-block: calc(var(--space-xs) + 0.3rem);
+}
+
+/* Alto contraste vence tema e paleta, inclusive em componentes com gradiente. */
+html[data-alto-contraste="true"] {
+  --color-primary: #0047b3;
+  --color-primary-dark: #001f66;
+  --color-bg: #ffffff;
+  --color-bg-alt: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-hover: #e8e8e8;
+  --color-surface-muted: #f2f2f2;
+  --color-border: #000000;
+  --color-text: #000000;
+  --color-text-primary: #000000;
+  --color-text-secondary: #111111;
+  --color-text-placeholder: #333333;
+}
+html[data-theme="escuro"][data-alto-contraste="true"] {
+  --color-primary: #ffea00;
+  --color-primary-dark: #ffffff;
+  --color-bg: #000000;
+  --color-bg-alt: #000000;
+  --color-surface: #000000;
+  --color-surface-hover: #171717;
+  --color-surface-muted: #101010;
+  --color-border: #ffffff;
+  --color-text: #ffffff;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-text-placeholder: #e0e0e0;
+}
+html[data-alto-contraste="true"] body,
+html[data-alto-contraste="true"] .cabecalho,
+html[data-alto-contraste="true"] .barra-lateral,
+html[data-alto-contraste="true"] .layout-aplicativo,
+html[data-alto-contraste="true"] .conteudo-principal-app,
+html[data-alto-contraste="true"] .conteudo-principal,
+html[data-alto-contraste="true"] .item-acessibilidade,
+html[data-alto-contraste="true"] .cartao-dashboard,
+html[data-alto-contraste="true"] .configuracoes-cartao,
+html[data-alto-contraste="true"] .perfil-secao,
+html[data-alto-contraste="true"] .perfil-card-lateral,
+html[data-alto-contraste="true"] .card-conversa,
+html[data-alto-contraste="true"] .compositor,
+html[data-alto-contraste="true"] .balao-robo,
+html[data-alto-contraste="true"] input,
+html[data-alto-contraste="true"] textarea,
+html[data-alto-contraste="true"] select {
+  color: var(--color-text) !important;
+  border-color: var(--color-border) !important;
+  background: var(--color-surface) !important;
+  box-shadow: none !important;
+}
+html[data-alto-contraste="true"] a { color: var(--color-primary) !important; text-decoration: underline; }
+html[data-alto-contraste="true"] .link-lateral.esta-ativo,
+html[data-alto-contraste="true"] .botao-principal {
+  color: var(--color-surface) !important;
+  border: 0.125rem solid var(--color-text) !important;
+  background: var(--color-text) !important;
+}
+html[data-theme="escuro"][data-alto-contraste="true"] .link-lateral.esta-ativo,
+html[data-theme="escuro"][data-alto-contraste="true"] .botao-principal {
+  color: #000000 !important;
+  border-color: #ffea00 !important;
+  background: #ffea00 !important;
+}
+
+@media (max-width: 48rem) {
+  .conteudo-principal-app {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  .secao-acessibilidade-nova {
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-md) 0;
+    box-sizing: border-box;
+  }
+  .item-acessibilidade { align-items: flex-start; flex-wrap: wrap; }
+  .item-acessibilidade-controle { width: 100%; padding-left: 0; box-sizing: border-box; }
+  .slider-wrapper, .controle-paleta { width: 100%; min-width: 0; }
+}
+
 /* Tema escuro — identidade visual própria, com contraste confortável e
    superfícies em camadas. Mantido no fim para não receber o fundo claro de
    componentes mais antigos. */

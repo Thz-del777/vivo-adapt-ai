@@ -172,6 +172,7 @@ class PreferenciasResponse(BaseModel):
     notificacoes_novidades: bool = False
     tamanho_texto: int = Field(default=2, ge=1, le=3)
     alto_contraste: bool = False
+    paleta_cores: Literal["padrao", "protanopia", "deuteranopia", "tritanopia", "monocromatica"] = "padrao"
     espacamento_ampliado: bool = False
     leitura_voz_alta: bool = True
     libras: bool = False
@@ -193,6 +194,7 @@ class PreferenciasUpdateRequest(BaseModel):
     notificacoes_novidades: bool | None = None
     tamanho_texto: int | None = Field(default=None, ge=1, le=3)
     alto_contraste: bool | None = None
+    paleta_cores: Literal["padrao", "protanopia", "deuteranopia", "tritanopia", "monocromatica"] | None = None
     espacamento_ampliado: bool | None = None
     leitura_voz_alta: bool | None = None
     libras: bool | None = None
