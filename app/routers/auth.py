@@ -8,6 +8,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from app.core.config import get_settings
 from app.models.schemas import (
     AuthCredentials,
+    AuthRefreshRequest,
     AuthSessionResponse,
     AuthUserResponse,
     MensagemResponse,
@@ -72,6 +73,18 @@ def login(payload: AuthCredentials, request: Request) -> AuthSessionResponse:
         if str(exc) == "Supabase Auth nao esta configurado":
             raise HTTPException(status_code=503, detail="Login indisponível no momento") from exc
         raise _erro_login_para_http(exc) from exc
+
+
+@router.post("/refresh", response_model=AuthSessionResponse)
+def refresh(payload: AuthRefreshRequest) -> AuthSessionResponse:
+    try:
+        return get_auth_service().renovar_sessao(payload.refresh_token)
+    except Exception as exc:
+        logger.warning("Falha ao renovar sessao: %s", type(exc).__name__)
+        raise HTTPException(
+            status_code=401,
+            detail="Sua sessao expirou. Entre novamente para continuar.",
+        ) from exc
     except Exception as exc:
         logger.warning("Falha de autenticacao via Supabase Auth: %s", type(exc).__name__)
         raise _erro_login_para_http(exc) from exc

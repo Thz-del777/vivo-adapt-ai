@@ -55,6 +55,12 @@ class AuthService:
             user=self._user_response(session.user),
         )
 
+    def renovar_sessao(self, refresh_token: str) -> AuthSessionResponse:
+        response = self.client.auth.refresh_session(refresh_token)
+        if not response.session:
+            raise RuntimeError("Sessao nao pode ser renovada")
+        return self._session_response(response.session)
+
     def cadastrar(
         self,
         email: str,

@@ -749,6 +749,10 @@ class AuthServiceFalso:
             user=self.usuario,
         )
 
+    def renovar_sessao(self, refresh_token):
+        assert refresh_token == "refresh-de-teste"
+        return self.entrar()
+
     def usuario_atual(self, token):
         if token != "token-de-teste":
             raise RuntimeError("Sessão inválida")
@@ -803,6 +807,10 @@ def test_rotas_de_autenticacao(monkeypatch):
     login = client.post("/auth/login", json={"email": "maria@example.com", "password": "senha-segura-123"})
     assert login.status_code == 200
     assert login.json()["access_token"] == "token-de-teste"
+
+    renovacao = client.post("/auth/refresh", json={"refresh_token": "refresh-de-teste"})
+    assert renovacao.status_code == 200
+    assert renovacao.json()["access_token"] == "token-de-teste"
 
     perfil = client.get("/auth/me", headers={"Authorization": "Bearer token-de-teste"})
     assert perfil.status_code == 200

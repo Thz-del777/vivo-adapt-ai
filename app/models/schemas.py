@@ -132,6 +132,10 @@ class AuthSessionResponse(BaseModel):
     user: AuthUserResponse
 
 
+class AuthRefreshRequest(BaseModel):
+    refresh_token: str = Field(min_length=1, max_length=4096)
+
+
 class DispositivoSessaoResponse(BaseModel):
     id: str
     navegador: str

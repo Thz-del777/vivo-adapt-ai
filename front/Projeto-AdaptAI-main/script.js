@@ -1021,6 +1021,28 @@ function ocultarErroFormulario(container) {
 const CHAVE_TOKEN_ACESSO = "vivo-adaptai-access-token";
 const CHAVE_TOKEN_RENOVACAO = "vivo-adaptai-refresh-token";
 const CHAVE_USUARIO = "vivo-adaptai-usuario";
+let renovacaoSessaoEmCurso = null;
+
+async function renovarSessaoAutenticada() {
+  if (renovacaoSessaoEmCurso) return renovacaoSessaoEmCurso;
+  const refreshToken = sessionStorage.getItem(CHAVE_TOKEN_RENOVACAO);
+  if (!refreshToken) return null;
+
+  renovacaoSessaoEmCurso = (async () => {
+    const resposta = await fetch(`${API_BASE_URL}/auth/refresh`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh_token: refreshToken })
+    });
+    if (!resposta.ok) return null;
+    const sessao = await resposta.json();
+    const usuarioSalvo = JSON.parse(sessionStorage.getItem(CHAVE_USUARIO) || "{}");
+    salvarSessaoAutenticada(sessao, usuarioSalvo.nome || "");
+    return sessao.access_token;
+  })().finally(() => { renovacaoSessaoEmCurso = null; });
+
+  return renovacaoSessaoEmCurso;
+}
 
 async function requisitarApi(caminho, opcoes = {}) {
   const controlador = new AbortController();
@@ -1031,11 +1053,25 @@ async function requisitarApi(caminho, opcoes = {}) {
     : 45000;
   const timeout = window.setTimeout(() => controlador.abort(), timeoutEmMs);
   try {
-    const resposta = await fetch(`${API_BASE_URL}${caminho}`, {
+    let resposta = await fetch(`${API_BASE_URL}${caminho}`, {
       ...opcoes,
       headers: { "Content-Type": "application/json", ...(opcoes.headers || {}) },
       signal: controlador.signal
     });
+    if (resposta.status === 401 && opcoes.renovarSessao !== false && opcoes.headers?.Authorization) {
+      const novoToken = await renovarSessaoAutenticada();
+      if (novoToken) {
+        resposta = await fetch(`${API_BASE_URL}${caminho}`, {
+          ...opcoes,
+          headers: {
+            "Content-Type": "application/json",
+            ...(opcoes.headers || {}),
+            Authorization: `Bearer ${novoToken}`
+          },
+          signal: controlador.signal
+        });
+      }
+    }
     const corpo = await resposta.json().catch(() => ({}));
     if (!resposta.ok) throw new Error(corpo.detail || "Não foi possível concluir a solicitação.");
     return corpo;
@@ -1624,10 +1660,9 @@ function modoGuiadoAtivo() {
 async function solicitarRespostaDoMimo(mensagem, opcoes = {}) {
   const token = sessionStorage.getItem(CHAVE_TOKEN_ACESSO);
   const modoGuiado = opcoes.modoGuiado ?? modoGuiadoAtivo();
-  const resposta = await fetch(`${API_BASE_URL}/chat`, {
+  return requisitarApi("/chat", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {})
     },
     // Com login, o backend encontra o cliente pelo token, sem aceitar um ID escolhido pelo navegador.
@@ -1635,9 +1670,6 @@ async function solicitarRespostaDoMimo(mensagem, opcoes = {}) {
       ? { mensagem, modo_guiado: modoGuiado }
       : { cliente_id: obterClienteApiId(), mensagem, modo_guiado: modoGuiado })
   });
-
-  if (!resposta.ok) throw new Error(`API respondeu com status ${resposta.status}`);
-  return resposta.json();
 }
 
 let encerramentoAtendimentoEmCurso = false;
@@ -1938,7 +1970,7 @@ async function enviarMensagemChat(texto, mensagemExistente) {
     mostrarToast({
       tipo: "erro",
       titulo: "Não foi possível falar com o Mimo",
-      mensagem: "Verifique se o atendimento está disponível e tente novamente."
+      mensagem: mensagemErroAutenticacao(erro)
     });
   }
 }
