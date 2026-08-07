@@ -95,6 +95,7 @@ class AppSidebar extends HTMLElement {
 
           <div class="divisor-lateral"></div>
 
+          <a href="demonstracao-ild.html" class="link-lateral ${activePage === 'demonstracao-ild' ? 'esta-ativo' : ''}"><i class="fa-solid fa-chart-line"></i> Demonstração do ILD</a>
           ${isHome ? `<a href="sobre-adapt-ai.html" class="link-lateral"><i class="fa-solid fa-robot"></i> Conheça o Mimo</a>` : ''}
           <a href="configuracoes.html" class="link-lateral ${activePage === 'configuracoes' ? 'esta-ativo' : ''}"><i class="fa-solid fa-gear"></i> Configurações</a>
           <a href="permissoes.html" class="link-lateral ${activePage === 'permissoes' ? 'esta-ativo' : ''}"><i class="fa-solid fa-lock"></i> Permissões</a>

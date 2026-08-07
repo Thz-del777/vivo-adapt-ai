@@ -4417,6 +4417,42 @@ body.pagina-cadastro .secao-autenticacao {
   }
 }
 
+/* Demonstração comparativa do ILD */
+.secao-demonstracao-ild { max-width: 86rem; margin-inline: auto; }
+.demo-ild-hero { display: flex; align-items: center; justify-content: space-between; gap: var(--space-xl); margin: var(--space-lg) 0; padding: clamp(1.4rem, 4vw, 2.5rem); border-radius: var(--radius-xl); color: #fff; background: linear-gradient(135deg, #310064, #660099 58%, #b71bc8); box-shadow: var(--shadow-elevated); }
+.demo-ild-hero h1 { max-width: 44rem; margin: .55rem 0; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.05; }
+.demo-ild-hero p { max-width: 43rem; margin: 0; color: rgba(255,255,255,.84); line-height: 1.55; }
+.demo-ild-selo { display: inline-flex; align-items: center; gap: .45rem; font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+.demo-ild-hero-icone { width: 6rem; aspect-ratio: 1; flex-shrink: 0; display: grid; place-items: center; border-radius: 1.5rem; background: rgba(255,255,255,.14); border: .0625rem solid rgba(255,255,255,.24); font-size: 2.5rem; transform: rotate(3deg); }
+.demo-ild-form { padding: var(--space-lg); border: .0625rem solid var(--color-border); border-radius: var(--radius-xl); background: var(--color-surface); box-shadow: var(--shadow-elevated); }
+.demo-ild-form > label { display: block; margin-bottom: .6rem; color: var(--color-text); font-weight: 700; }
+.demo-ild-compositor { display: flex; align-items: center; gap: .7rem; padding: .45rem; border: .1rem solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); }
+.demo-ild-compositor:focus-within { border-color: var(--color-primary); box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--color-primary) 14%, transparent); }
+.demo-ild-compositor > i { margin-left: .65rem; color: var(--color-primary); }
+.demo-ild-compositor input { min-width: 0; flex: 1; padding: .7rem .2rem; border: 0; outline: 0; color: var(--color-text); background: transparent; font: inherit; }
+.demo-ild-compositor .botao { flex-shrink: 0; }
+.demo-ild-sugestoes { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.demo-ild-sugestoes button { padding: .45rem .7rem; border: .0625rem solid var(--color-border); border-radius: var(--radius-full); background: var(--color-surface-muted); color: var(--color-primary); cursor: pointer; font: inherit; font-size: .72rem; }
+.demo-ild-sugestoes button:hover { border-color: var(--color-primary); }
+.demo-ild-explicacao { display: flex; align-items: center; gap: .65rem; margin: var(--space-lg) 0; color: var(--color-text-secondary); font-size: .78rem; }
+.demo-ild-explicacao i { color: var(--color-primary); }.demo-ild-explicacao p { margin: 0; }
+.demo-ild-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: var(--space-lg); }
+.demo-ild-card { min-width: 0; display: flex; flex-direction: column; padding: var(--space-lg); border: .0625rem solid var(--color-border); border-top: .3rem solid var(--demo-cor); border-radius: var(--radius-xl); background: var(--color-surface); box-shadow: var(--shadow-elevated); }
+.demo-ild-iniciante { --demo-cor: #2d7d6d; }.demo-ild-intermediario { --demo-cor: #7651c8; }.demo-ild-avancado { --demo-cor: #c2267d; }
+.demo-ild-card > header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .75rem; }
+.demo-ild-card > header > i { color: var(--demo-cor); font-size: 1.25rem; }
+.demo-ild-numero { width: 3.2rem; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--demo-cor) 13%, var(--color-surface)); color: var(--demo-cor); font-weight: 800; }
+.demo-ild-card header strong,.demo-ild-card header small { display: block; }.demo-ild-card header strong { color: var(--color-text); text-transform: capitalize; }.demo-ild-card header small { margin-top: .15rem; color: var(--color-text-secondary); font-size: .7rem; }
+.demo-ild-caracteristicas { display: flex; flex-wrap: wrap; gap: .35rem; margin: 1rem 0; }
+.demo-ild-caracteristicas span { padding: .3rem .5rem; border-radius: var(--radius-full); background: var(--color-surface-muted); color: var(--color-text-secondary); font-size: .65rem; }
+.demo-ild-mensagem { flex: 1; padding: 1rem; border-radius: .25rem var(--radius-lg) var(--radius-lg) var(--radius-lg); background: color-mix(in srgb, var(--demo-cor) 7%, var(--color-surface)); border: .0625rem solid color-mix(in srgb, var(--demo-cor) 20%, var(--color-border)); }
+.demo-ild-mensagem span { color: var(--demo-cor); font-size: .7rem; font-weight: 800; }.demo-ild-mensagem p { margin: .45rem 0 0; color: var(--color-text); line-height: 1.55; font-size: .88rem; }
+.demo-ild-acoes { display: flex; gap: .45rem; margin-top: .75rem; }.demo-ild-acoes button { flex: 1; padding: .55rem .35rem; border: .0625rem solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text-secondary); }
+.demo-ild-rodape { display: flex; align-items: center; gap: 1rem; margin-top: var(--space-xl); padding: var(--space-lg); border-radius: var(--radius-xl); background: var(--color-surface-muted); color: var(--color-text); }
+.demo-ild-rodape > i { color: var(--color-primary); font-size: 1.5rem; }.demo-ild-rodape div { flex: 1; }.demo-ild-rodape p { margin: .2rem 0 0; color: var(--color-text-secondary); font-size: .75rem; }.demo-ild-rodape a { color: var(--color-primary); font-weight: 700; text-decoration: none; font-size: .78rem; }
+@media (max-width: 64em) { .demo-ild-grid { grid-template-columns: 1fr; }.demo-ild-card { min-height: auto; } }
+@media (max-width: 48em) { .demo-ild-hero-icone { display: none; }.demo-ild-compositor { align-items: stretch; flex-wrap: wrap; }.demo-ild-compositor input { width: calc(100% - 2rem); }.demo-ild-compositor .botao { width: 100%; justify-content: center; }.demo-ild-rodape { align-items: flex-start; flex-wrap: wrap; }.demo-ild-rodape a { width: 100%; } }
+
 /* Central de ajuda completa */
 .central-ajuda-hero {
   position: relative;

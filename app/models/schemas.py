@@ -30,6 +30,22 @@ class ChatResponse(BaseModel):
     origem_resposta: Literal["groq", "fallback", "demo"]
 
 
+class DemonstracaoIldRequest(BaseModel):
+    mensagem: str = Field(min_length=1, max_length=500)
+
+
+class DemonstracaoIldItemResponse(BaseModel):
+    ild: int = Field(ge=0, le=100)
+    perfil: Perfil
+    estilo: str
+    resposta: str
+
+
+class DemonstracaoIldResponse(BaseModel):
+    mensagem: str
+    comparacoes: list[DemonstracaoIldItemResponse]
+
+
 class MensagemHistoricoResponse(BaseModel):
     id: int
     remetente: str

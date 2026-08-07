@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demonstração do ILD - Vivo AdaptAI</title>
+  <link rel="stylesheet" href="style.css?v=63">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="tema-destaque" data-page="demonstracao-ild">
+  <div class="app-shell">
+    <app-header app-page></app-header>
+    <div class="layout-aplicativo">
+      <app-sidebar active-page="demonstracao-ild"></app-sidebar>
+      <main class="conteudo-principal-app">
+        <section class="secao-demonstracao-ild">
+          <nav class="trilha-navegacao" aria-label="Trilha de navegação">
+            <a href="home.html"><i class="fa-solid fa-house"></i> Início</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span aria-current="page">Demonstração do ILD</span>
+          </nav>
+
+          <header class="demo-ild-hero">
+            <div>
+              <span class="demo-ild-selo"><i class="fa-solid fa-wand-magic-sparkles"></i> Veja a adaptação acontecer</span>
+              <h1>Uma dúvida, três formas de ajudar</h1>
+              <p>Escreva uma solicitação e compare como o Mimo adapta linguagem, detalhes e ritmo para cada perfil.</p>
+            </div>
+            <div class="demo-ild-hero-icone" aria-hidden="true"><i class="fa-solid fa-chart-simple"></i></div>
+          </header>
+
+          <form class="demo-ild-form" id="demoIldForm">
+            <label for="demoIldMensagem">O que você gostaria de resolver?</label>
+            <div class="demo-ild-compositor">
+              <i class="fa-regular fa-message"></i>
+              <input id="demoIldMensagem" maxlength="500" value="Quero tirar a segunda via da minha fatura" required>
+              <button class="botao botao-principal" type="submit" id="demoIldComparar"><i class="fa-solid fa-arrows-left-right"></i> Comparar</button>
+            </div>
+            <div class="demo-ild-sugestoes" aria-label="Sugestões de perguntas">
+              <button type="button">Minha internet não funciona</button>
+              <button type="button">Quero configurar meu roteador</button>
+              <button type="button">Quero tirar a segunda via da minha fatura</button>
+            </div>
+          </form>
+
+          <div class="demo-ild-explicacao"><i class="fa-solid fa-circle-info"></i><p>A mensagem é exatamente a mesma. Somente o estilo da resposta muda. Esta demonstração usa regras locais e não consome tokens de IA.</p></div>
+
+          <div class="demo-ild-grid" id="demoIldResultados" aria-live="polite">
+            <article class="demo-ild-card demo-ild-iniciante" data-perfil="iniciante">
+              <header><span class="demo-ild-numero">25</span><div><strong>Iniciante</strong><small>Uma ação por vez</small></div><i class="fa-solid fa-shoe-prints"></i></header>
+              <div class="demo-ild-caracteristicas"><span>Linguagem simples</span><span>Confirmação</span></div>
+              <div class="demo-ild-mensagem"><span>Mimo</span><p>Carregando demonstração...</p></div>
+              <div class="demo-ild-acoes"><button type="button" disabled><i class="fa-solid fa-check"></i> Consegui</button><button type="button" disabled><i class="fa-solid fa-life-ring"></i> Não consegui</button></div>
+            </article>
+            <article class="demo-ild-card demo-ild-intermediario" data-perfil="intermediario">
+              <header><span class="demo-ild-numero">50</span><div><strong>Intermediário</strong><small>Clareza e equilíbrio</small></div><i class="fa-solid fa-list-check"></i></header>
+              <div class="demo-ild-caracteristicas"><span>Detalhes moderados</span><span>Caminho completo</span></div>
+              <div class="demo-ild-mensagem"><span>Mimo</span><p>Carregando demonstração...</p></div>
+            </article>
+            <article class="demo-ild-card demo-ild-avancado" data-perfil="avancado">
+              <header><span class="demo-ild-numero">85</span><div><strong>Avançado</strong><small>Rapidez e objetividade</small></div><i class="fa-solid fa-bolt"></i></header>
+              <div class="demo-ild-caracteristicas"><span>Resposta direta</span><span>Atalho</span></div>
+              <div class="demo-ild-mensagem"><span>Mimo</span><p>Carregando demonstração...</p></div>
+            </article>
+          </div>
+
+          <footer class="demo-ild-rodape"><i class="fa-solid fa-shield-heart"></i><div><strong>ILD não mede inteligência</strong><p>Ele identifica qual formato de atendimento oferece mais autonomia e conforto naquele momento.</p></div><a href="sobre-adapt-ai.html">Entenda o Vivo AdaptAI <i class="fa-solid fa-arrow-right"></i></a></footer>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script src="components.js?v=13"></script>
+  <script src="api-config.js?v=1"></script>
+  <script src="script.js?v=45"></script>
+</body>
+</html>

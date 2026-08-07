@@ -41,6 +41,18 @@ def test_health_e_status():
     assert status.json()["status"] == "ok"
 
 
+def test_demonstracao_ild_compara_os_tres_perfis_sem_ia():
+    resposta = client.post(
+        "/demonstracao/ild",
+        json={"mensagem": "Quero tirar a segunda via da minha fatura"},
+    )
+    assert resposta.status_code == 200
+    comparacoes = resposta.json()["comparacoes"]
+    assert [item["perfil"] for item in comparacoes] == ["iniciante", "intermediario", "avancado"]
+    assert [item["ild"] for item in comparacoes] == [25, 50, 85]
+    assert len({item["resposta"] for item in comparacoes}) == 3
+
+
 def test_evento_digital_exige_login():
     resposta = client.post(
         "/eventos",

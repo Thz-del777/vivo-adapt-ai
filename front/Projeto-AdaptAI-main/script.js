@@ -9,7 +9,7 @@ function inicializarAplicacao() {
     'libras', 'texto-simplificado', 'historico', 'perfil', 'dashboard',
     'configuracoes', 'permissoes', 'acessibilidade', 'central-de-ajuda',
     'sobre-adapt-ai', 'erro-atendimento', 'offline', 'conclusao',
-    'resumo-atendimento', 'conectando', 'notificacoes', 'privacidade'
+    'resumo-atendimento', 'conectando', 'notificacoes', 'privacidade', 'demonstracao-ild'
   ];
   const paginaAtual = document.body.dataset.page || new URL(window.location.href).pathname.split('/').pop().replace('.html', '');
   if (paginasProtegidas.includes(paginaAtual) && !sessionStorage.getItem('vivo-adaptai-sessao-autenticada')) {
@@ -60,6 +60,7 @@ function inicializarAplicacao() {
   inicializarDashboard();
   inicializarReenvioCodigo();
   inicializarTelemetriaIld();
+  inicializarDemonstracaoIld();
 
   if (sessionStorage.getItem('vivo-adaptai-aviso-dashboard') === '1') {
     sessionStorage.removeItem('vivo-adaptai-aviso-dashboard');
@@ -3036,6 +3037,52 @@ function exibirErroPainelIld(mensagem) {
   if (estado) estado.textContent = mensagem;
   const atualizacao = document.getElementById("ildUltimaAtualizacao");
   if (atualizacao) atualizacao.textContent = "Dados temporariamente indisponíveis";
+}
+
+function inicializarDemonstracaoIld() {
+  const formulario = document.getElementById("demoIldForm");
+  if (!formulario) return;
+  const campo = document.getElementById("demoIldMensagem");
+  const botao = document.getElementById("demoIldComparar");
+
+  async function comparar() {
+    const mensagem = campo.value.trim();
+    if (!mensagem) return;
+    definirCarregamentoBotao(botao, true);
+    document.querySelectorAll(".demo-ild-mensagem p").forEach((elemento) => {
+      elemento.textContent = "Adaptando a resposta...";
+    });
+    try {
+      const dados = await requisitarApi("/demonstracao/ild", {
+        method: "POST",
+        body: JSON.stringify({ mensagem })
+      });
+      dados.comparacoes.forEach((comparacao) => {
+        const card = document.querySelector(`.demo-ild-card[data-perfil="${comparacao.perfil}"]`);
+        const resposta = card?.querySelector(".demo-ild-mensagem p");
+        if (resposta) resposta.textContent = comparacao.resposta;
+      });
+    } catch (erro) {
+      document.querySelectorAll(".demo-ild-mensagem p").forEach((elemento) => {
+        elemento.textContent = "Não foi possível gerar a comparação agora.";
+      });
+      mostrarToast({ tipo: "erro", titulo: "Comparação indisponível", mensagem: mensagemErroAutenticacao(erro) });
+    } finally {
+      definirCarregamentoBotao(botao, false);
+    }
+  }
+
+  formulario.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+    comparar();
+  });
+  document.querySelectorAll(".demo-ild-sugestoes button").forEach((sugestao) => {
+    sugestao.addEventListener("click", () => {
+      campo.value = sugestao.textContent.trim();
+      comparar();
+    });
+  });
+  comparar();
 }
 
 // Perfil conectado ao backend: consulta e salva somente dados da própria conta.
