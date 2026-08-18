@@ -24,7 +24,8 @@ class Settings(BaseSettings):
     demo_mode: bool = True
     use_supabase: bool = False
     groq_api_key: str | None = None
-    groq_model: str = "llama-3.3-70b-versatile"
+    groq_model: str = "openai/gpt-oss-20b"
+    groq_fallback_model: str = "openai/gpt-oss-20b"
     supabase_url: str | None = None
     supabase_key: str | None = None
     supabase_publishable_key: str | None = None

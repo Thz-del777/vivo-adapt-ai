@@ -1,4 +1,8 @@
+import logging
+
 from app.core.config import Settings
+
+logger = logging.getLogger(__name__)
 
 
 class GroqService:
@@ -11,17 +15,16 @@ class GroqService:
         if not self.settings.groq_api_key:
             raise RuntimeError("GROQ_API_KEY nao configurada")
 
-        from groq import Groq
+        from groq import Groq, NotFoundError
 
-        client = Groq(api_key=self.settings.groq_api_key)
+        client = Groq(api_key=self.settings.groq_api_key, timeout=20.0, max_retries=1)
         limites_por_perfil = {
             "iniciante": 180,
             "intermediario": 240,
             "avancado": 300,
         }
-        resposta = client.chat.completions.create(
-            model=self.settings.groq_model,
-            messages=[
+        parametros = {
+            "messages": [
                 {
                     "role": "system",
                     "content": (
@@ -31,9 +34,26 @@ class GroqService:
                 },
                 {"role": "user", "content": prompt},
             ],
-            temperature=0.4,
-            max_completion_tokens=limites_por_perfil.get(perfil, 240),
-        )
+            "temperature": 0.4,
+            "max_completion_tokens": limites_por_perfil.get(perfil, 240),
+        }
+        try:
+            resposta = client.chat.completions.create(
+                model=self.settings.groq_model,
+                **parametros,
+            )
+        except NotFoundError:
+            modelo_alternativo = self.settings.groq_fallback_model
+            if not modelo_alternativo or modelo_alternativo == self.settings.groq_model:
+                raise
+            logger.warning(
+                "Modelo Groq configurado indisponivel; tentando modelo alternativo %s",
+                modelo_alternativo,
+            )
+            resposta = client.chat.completions.create(
+                model=modelo_alternativo,
+                **parametros,
+            )
         conteudo = resposta.choices[0].message.content if resposta.choices else None
         if not conteudo:
             raise RuntimeError("Groq retornou uma resposta vazia")
