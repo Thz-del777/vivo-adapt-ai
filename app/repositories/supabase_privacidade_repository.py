@@ -1,6 +1,8 @@
 from datetime import datetime, timezone
 from typing import Any
 
+from app.core.supabase_client import get_supabase_data_client
+
 
 TIPOS_CONSENTIMENTO = (
     "personalizacao",
@@ -14,9 +16,7 @@ class SupabasePrivacidadeRepository:
     """Operações de privacidade executadas somente pelo backend."""
 
     def __init__(self, url: str, key: str) -> None:
-        from supabase import create_client
-
-        self.client = create_client(url, key)
+        self.client = get_supabase_data_client(url, key)
 
     def listar_consentimentos(self, cliente_id: int) -> list[dict[str, Any]]:
         return (

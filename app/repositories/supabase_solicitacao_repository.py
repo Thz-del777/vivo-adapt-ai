@@ -4,6 +4,7 @@ import secrets
 from typing import Any
 
 from app.repositories.supabase_conversa_repository import SupabaseConversaRepository
+from app.core.supabase_client import get_supabase_data_client
 
 
 logger = logging.getLogger(__name__)
@@ -13,9 +14,7 @@ class SupabaseSolicitacaoRepository:
     """Registra pedidos de atendimento humano vinculados ao cliente autenticado."""
 
     def __init__(self, url: str, key: str) -> None:
-        from supabase import create_client
-
-        self.client = create_client(url, key)
+        self.client = get_supabase_data_client(url, key)
         self.conversas = SupabaseConversaRepository(url, key)
 
     def criar(self, cliente_id: int, assunto: str, descricao: str) -> dict[str, Any]:

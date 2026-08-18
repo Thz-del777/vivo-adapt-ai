@@ -7,6 +7,7 @@ from typing import Any
 import httpx
 
 from app.core.config import Settings
+from app.core.supabase_client import get_supabase_auth_client
 from app.models.schemas import AvaliacaoInicial, AuthSessionResponse, AuthUserResponse, SignUpResponse
 from app.repositories.supabase_cliente_repository import SupabaseClienteRepository
 from app.repositories.supabase_notificacao_repository import SupabaseNotificacaoRepository
@@ -25,10 +26,8 @@ class AuthService:
         if not settings.supabase_url or not settings.supabase_key:
             raise RuntimeError("Supabase Auth nao esta configurado")
 
-        from supabase import create_client
-
         self.settings = settings
-        self.client = create_client(settings.supabase_url, settings.supabase_key)
+        self.client = get_supabase_auth_client(settings.supabase_url, settings.supabase_key)
 
     def _user_response(self, user: Any) -> AuthUserResponse:
         app_metadata = getattr(user, "app_metadata", None) or {}

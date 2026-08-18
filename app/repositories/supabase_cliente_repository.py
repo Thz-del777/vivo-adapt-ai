@@ -1,13 +1,13 @@
 from typing import Any
 
+from app.core.supabase_client import get_supabase_data_client
+
 
 class SupabaseClienteRepository:
     """Repositório opcional; erros são tratados pelo roteador com fallback local."""
 
     def __init__(self, url: str, key: str) -> None:
-        from supabase import create_client
-
-        self.client = create_client(url, key)
+        self.client = get_supabase_data_client(url, key)
 
     def get_by_id(self, cliente_id: int) -> dict[str, Any] | None:
         response = self.client.table("clientes").select("*").eq("id", cliente_id).limit(1).execute()

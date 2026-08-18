@@ -1,13 +1,13 @@
 from typing import Any
 
+from app.core.supabase_client import get_supabase_data_client
+
 
 class SupabaseEventoRepository:
     """Registra telemetria do ILD somente pelo backend autenticado."""
 
     def __init__(self, url: str, key: str) -> None:
-        from supabase import create_client
-
-        self.client = create_client(url, key)
+        self.client = get_supabase_data_client(url, key)
 
     def registrar(
         self,

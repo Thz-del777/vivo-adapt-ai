@@ -2,6 +2,7 @@ import logging
 from datetime import datetime, timezone
 from typing import Any
 
+from app.core.supabase_client import get_supabase_data_client
 from app.services.ild_service import calcular_ild, classificar_perfil
 
 
@@ -12,9 +13,7 @@ class SupabaseOperacaoRepository:
     """Fila e acoes do atendimento humano, acessadas somente pelo backend."""
 
     def __init__(self, url: str, key: str) -> None:
-        from supabase import create_client
-
-        self.client = create_client(url, key)
+        self.client = get_supabase_data_client(url, key)
 
     @staticmethod
     def _enriquecer(solicitacao: dict[str, Any], cliente: dict[str, Any], ultima: str | None) -> dict[str, Any]:

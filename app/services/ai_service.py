@@ -1,8 +1,17 @@
 import logging
+from functools import lru_cache
+from typing import Any
 
 from app.core.config import Settings
 
 logger = logging.getLogger(__name__)
+
+
+@lru_cache(maxsize=2)
+def _get_groq_client(api_key: str) -> Any:
+    from groq import Groq
+
+    return Groq(api_key=api_key, timeout=20.0, max_retries=1)
 
 
 class GroqService:
@@ -15,9 +24,9 @@ class GroqService:
         if not self.settings.groq_api_key:
             raise RuntimeError("GROQ_API_KEY nao configurada")
 
-        from groq import Groq, NotFoundError
+        from groq import NotFoundError
 
-        client = Groq(api_key=self.settings.groq_api_key, timeout=20.0, max_retries=1)
+        client = _get_groq_client(self.settings.groq_api_key)
         limites_por_perfil = {
             "iniciante": 180,
             "intermediario": 240,
