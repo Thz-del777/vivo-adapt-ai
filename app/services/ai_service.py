@@ -27,11 +27,7 @@ class GroqService:
         from groq import NotFoundError
 
         client = _get_groq_client(self.settings.groq_api_key)
-        limites_por_perfil = {
-            "iniciante": 180,
-            "intermediario": 240,
-            "avancado": 300,
-        }
+        limite = 512
         parametros = {
             "messages": [
                 {
@@ -44,13 +40,18 @@ class GroqService:
                 {"role": "user", "content": prompt},
             ],
             "temperature": 0.4,
-            "max_completion_tokens": limites_por_perfil.get(perfil, 240),
+            "max_completion_tokens": limite,
         }
+
+        def completar(modelo: str, max_tokens: int = limite):
+            opcoes = {**parametros, "max_completion_tokens": max_tokens}
+            if modelo.startswith("openai/gpt-oss"):
+                opcoes.update(reasoning_effort="low", reasoning_format="hidden")
+            return client.chat.completions.create(model=modelo, **opcoes)
+
         try:
-            resposta = client.chat.completions.create(
-                model=self.settings.groq_model,
-                **parametros,
-            )
+            modelo_usado = self.settings.groq_model
+            resposta = completar(modelo_usado)
         except NotFoundError:
             modelo_alternativo = self.settings.groq_fallback_model
             if not modelo_alternativo or modelo_alternativo == self.settings.groq_model:
@@ -59,10 +60,11 @@ class GroqService:
                 "Modelo Groq configurado indisponivel; tentando modelo alternativo %s",
                 modelo_alternativo,
             )
-            resposta = client.chat.completions.create(
-                model=modelo_alternativo,
-                **parametros,
-            )
+            modelo_usado = modelo_alternativo
+            resposta = completar(modelo_usado)
+        if resposta.choices and resposta.choices[0].finish_reason == "length":
+            logger.warning("Resposta Groq atingiu o limite; repetindo com margem maior")
+            resposta = completar(modelo_usado, 1024)
         conteudo = resposta.choices[0].message.content if resposta.choices else None
         if not conteudo:
             raise RuntimeError("Groq retornou uma resposta vazia")
